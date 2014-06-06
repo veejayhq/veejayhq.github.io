@@ -49,9 +49,28 @@
             
     
     <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/home/matthijs/Development/Sites/veejayhq/content/contact.md">Contact</a></h2>
+        <p class="blog-post-meta">November 25, 2007</p>
+        <p>The best way to get in touch with veejay&#39;s developers and users is here:  </p>
+<p><a href="http://groups.google.com/group/veejay-discussion?hl=en">http://groups.google.com/group/veejay-discussion?hl=en</a>  </p>
+<p>Tell us everything ^-^  </p>
+<p>bug reports, questions, suggestions, etc, are welcome.  </p>
+<form action="http://groups.google.com/group/veejay-discussion/boxsubscribe"><br></form>  
+
+
+<table class="c3" border="0" cellspacing="0"><tbody><tr><td><img src="http://groups.google.com/groups/img/3nb/groups_bar.gif" alt="Google Groups"></td></tr><tr><td class="c1"><strong>Subscribe to veejay-discussion</strong></td></tr><tr><td class="c2">Email:<br>
+<input name="email/" type="text"></input><input name="sub" type="submit" value="Subscribe"></input></td></tr><tr><td align="right"><a href="http://groups.google.com/group/veejay-discussion">Visit this group</a></td></tr></tbody></table>
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/about-plugins/">About plugins</a></h2>
         <p class="blog-post-meta">May 01, 2007</p>
-        <p>Veejay can load both FreeFrame and Frei0r plugins. By default, veejay loads no plugins. You must create a file and enter the location of the plugins you want to load. Bad plugins can cause veejay to crash, test all your plugins before using them live.$ mkdir ~/.veejay$ vi ~/.veejay/pluginsThe contents of the file can look like:/usr/local/lib/freeframe/usr/local/lib/frei0r-1Veejay will pick up the plugins the next time you start it.</p>
+        <p>Veejay can load both FreeFrame and Frei0r plugins. By default, veejay loads no plugins. You must create a file and enter the location of the plugins you want to load. Bad plugins can cause veejay to crash, test all your plugins before using them live.  </p>
+<p>$ mkdir ~/.veejay<br>$ vi ~/.veejay/plugins  </p>
+<p>The contents of the file can look like:  </p>
+<p>/usr/local/lib/freeframe<br>/usr/local/lib/frei0r-1  </p>
+<p>Veejay will pick up the plugins the next time you start it.</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -59,7 +78,38 @@
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/debugging-veejay/">debugging veejay</a></h2>
         <p class="blog-post-meta">February 18, 2009</p>
-        <p>To help us fix things in veejay faster, please provide the followinginformation:1. full veejay console output(always run veejay with the &#39;-v&#39; commandline option)In case of segmentation faults,1. Run configure with &#39;--enable- debug &#39; for both server and client2. Run veejay-server and reloaded in the debugger$ gdb /full/path/to/veejay(gdb) r -v /path/to/some/videofile.avi3. When it crashes,(gdb) btAnd copy&amp;paste the outputAlso, valgrind is an excellent tool for debugging veejay, I&#39;m alwaysinterested ina few valgrind logs to make veejay more robuust. This will only beusefull ifyou have run configure with --enable- debug (from a clean source tree)$ valgrind --log-file=/tmp/veejay.log --leak-resolution=high --leak-check=full /full/path/to/veejay -v /path/to/videofile.avi</p>
+        <p>To help us fix things in veejay faster, please provide the following<br>information:  </p>
+<ol>
+<li>full veejay console output<br>(always run veejay with the &#39;-v&#39; commandline option)  </li>
+</ol>
+<p>In case of segmentation faults,  </p>
+<ol>
+<li>Run configure with &#39;--enable-<span class="nfakPe">debug</span>&#39; for both server and client  </li>
+<li>Run veejay-server and reloaded in the debugger  </li>
+</ol>
+<p>$ gdb /full/path/to/veejay<br>(gdb) r -v /path/to/some/videofile.avi  </p>
+<ol>
+<li>When it crashes,<br>(gdb) bt  </li>
+</ol>
+<p>And copy&amp;paste the output  </p>
+<p>Also, valgrind is an excellent tool for debugging veejay, I&#39;m always<br>interested in<br>a few valgrind logs to make veejay more robuust. This will only be<br>usefull if<br>you have run configure with --enable-<span class="nfakPe">debug</span>(from a clean source tree)  </p>
+<p>$ valgrind --log-file=/tmp/veejay.log --leak-resolution=high --leak-<br>check=full /full/path/to/veejay -v /path/to/videofile.avi</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category//documentation/how-to-use-midi/">How to use MIDI</a></h2>
+        <p class="blog-post-meta">April 02, 2007</p>
+        <p><strong>Reloaded 1.0</strong> supports MIDI devices through ALSA  </p>
+<p>To use your MIDI device with Reloaded, you need to use <strong>aconnect</strong> or<br><strong>aconnectgui</strong> to connect the MIDI device to Reloaded.  </p>
+<p>To see all input devices (your MIDI devices)<br><code>$ aconnect -i</code>  </p>
+<p>And all output devices (Reloaded/ Veejay)<br>`<br>$ aconnect -o  </p>
+<p>And then connect them:<br>`<br>$ aconnect -i 127 -o 128  </p>
+<p>Launch Reloaded  </p>
+<p>$ reloaded  </p>
+<p>Instruction for MIDI learning:  </p>
+<p>In the menubar, click GVeejay -&gt; MIDI -&gt; MIDI learn<br>Press a key on your MIDI device (reloaded will display the raw MIDI event in the statusbar)<br>and click a button , press a key or pull a slider in the userinterface to associate<br>a particular event with a MIDI note, pitch or velocity key.<br>Once you have assigned the MIDI notes to VIMS, you can save the<br>MIDI preset and enable MIDI (GVeejay -&gt; Save -&gt; MIDI layout) and<br>(GVeejay -&gt; MIDI -&gt; MIDI enable)``</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -67,11 +117,15 @@
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/sampling/">Sampling</a></h2>
         <p class="blog-post-meta">April 27, 2007</p>
-        <p>If you have started veejay with one or more video file(s) (thus <strong>not with</strong>$ veejay -d ), you can easily create new samples;First, Veejay must be running in <em>plain mode</em></p>
-<p><img src="http://www.veejayhq.net/wp-content/galleries/screenshots/reloaded_bar1.png" alt="top buttonbar"></p>
-<p>Then, you can press the In and Out button to set the starting and ending position of a sample ; Pressing the &#39;Out&#39;button immedialty commits the new sample. The keyboard shortcuts are Left bracket and Right bracket resp.When a sample is created it has a partial copy of the Edit Decision List; You can change the starting positions by at most -2.0 seconds and the ending positions +2.0 seconds.After each commit, the starting position of the sample is set equal to the ending position of the last created sample,you can repeatedly press the Out point button to quickly create a series of samples.</p>
-<p><img src="http://www.veejayhq.net/wp-content/galleries/screenshots/reloaded_nav1.png" alt="navigation buttons"></p>
-<p>If you have started Veejay in dummy mode, the only way to add videofiles is by GVeejay -&gt; Sample -&gt; New from file.To play a sample, you can either press one of the F-keys, or doubleclick a sample slot in the samplebank.You can activate up to 120 samples per keyboard; To play in range 12-24, press &#39;2&#39;, To play in range 1-12, press &#39;1&#39;.The &#39;a,s,d,f,g,h,j,k,l&#39; keys can be used for faster playback , ALT + &#39;a,s,d,f,g,h,j,k,l&#39; for slower playback.To see a full overview of the keyboard comments, use $ man veejay or click View -&gt; VIMS bundles in reloaded which displays a list of all valid events and their bindings).</p>
+        <p>If you have started veejay with one or more video file(s) (thus <strong>not with</strong> <code>$ veejay -d</code> ), you can easily create new samples;  </p>
+<p>First, Veejay must be running in <em>plain mode</em>  </p>
+<p><img src="http://www.veejayhq.net/wp-content/galleries/screenshots/reloaded_bar1.png" alt="top buttonbar">  </p>
+<p>Then, you can press the In and Out button to set the starting and ending position of a sample ; Pressing the &#39;Out&#39;<br>button immedialty commits the new sample. The keyboard shortcuts are Left bracket and Right bracket resp.  </p>
+<p>When a sample is created it has a partial copy of the Edit Decision List; You can change the starting positions by at most -2.0 seconds and the ending positions +2.0 seconds.  </p>
+<p>After each commit, the starting position of the sample is set equal to the ending position of the last created sample,<br>you can repeatedly press the Out point button to quickly create a series of samples.  </p>
+<p><img src="http://www.veejayhq.net/wp-content/galleries/screenshots/reloaded_nav1.png" alt="navigation buttons">  </p>
+<p>If you have started Veejay in dummy mode, the only way to add videofiles is by GVeejay -&gt; Sample -&gt; New from file.  </p>
+<p>To play a sample, you can either press one of the F-keys, or doubleclick a sample slot in the samplebank.<br>You can activate up to 120 samples per keyboard; To play in range 12-24, press &#39;2&#39;, To play in range 1-12, press &#39;1&#39;.<br>The &#39;a,s,d,f,g,h,j,k,l&#39; keys can be used for faster playback , ALT + &#39;a,s,d,f,g,h,j,k,l&#39; for slower playback.<br>To see a full overview of the keyboard comments, use <code>$ man veejay</code> or click View -&gt; VIMS bundles in reloaded which displays a list of all valid events and their bindings).</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -79,11 +133,21 @@
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/sendvims-client-for-pure-data/">sendVIMS client for Pure Data</a></h2>
         <p class="blog-post-meta">May 02, 2007</p>
-        <p>sendVIMS is an external for <a href="http://www.puredata.org">Pure Data</a>. with sendVIMS, you can send VIMS messages directly to veejay, and receive the complete status back. With a little patching and trial&amp;error you could easily built a custom interface for a performance or installation.I&#39;ve whipped up some examples of what can be done in sendVIMS, wich also shows how fast a little prototyping can be done in pure data.The pd patches in one tarbal: <a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-patchestar.gz">help-vims-patchestar.gz</a><strong>1. Triggering actions with audio</strong>shouting at the video makes it look weirder...</p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-audiotrigger.png" title="Triggering actions from audio"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-audiotrigger-150x150.png" alt="Triggering actions from audio"></a><strong>2. Create a midi - videomixer</strong>As of 1.0, midi is built into veejay, making this example less useful. Still, it shows some basic controlling done easily... replace &lt;midi&gt; with &lt;joystick&gt; or &lt;extra mice&gt;</p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-midi.png" title="Using MIDI to control playback"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-midi-150x150.png" alt="Using MIDI to control playback"></a><strong>3. Building your custom playback-scrubber</strong>See the sound example, maybe connect these two?</p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-scrubbing.png" title="Controlling the timeline in YOUR way"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-scrubbing-150x150.png" alt="Controlling the timeline in YOUR way"></a><strong>4. A simple video sequencer</strong>Simple sequencing, or multiple veejays all controlled by one shout, it can be done.</p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-sequencer.png" title="A simple video sequencer"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-sequencer-150x150.png" alt="A simple video sequencer"></a></p>
+        <p>sendVIMS is an external for <a href="http://www.puredata.org">Pure Data</a>. with sendVIMS, you can send VIMS messages directly to veejay, and receive the complete status back. With a little patching and trial&amp;error you could easily built a custom interface for a performance or installation.  </p>
+<p>I&#39;ve whipped up some examples of what can be done in sendVIMS, wich also shows how fast a little prototyping can be done in pure data.  </p>
+<p>The pd patches in one tarbal: <a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-patchestar.gz" title="help-vims-patchestar.gz">help-vims-patchestar.gz</a>  </p>
+<p><strong>1. Triggering actions with audio</strong>  </p>
+<p>shouting at the video makes it look weirder...  </p>
+<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-audiotrigger.png" title="Triggering actions from audio"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-audiotrigger-150x150.png" alt="Triggering actions from audio"></a>  </p>
+<p><strong>2. Create a midi - videomixer</strong>  </p>
+<p>As of 1.0, midi is built into veejay, making this example less useful. Still, it shows some basic controlling done easily... replace <midi> with <joystick> or <extra mice>  </p>
+<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-midi.png" title="Using MIDI to control playback"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-midi-150x150.png" alt="Using MIDI to control playback"></a>  </p>
+<p><strong>3. Building your custom playback-scrubber</strong>  </p>
+<p>See the sound example, maybe connect these two?  </p>
+<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-scrubbing.png" title="Controlling the timeline in YOUR way"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-scrubbing-150x150.png" alt="Controlling the timeline in YOUR way"></a>  </p>
+<p><strong>4. A simple video sequencer</strong>  </p>
+<p>Simple sequencing, or multiple veejays all controlled by one shout, it can be done.  </p>
+<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-sequencer.png" title="A simple video sequencer"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-sequencer-150x150.png" alt="A simple video sequencer"></a>  </p>
 <h2 id="a-simple-video-sequencer">A simple video sequencer</h2>
 
     </div><!-- /.blog-post -->
@@ -92,7 +156,17 @@
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-1-0-known-bugs/">veejay 1.0 known bugs</a></h2>
         <p class="blog-post-meta">April 11, 2007</p>
-        <p>There are currently 4 known bugs in veejay 1.01. The OSC server starts at port offset + 4,but the console reports port offset + 2.Use port 3494 instead of 34922. There&#39;s a glitch in the resampler, toworkarround it you must start jackdin the same samperate as veejay.For example, if the audio has 44.1Khz,start jackd with -r 44100 and thenstart veejay.3. On some systems, veejay&#39;s commandlineoption &#39;-O4&#39; (openGL) causes a segfault4. SDL and fullscreen in Xinerama does not work</p>
+        <p>There are currently 4 known bugs in veejay 1.0  </p>
+<ol>
+<li><p>The OSC server starts at port offset + 4,<br>but the console reports port offset + 2.<br>Use port 3494 instead of 3492  </p>
+</li>
+<li><p>There&#39;s a glitch in the resampler, to<br>workarround it you must start jackd<br>in the same samperate as veejay.<br>For example, if the audio has 44.1Khz,<br>start jackd with -r 44100 and then<br>start veejay.  </p>
+</li>
+<li><p>On some systems, veejay&#39;s commandline<br>option &#39;-O4&#39; (openGL) causes a segfault  </p>
+</li>
+<li><p>SDL and fullscreen in Xinerama does not work</p>
+</li>
+</ol>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -100,7 +174,8 @@
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-1-1-released/">Veejay 1.1 released</a></h2>
         <p class="blog-post-meta">November 30, 2007</p>
-        <p>veejay 1.1 is available from the repository, its a bugfix release ofveejay-1.0$ svn checkout svn://dyne.org/veejay/trunk/veejay-1.1</p>
+        <p>veejay 1.1 is available from the repository, its a bugfix release of<br>veejay-1.0  </p>
+<p>$ svn checkout svn://dyne.org/veejay/trunk/veejay-1.1</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -108,7 +183,11 @@
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-1-5-5-released/">veejay 1.5.5 released</a></h2>
         <p class="blog-post-meta">October 21, 2010</p>
-        <p><strong>veejay 1.5.5 is out now!</strong><a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-src/veejay-1.5.5.tar.bz2/download">veejay-1.5.5</a>ChangeLog:fixed problem of setting playback speed while pausedMIDI channel/parameter numbers in reloaded can be used as sample IDs where 0 = current playing.</p>
+        <p><strong>veejay 1.5.5 is out now!</strong>  </p>
+<p><a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-src/veejay-1.5.5.tar.bz2/download">veejay-1.5.5</a>  </p>
+<p>ChangeLog:  </p>
+<p>fixed problem of setting playback speed while paused  </p>
+<p>MIDI channel/parameter numbers in reloaded can be used as sample IDs where 0 = current playing.</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -116,45 +195,92 @@
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-and-images/">Veejay and images.</a></h2>
         <p class="blog-post-meta">June 15, 2007</p>
-        <p><strong>Instead of videofiles, veejay can use images as source</strong>Working:</p>
+        <p><strong>Instead of videofiles, veejay can use images as source</strong>  </p>
+<p>Working:  </p>
 <ul>
-<li>jpeg</li>
-<li>png</li>
-<li><p>bmp
-gdk-pixbuf supports at least</p>
-</li>
+<li></li>
 <li><p>jpeg</p>
 </li>
-<li><p>png
-Possibly also:</p>
+<li></li>
+<li><p>png</p>
 </li>
+<li></li>
+<li><p>bmp</p>
+</li>
+<li></li>
+</ul>
+<p>gdk-pixbuf supports at least  </p>
+<ul>
+<li></li>
+<li><p>jpeg</p>
+</li>
+<li></li>
+<li><p>png</p>
+</li>
+<li></li>
+</ul>
+<p>Possibly also:  </p>
+<ul>
+<li></li>
 <li><p>wbmp</p>
 </li>
-<li>wmf</li>
-<li>ani</li>
-<li>bmp</li>
-<li>gif</li>
-<li>ico</li>
-<li>pcx</li>
-<li>pnm</li>
-<li>ras</li>
-<li>tga</li>
-<li>xmb</li>
-<li>xpm</li>
-<li>tiff</li>
-<li><p>svg
-<strong>Outputting images:</strong>Making screenshots (scales and save image to file)330:&lt;output width&gt; &lt;output height&gt; &lt;filename&gt;;for example</p>
-<p>  $ sayVIMS &quot;330:640 480 screenshot.png;&quot;</p>
+<li></li>
+<li><p>wmf</p>
 </li>
+<li></li>
+<li><p>ani</p>
+</li>
+<li></li>
+<li><p>bmp</p>
+</li>
+<li></li>
+<li><p>gif</p>
+</li>
+<li></li>
+<li><p>ico</p>
+</li>
+<li></li>
+<li><p>pcx</p>
+</li>
+<li></li>
+<li><p>pnm</p>
+</li>
+<li></li>
+<li><p>ras</p>
+</li>
+<li></li>
+<li><p>tga</p>
+</li>
+<li></li>
+<li><p>xmb</p>
+</li>
+<li></li>
+<li><p>xpm</p>
+</li>
+<li></li>
+<li><p>tiff</p>
+</li>
+<li></li>
+<li><p>svg</p>
+</li>
+<li></li>
 </ul>
-
+<p><strong>Outputting images:  
+</strong><br>Making screenshots (scales and save image to file)  </p>
+<p>330:<output width> <output height> <filename>;  </p>
+<p>for example  </p>
+<pre><code>$ sayVIMS &quot;330:640 480 screenshot.png;&quot;
+</code></pre>
     </div><!-- /.blog-post -->
     <hr/>
     
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-s-caching/">veejay’s caching</a></h2>
         <p class="blog-post-meta">May 02, 2007</p>
-        <p>Veejay has a caching mechanism that loads (compressed) images from disk into RAM. Frames furthest away from the currently played position will be discarded first when the cache size limit is reached. By default, this limit is set to 30% of your system&#39;s memory. There are two commandline options you can use to change the behaviour of the cache:-m / --memory [percentage of available RAM to use]-j / --max_chain [maximum number of simultaneous samples to cache]If you mix a lot of (short) different samples over eachother, you might want to set &quot;-j5 -m50&quot; . If you would have 100 MB RAM, veejay will consume up to 50%, dividing the memory available for 5 different samples, thus max. 10 MB RAM per sample.</p>
+        <p>Veejay has a caching mechanism that loads (compressed) images from disk into RAM. Frames furthest away from the currently played position will be discarded first when the cache size limit is reached. By default, this limit is set to 30% of your system&#39;s memory. There are two commandline options you can use to change the behaviour of the cache:  </p>
+<p>-m / --memory [percentage of available RAM to use]  </p>
+<p>-j / --max_chain [maximum number of simultaneous samples to cache]  </p>
+<p>If you mix a lot of (short) different samples over eachother, you might want to set &quot;-j5 -m50&quot; . If you would have 100 MB RAM, veejay will consume up to 50%, dividing the memory available for 5 different samples, thus max. 10 MB RAM per sample.</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -162,19 +288,28 @@ Possibly also:</p>
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-s-googlegroup-veejay-discussion/">Veejay’s googlegroup: veejay-discussion</a></h2>
         <p class="blog-post-meta">November 25, 2007</p>
-        <p>I started a google-group in search of a community. The number of posts to this blog has been steady enough the last couple of months, showing the need for an alternative help channel. The group can be found here:<a href="http://groups.google.com/group/veejay-discussion?hl=en">http://groups.google.com/group/veejay-discussion?hl=en</a>Please subscribe to this list if you have questions, and we will try our best to provide an answer.I hope the same goes for the 24 subscribers/posters/friends I have invited to get the group started!Cheers,Mathijs<strong>p.s.</strong>This is the original invitation as I wrote it just now:</p>
+        <p>I started a google-group in search of a community. The number of posts to this blog has been steady enough the last couple of months, showing the need for an alternative help channel. The group can be found here:  </p>
+<p><a href="http://groups.google.com/group/veejay-discussion?hl=en">http://groups.google.com/group/veejay-discussion?hl=en</a>  </p>
+<p>Please subscribe to this list if you have questions, and we will try our best to provide an answer.  </p>
+<p>I hope the same goes for the 24 subscribers/posters/friends I have invited to get the group started!  </p>
+<p>Cheers,<br>Mathijs  </p>
+<p><strong>p.s.</strong>This is the original invitation as I wrote it just now:  </p>
 <hr>
-<p>_Hi, you’re receiving this message because you wrote a comment on the veejay blog, or have been subscribed to the veejay-users list. Veejay-users is ‘dead’ ( officially and unofficially) and I don’t hold the password to it to cancel it’s existence. The number of posts on the blog has been steady over the last couple of months, so I know there’s a need for a help channel. Because there’s no good place to ask questions about veejay, and I cannot answer all questions, I hope you will accept this invitation and maybe help out others when they come to the site for help._Thank’s for your help!<table><tbody><tr><td></p>
-<p><img src="http://groups.google.com/groups/img/3nb/groups_bar.gif" alt="Google Groups"></p>
-<p></td></tr><tr><td><strong>veejay-discussion</strong></td></tr><tr><td><a href="http://groups.google.com/group/veejay-discussion">Visit this group</a></td></tr></tbody></table></p>
-
+<p><em>Hi, you’re receiving this message because you wrote a comment on the veejay blog, or have been subscribed to the veejay-users list. Veejay-users is ‘dead’ ( officially and unofficially) and I don’t hold the password to it to cancel it’s existence. The number of posts on the blog has been steady over the last couple of months, so I know there’s a need for a help channel. Because there’s no good place to ask questions about veejay, and I cannot answer all questions, I hope you will accept this invitation and maybe help out others when they come to the site for help.</em>  </p>
+<p>Thank’s for your help!  </p>
+<table class="c3" border="0" cellspacing="0"><tbody><tr><td><img src="http://groups.google.com/groups/img/3nb/groups_bar.gif" alt="Google Groups"></td></tr><tr><td class="c1"><strong>veejay-discussion</strong></td></tr><tr><td class="c2"><a href="http://groups.google.com/group/veejay-discussion">Visit this group</a></td></tr></tbody></table>
     </div><!-- /.blog-post -->
     <hr/>
     
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-s-sound-output-jackd/">Veejay’s sound output: jackd</a></h2>
         <p class="blog-post-meta">April 30, 2007</p>
-        <p>Veejay plays audio through <strong>Jack</strong>You must start the jack server prior to starting Veejay:$ jackd$ veejay video-file.aviIf the audio samplerate differs (Jack plays 48Khz, veejay plays 44.1Khz),you need to setup jack in the proper samplerate.$ jackd -r 44100</p>
+        <p>Veejay plays audio through <strong>Jack</strong>  </p>
+<p>You must start the jack server prior to starting Veejay:  </p>
+<p><code>$ jackd</code>  </p>
+<p><code>$ veejay video-file.avi</code>  </p>
+<p>If the audio samplerate differs (Jack plays 48Khz, veejay plays 44.1Khz),<br>you need to setup jack in the proper samplerate.  </p>
+<p><code>$ jackd -r 44100</code></p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -182,8 +317,8 @@ Possibly also:</p>
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-shop/">veejay shop</a></h2>
         <p class="blog-post-meta">January 25, 2007</p>
-        <p>You can support this project by buying something from the<a href="http://231947.spreadshirt.net">Veejay shop</a></p>
-<p><a href="#"><img src="http://spreadshirt.net/image.php?type=image&amp;partner_id=896281&amp;product_id=5151558&amp;img_id=1&amp;size=big&amp;bgcolor_images=white" alt=""></a></p>
+        <p>You can support this project by buying something from the<br><a href="http://231947.spreadshirt.net">Veejay shop</a>  </p>
+<p><a href="#"><img src="http://spreadshirt.net/image.php?type=image&amp;partner_id=896281&amp;product_id=5151558&amp;img_id=1&amp;size=big&amp;bgcolor_images=white" alt=""></a>  </p>
 <p>For now, I would definately go with the mug :)</p>
 
     </div><!-- /.blog-post -->
@@ -192,19 +327,33 @@ Possibly also:</p>
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/veejay-vinyl-control/">Veejay Vinyl Control</a></h2>
         <p class="blog-post-meta">September 24, 2013</p>
-        <p>This guide is aimed to use Serato or Traktor timecode with VeeJay&#39;s playback. You need to have VeeJay server, Reloaded, sendVIMS and Puredata already installed. Also we need Jackd daemon, in this example I&#39;ll use QJackCtl to set audio connection and configuration.In order to make it work we&#39;ll need:<em> Flext (Development layer for puredata):<a href="http://puredata.info/Members/thomas/flext">http://puredata.info/Members/thomas/flext</a></em> Niklas Klügel vinylcontrol~ external:<a href="http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html*">http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html*</a> <a href="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl.pd_.tar.gz">VeeJayVinylControl.pd.tar</a>:</p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl.png"><img src="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl-300x225.png" alt="" title="VeeJay Vinyl Control"></a>Build flext could be not so easy, so I give you a little guide. Let&#39;s build flext with the build bash script:</p>
+        <p>This guide is aimed to use Serato or Traktor timecode with VeeJay&#39;s playback. You need to have VeeJay server, Reloaded, sendVIMS and Puredata already installed. Also we need Jackd daemon, in this example I&#39;ll use QJackCtl to set audio connection and configuration.<br>In order to make it work we&#39;ll need:  </p>
+<ul>
+<li>Flext (Development layer for puredata):<br><a href="http://puredata.info/Members/thomas/flext">http://puredata.info/Members/thomas/flext</a>  </li>
+<li>Niklas Klügel vinylcontrol~ external:<br><a href="http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html">http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html</a>  </li>
+<li><a href="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl.pd_.tar.gz">VeeJayVinylControl.pd.tar</a>:  </li>
+</ul>
+<p><a href="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl.png"><img src="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl-300x225.png" alt="" title="VeeJay Vinyl Control"></a>  </p>
+<p>Build flext could be not so easy, so I give you a little guide. Let&#39;s build flext with the build bash script:  </p>
 <blockquote>
-<p>./build.sh pd gccThen a few configuration files will be created. Now we have to move to buildsys/config-lnx-pd-gcc.txt and edit some lines to point at PD directories, in my case:</p>
-<p>PDPATH=/usr/include/pdand</p>
-<p>INSTPATH=/usr/lib/pd/extraThere&#39;s no need to build Flext with SndObj and STK support, so we can comment that lines.Then we run as root:</p>
-<p>./build.sh pd gcc installWe can also build Flext with autoconf:</p>
-<p>./bootstrap.shThen we run:</p>
-<p>./configure --with-sdkdir=/usr/include/pd/extramakemake installBy now we should have Flext installed, move on to build vinylcontrol~:We can download vinylcontrol src, or just the vinylcontrol~.pd_linux and make a copy to our external puredata directory from <a href="http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.htmlInstallation">http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.htmlInstallation</a> of vinylcontrol src is almost the same that flext.First:</p>
-<p>./build.sh pd gccAgain we have to edit the file buildsys/config-lnx-pd-gcc.txt and then install as root:</p>
-<p>./build.sh pd gcc installNow the system is ready to control the video playback with a vinyl control or scratch live control cd.At first, load your video, then open QJackCtl and start the server. Open Puredata and connect the deck or CDJ to Puredata input.Load VeeJayVinylControl.pd, and you&#39;ll be able to start scratching your video!! Let&#39;s explain how it work and how we can calibrate the patch in order to get it working better.The external provide 3 outlets:1) alive - bang is sent when the decoding starts/stops (ie. input is above a certain threshold and timecode is being tracked)2) pitch - float that is 1 at 33 rpm in forward direction; negative values indicate backward-movement3) relative position; the start is the first cue-point (first tracked timecode where the needle was dropped) and can be reset to the current timecode-position by sending a bang to the third inlet. The end position is the last sane timecode on the record. The position is calculated using (current_position-start_position)/(last_position-start_posit ion), thus giving a range between 0 and 1 between the end position and the relative start position and negative values for positions before the start position.And 3 inlets:1) left input2) right input (take care of the cabling from your turntable)3) reset for the relative start position</p>
+<p>./build.sh pd gcc<br>Then a few configuration files will be created. Now we have to move to buildsys/config-lnx-pd-gcc.txt and edit some lines to point at PD directories, in my case:  </p>
+<p>PDPATH=/usr/include/pd<br>and  </p>
+<p>INSTPATH=/usr/lib/pd/extra<br>There&#39;s no need to build Flext with SndObj and STK support, so we can comment that lines.<br>Then we run as root:  </p>
+<p>./build.sh pd gcc install<br>We can also build Flext with autoconf:  </p>
+<p>./bootstrap.sh<br>Then we run:  </p>
+<p>./configure --with-sdkdir=/usr/include/pd/extra<br>make<br>make install<br>By now we should have Flext installed, move on to build vinylcontrol~:<br>We can download vinylcontrol src, or just the vinylcontrol~.pd_linux and make a copy to our external puredata directory from <a href="http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html">http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html</a><br>Installation of vinylcontrol src is almost the same that flext.<br>First:  </p>
+<p>./build.sh pd gcc<br>Again we have to edit the file buildsys/config-lnx-pd-gcc.txt and then install as root:  </p>
+<p>./build.sh pd gcc install<br>Now the system is ready to control the video playback with a vinyl control or scratch live control cd.<br>At first, load your video, then open QJackCtl and start the server. Open Puredata and connect the deck or CDJ to Puredata input.  </p>
 </blockquote>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2013/09/vinylcontrol.png"><img src="http://www.veejayhq.net/wp-content/uploads/2013/09/vinylcontrol-300x264.png" alt="" title="Vinyl Control"></a>The external doesn&#39;t work perfectly, so you have to measure the audio input gain until the number on the 3rd patch outlet increases when the vinyl starts. This is multiplied by the frame&#39;s number of our video (I think that it could be took from VeeJay, but I&#39;m not too sure), and is connected to veejay current frame.The 2nd outlet have a &quot;moses 0&quot; message box, that means that when it&#39;s under 0 it will play the video backward, and when is above 0 it will play forward.The 1st outlet just bang the play/stop. It uses a threshold that I&#39;m almost sure it&#39;s defined by the timecode.c file.That&#39;s all, the patch doesn&#39;t work perfectly, so if you make something better, let me know: juanicotolengo(at)gmail(dot)comThanks to DJ Trip&#39;s Cris, Niels Elburg and Matthijs van Henten for their support.Juan Sebastian Faccio (a.k.a.: DaNoiseMan)</p>
+<p>Load VeeJayVinylControl.pd, and you&#39;ll be able to start scratching your video!! Let&#39;s explain how it work and how we can calibrate the patch in order to get it working better.  </p>
+<p>The external provide 3 outlets:<br>1) alive - bang is sent when the decoding starts/stops (ie. input is above a certain threshold and timecode is being tracked)<br>2) pitch - float that is 1 at 33 rpm in forward direction; negative values indicate backward-movement<br>3) relative position; the start is the first cue-point (first tracked timecode where the needle was dropped) and can be reset to the current timecode-position by sending a bang to the third inlet. The end position is the last sane timecode on the record. The position is calculated using (current_position-start_position)/(last_position-start_posit ion), thus giving a range between 0 and 1 between the end position and the relative start position and negative values for positions before the start position.  </p>
+<p>And 3 inlets:<br>1) left input<br>2) right input (take care of the cabling from your turntable)<br>3) reset for the relative start position  </p>
+<p><a href="http://www.veejayhq.net/wp-content/uploads/2013/09/vinylcontrol.png"><img src="http://www.veejayhq.net/wp-content/uploads/2013/09/vinylcontrol-300x264.png" alt="" title="Vinyl Control"></a>  </p>
+<p>The external doesn&#39;t work perfectly, so you have to measure the audio input gain until the number on the 3rd patch outlet increases when the vinyl starts. This is multiplied by the frame&#39;s number of our video (I think that it could be took from VeeJay, but I&#39;m not too sure), and is connected to veejay current frame.  </p>
+<p>The 2nd outlet have a &quot;moses 0&quot; message box, that means that when it&#39;s under 0 it will play the video backward, and when is above 0 it will play forward.  </p>
+<p>The 1st outlet just bang the play/stop. It uses a threshold that I&#39;m almost sure it&#39;s defined by the timecode.c file.  </p>
+<p>That&#39;s all, the patch doesn&#39;t work perfectly, so if you make something better, let me know: juanicotolengo(at)gmail(dot)com<br>Thanks to DJ Trip&#39;s Cris, Niels Elburg and Matthijs van Henten for their support.  </p>
+<p>Juan Sebastian Faccio (a.k.a.: DaNoiseMan)</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -212,7 +361,69 @@ Possibly also:</p>
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/video-files-and-resolution/">Video files and resolution.</a></h2>
         <p class="blog-post-meta">May 02, 2007</p>
-        <p><strong>1. Video formats and containers</strong>A video file consists out of TWO seperate elements:<em> container</em> codecThe container holds the digitally encoded data and the codec is capable of decoding/encoding this digitally encoded data.Veejay supports the AVI and the Quicktime container , with the following codecs:Quicktime:<em> mpjeg,mjpa,jpeg,dmb1</em> dvsd, dv, dvcp, dvhdAVI<em> mjpeg, mjpa,jpeg,jfif,dmb1</em> dvsd, dv, dvcp, dvhd<em> i420, i422, yv16, hfyuRaw DV</em> PAL / NTSC dvsdVeejay can only deal with video files that consists entirely out of whole images (only I-frames). The codecs below will only work if all frames are I-frames. Otherwise, veejay will abort with an error message.AVI / Quicktime:<em> xvid, mp4v,divx,dxsd,mp4s,m4s2</em> div3,mp43,mp42,mpg4<em> avc1,h264,x264,davc,svq1,svq3,avc1<strong>2. Wich codec to use</strong>MotionJPEG ( mjpeg) is the veejay codec of choice for most applications, it gives you a good tradeof between compression, quality and compatibility. If you want speed, use AVI yv16 or i420 while recording to new samples.Tools that support MJPEG:</em> <a href="http://cvs.cinelerra.org/Cinelerra*">http://cvs.cinelerra.org/Cinelerra*</a> <a href="http://www.kinodv.org/Kino*">http://www.kinodv.org/Kino*</a> <a href="http://ronald.bitfreak.net/lvs/Linux">http://ronald.bitfreak.net/lvs/Linux</a> video studio<em> <a href="http://mjpeg.sourceforge.net/mjpegtools">http://mjpeg.sourceforge.net/mjpegtools</a></em> <a href="http://www.mplayerhq.huMplayer">http://www.mplayerhq.huMplayer</a>, and mencoder<em> <a href="http://lives.sf.net">http://lives.sf.net</a> Lives<strong>2. Wich resolutions to use</strong>Veejay can do:</em> pal: 720x576<em> ntsc: 720x480</em> 1/4 pal: 360x288<em> 1/4 ntsc: 360x240<strong>and many more</strong>, but multiples of 16 ( jpeg squares) will look best!If you load multiple video files on the commandline, make sure that all files have the same resolution and audio properties.<strong>3. How to convert ( transcode)</strong>Veejay can convert dv video to mjpeg for you, however, I prefer to use mplayer for this, wich has more flexibility.From &quot;anything&quot; mplayer can play to mjpeg, use:$ mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -o &lt;outputfile&gt; &lt;inputfile&gt;To scale on the fly, use:$ mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -vf scale=352:288 -o &lt;outputfile&gt; &lt;inputfile&gt;consult mplayer documentation about other options, such as cropping and filtering out blocks in video.a quick hint for bulk encoding a bunch of capture.dv files:$ for i in `ls </em>dv<code>;do mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -o</code>echo $i | sed s/.dv/.avi/` $i; done;<strong>4. What is this dummy mode</strong>Dummy mode opens up a &#39;color stream&#39; to start veejay without a video file.If you use a video file, veejay will take that file&#39;s properties as default settings for the whole session.</p>
+        <p><strong>1. Video formats and containers  
+</strong>  </p>
+<p>A video file consists out of TWO seperate elements:  </p>
+<ul>
+<li>container  </li>
+<li>codec  </li>
+</ul>
+<p>The container holds the digitally encoded data and the codec is capable of decoding/encoding this digitally encoded data.  </p>
+<p>Veejay supports the AVI and the Quicktime container , with the following codecs:  </p>
+<p>Quicktime:  </p>
+<ul>
+<li>mpjeg,mjpa,jpeg,dmb1  </li>
+<li>dvsd, dv, dvcp, dvhd  </li>
+</ul>
+<p>AVI  </p>
+<ul>
+<li>mjpeg, mjpa,jpeg,jfif,dmb1  </li>
+<li>dvsd, dv, dvcp, dvhd  </li>
+<li>i420, i422, yv16, hfyu  </li>
+</ul>
+<p>Raw DV  </p>
+<ul>
+<li>PAL / NTSC dvsd  </li>
+</ul>
+<p>Veejay can only deal with video files that consists entirely out of whole images (only I-frames). The codecs below will only work if all frames are I-frames. Otherwise, veejay will abort with an error message.  </p>
+<p>AVI / Quicktime:  </p>
+<ul>
+<li>xvid, mp4v,divx,dxsd,mp4s,m4s2  </li>
+<li>div3,mp43,mp42,mpg4  </li>
+<li>avc1,h264,x264,davc,svq1,svq3,avc1  </li>
+</ul>
+<p><strong>2. Wich codec to use</strong>  </p>
+<p>MotionJPEG ( mjpeg) is the veejay codec of choice for most applications, it gives you a good tradeof between compression, quality and compatibility. If you want speed, use AVI yv16 or i420 while recording to new samples.  </p>
+<p>Tools that support MJPEG:  </p>
+<ul>
+<li><a href="http://cvs.cinelerra.org/Cinelerra">http://cvs.cinelerra.org/Cinelerra</a>  </li>
+<li><a href="http://www.kinodv.org/Kino">http://www.kinodv.org/Kino</a>  </li>
+<li><a href="http://ronald.bitfreak.net/lvs/Linux">http://ronald.bitfreak.net/lvs/Linux</a> video studio  </li>
+<li><a href="http://mjpeg.sourceforge.net/mjpegtools">http://mjpeg.sourceforge.net/mjpegtools</a>  </li>
+<li><a href="http://www.mplayerhq.huMplayer">http://www.mplayerhq.huMplayer</a>, and mencoder  </li>
+<li><a href="http://lives.sf.net">http://lives.sf.net</a> Lives  </li>
+</ul>
+<p><strong>2. Wich resolutions to use</strong>  </p>
+<p>Veejay can do:  </p>
+<ul>
+<li>pal: 720x576  </li>
+<li>ntsc: 720x480  </li>
+<li>1/4 pal: 360x288  </li>
+<li>1/4 ntsc: 360x240  </li>
+</ul>
+<p><strong>and many more</strong>, but multiples of 16 ( jpeg squares) will look best!  </p>
+<p>If you load multiple video files on the commandline, make sure that all files have the same resolution and audio properties.  </p>
+<p><strong>3. How to convert ( transcode)</strong><br>Veejay can convert dv video to mjpeg for you, however, I prefer to use mplayer for this, wich has more flexibility.  </p>
+<p>From &quot;anything&quot; mplayer can play to mjpeg, use:  </p>
+<p>$ mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -o <outputfile> <inputfile>  </p>
+<p>To scale on the fly, use:  </p>
+<p>$ mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -vf scale=352:288 -o <outputfile> <inputfile>  </p>
+<p>consult mplayer documentation about other options, such as cropping and filtering out blocks in video.  </p>
+<p>a quick hint for bulk encoding a bunch of capture.dv files:  </p>
+<p>$ for i in `ls *dv`;do mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -o `echo $i | sed s/.dv/.avi/` $i; done;  </p>
+<p><strong>4. What is this dummy mode</strong>  </p>
+<p>Dummy mode opens up a &#39;color stream&#39; to start veejay without a video file.  </p>
+<p>If you use a video file, veejay will take that file&#39;s properties as default settings for the whole session.</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -220,7 +431,13 @@ Possibly also:</p>
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/video-mixing/">Video mixing</a></h2>
         <p class="blog-post-meta">May 02, 2007</p>
-        <p>Veejay can (down)mix from multiple sources<strong>Method 1/2. Mixing plain samples</strong>To mix &#39;plain&#39; samples, i.e samples with no FX you can simply add a video effect to the current sample , click it in the FX chain and select a secondary source for it from the FX sources list. This method will not render the FX that may be present on the secondary source. You can use method 2, or play and record the secondary sample to a new sample before mixing.<strong>Method 2/2. Mixing composed samples</strong>To mix &#39;composed&#39; samples, i.e. samples with all FX rendered, you can use the MT panel in Reloaded.The MultiTrack panel is used to track multiple veejay servers and can be used to connect video streams.If you have a few fast machines and a fast network at your disposal, you can easily drive 4 veejays simultaneously.The maximum number of tracks can be increased on reloaded&#39;s command line.The MT panel provides synchronized playback controls</p>
+        <p>Veejay can (down)mix from multiple sources  </p>
+<p><strong>Method 1/2. Mixing plain samples</strong>  </p>
+<p>To mix &#39;plain&#39; samples, i.e samples with no FX you can simply add a video effect to the current sample , click it in the FX chain and select a secondary source for it from the FX sources list. This method will not render the FX that may be present on the secondary source. You can use method 2, or play and record the secondary sample to a new sample before mixing.  </p>
+<p><strong>Method 2/2. Mixing composed samples</strong>  </p>
+<p>To mix &#39;composed&#39; samples, i.e. samples with all FX rendered, you can use the MT panel in Reloaded.<br>The MultiTrack panel is used to track multiple veejay servers and can be used to connect video streams.  </p>
+<p>If you have a few fast machines and a fast network at your disposal, you can easily drive 4 veejays simultaneously.<br>The maximum number of tracks can be increased on reloaded&#39;s command line.  </p>
+<p>The MT panel provides synchronized playback controls</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -228,7 +445,21 @@ Possibly also:</p>
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="/category//documentation/what-to-use-as-a-live-video-source/">What to use as a live video source?</a></h2>
         <p class="blog-post-meta">August 08, 2007</p>
-        <p>The issue is raised every now and then:&quot;How do I plug in my (USB WebCam/Digital Camera/Exotic Hardware) to veejay?&quot;Currently, Veejay does not support decompressing digital video ( firewire) directly from the camera ( like on windows and mac). There is however, full functional support for avi&#39;s and quicktime movies in digital video.The codec for DV video on linux, is unlike the commercial codecs for windows and macosx, rather slow. There&#39;s no way to expect near-realtime performance on average hardware.( at least, not on my hardware wich is getting old).Capturing live video is done trough UNICAP, so hopefully one day we can have digital video decompression on the fly.As for the USB Webcams, please check out the compatibility list on <a href="http://www.exploits.org/v4l/">http://www.exploits.org/v4l/</a>Basically, anything that goes with XawTV and others will propably work with Veejay too.The veejay team has always relied on TV-input cards as a source of nice-quality realtime video source. The one&#39;s we used:- Anything that goes with BTTV- The AVER TV CARDBUS from AverMedia ( a PCMCIA card)We are in no way affiliated with AverMedia, or making advertisements, but it just happened to be the ONLY existing PCMCIA TV card at the time I was looking for one. there might be other alternatives right now, again, see <a href="http://www.exploits.org/v4l/">http://www.exploits.org/v4l/</a>Using uncompressed video is very CPU friendly, wich leaves more juice for realtime effects. Even on commercial platforms there&#39;s a speed penalty when using compressed sources.Comments on this issue are VERY welcome!</p>
+        <p>The issue is raised every now and then:  </p>
+<p>&quot;How do I plug in my (USB WebCam/Digital Camera/Exotic Hardware) to veejay?&quot;  </p>
+<p>Currently, Veejay does not support decompressing digital video ( firewire) directly from the camera ( like on windows and mac). There is however, full functional support for avi&#39;s and quicktime movies in digital video.  </p>
+<p>The codec for DV video on linux, is unlike the commercial codecs for windows and macosx, rather slow. There&#39;s no way to expect near-realtime performance on average hardware.  </p>
+<p>( at least, not on my hardware wich is getting old).  </p>
+<p>Capturing live video is done trough UNICAP, so hopefully one day we can have digital video decompression on the fly.  </p>
+<p>As for the USB Webcams, please check out the compatibility list on <a href="http://www.exploits.org/v4l/">http://www.exploits.org/v4l/</a>  </p>
+<p>Basically, anything that goes with XawTV and others will propably work with Veejay too.  </p>
+<p>The veejay team has always relied on TV-input cards as a source of nice-quality realtime video source. The one&#39;s we used:  </p>
+<ul>
+<li>Anything that goes with BTTV  </li>
+<li>The AVER TV CARDBUS from AverMedia ( a PCMCIA card)<br>We are in no way affiliated with AverMedia, or making advertisements, but it just happened to be the ONLY existing PCMCIA TV card at the time I was looking for one. there might be other alternatives right now, again, see <a href="http://www.exploits.org/v4l/">http://www.exploits.org/v4l/</a>  </li>
+</ul>
+<p>Using uncompressed video is very CPU friendly, wich leaves more juice for realtime effects. Even on commercial platforms there&#39;s a speed penalty when using compressed sources.  </p>
+<p>Comments on this issue are VERY welcome!</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -257,13 +488,67 @@ Possibly also:</p>
                 
                 <li><a href="/category/uncategorized/">uncategorized</a></li>
                 
-                <li><a href="/category/news/">news</a></li>
-                
                 <li><a href="/category/documentation/">documentation</a></li>
+                
+                <li><a href="/category/news/">news</a></li>
                 
             </ol>
             <h4>Pages</h4>
             <ol class="list-unstyled">
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/colorspaces.md">Colorspaces</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/compiling-on-ubuntu.md">Compiling on Ubuntu </a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/contact.md">Contact</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/contributions.md">Contributions</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/dependencies.md">Dependencies</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/documentation.md">Documentation</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/donate.md">Donate</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/download.md">Download</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/facebook.md">Facebook</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/features.md">Features</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/fx-stuff.md">fx stuff</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/getting-started.md">Getting Started</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/links.md">links</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/livido-osc.md">LiViDO/OSC</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/midi.md">MIDI</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/multitracker.md">MultiTracker</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/performance-tips.md">Performance Tips</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/projection-mapping.md">Projection Mapping</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/roadmap.md">Roadmap</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/sample-sequencer.md">Sample Sequencer</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/screenshots.md">Screenshots</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/showcase.md">showcase</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/veejay-1-5.md">veejay 1.5</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/veejay-advanced.md">Veejay Advanced</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/veejay-basics.md">Veejay Basics</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/veejay-environment-variables.md">veejay environment variables</a></li>
+                
+                <li><a href="/home/matthijs/Development/Sites/veejayhq/content/vims-list.md">VIMS List</a></li>
                 
                 <li><a href="/colorspaces/">Colorspaces</a></li>
                 

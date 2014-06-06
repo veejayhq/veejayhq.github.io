@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Veejay and images.</title>
+    <title>How to use MIDI</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
     <div class="container">
 
       <div class="blog-header">
-        <h2 class="blog-title">Veejay and images.</h2>
+        <h2 class="blog-title">How to use MIDI</h2>
         <p class="lead blog-description">Veejay community site</p>
       </div>
 
@@ -51,82 +51,16 @@
         <h2 class="blog-post-title"></h2>
         <p class="blog-post-meta">June 06, 14</p>
 
-        <p><strong>Instead of videofiles, veejay can use images as source</strong>  </p>
-<p>Working:  </p>
-<ul>
-<li></li>
-<li><p>jpeg</p>
-</li>
-<li></li>
-<li><p>png</p>
-</li>
-<li></li>
-<li><p>bmp</p>
-</li>
-<li></li>
-</ul>
-<p>gdk-pixbuf supports at least  </p>
-<ul>
-<li></li>
-<li><p>jpeg</p>
-</li>
-<li></li>
-<li><p>png</p>
-</li>
-<li></li>
-</ul>
-<p>Possibly also:  </p>
-<ul>
-<li></li>
-<li><p>wbmp</p>
-</li>
-<li></li>
-<li><p>wmf</p>
-</li>
-<li></li>
-<li><p>ani</p>
-</li>
-<li></li>
-<li><p>bmp</p>
-</li>
-<li></li>
-<li><p>gif</p>
-</li>
-<li></li>
-<li><p>ico</p>
-</li>
-<li></li>
-<li><p>pcx</p>
-</li>
-<li></li>
-<li><p>pnm</p>
-</li>
-<li></li>
-<li><p>ras</p>
-</li>
-<li></li>
-<li><p>tga</p>
-</li>
-<li></li>
-<li><p>xmb</p>
-</li>
-<li></li>
-<li><p>xpm</p>
-</li>
-<li></li>
-<li><p>tiff</p>
-</li>
-<li></li>
-<li><p>svg</p>
-</li>
-<li></li>
-</ul>
-<p><strong>Outputting images:  
-</strong><br>Making screenshots (scales and save image to file)  </p>
-<p>330:<output width> <output height> <filename>;  </p>
-<p>for example  </p>
-<pre><code>$ sayVIMS &quot;330:640 480 screenshot.png;&quot;
-</code></pre>
+        <p><strong>Reloaded 1.0</strong> supports MIDI devices through ALSA  </p>
+<p>To use your MIDI device with Reloaded, you need to use <strong>aconnect</strong> or<br><strong>aconnectgui</strong> to connect the MIDI device to Reloaded.  </p>
+<p>To see all input devices (your MIDI devices)<br><code>$ aconnect -i</code>  </p>
+<p>And all output devices (Reloaded/ Veejay)<br>`<br>$ aconnect -o  </p>
+<p>And then connect them:<br>`<br>$ aconnect -i 127 -o 128  </p>
+<p>Launch Reloaded  </p>
+<p>$ reloaded  </p>
+<p>Instruction for MIDI learning:  </p>
+<p>In the menubar, click GVeejay -&gt; MIDI -&gt; MIDI learn<br>Press a key on your MIDI device (reloaded will display the raw MIDI event in the statusbar)<br>and click a button , press a key or pull a slider in the userinterface to associate<br>a particular event with a MIDI note, pitch or velocity key.<br>Once you have assigned the MIDI notes to VIMS, you can save the<br>MIDI preset and enable MIDI (GVeejay -&gt; Save -&gt; MIDI layout) and<br>(GVeejay -&gt; MIDI -&gt; MIDI enable)``</p>
+
     </div><!-- /.blog-post -->
 
         </div><!-- /.blog-main -->

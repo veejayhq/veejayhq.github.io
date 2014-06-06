@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Veejay and images.</title>
+    <title>Run Veejay </title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
     <div class="container">
 
       <div class="blog-header">
-        <h2 class="blog-title">Veejay and images.</h2>
+        <h2 class="blog-title">Run Veejay </h2>
         <p class="lead blog-description">Veejay community site</p>
       </div>
 
@@ -51,82 +51,28 @@
         <h2 class="blog-post-title"></h2>
         <p class="blog-post-meta">June 06, 14</p>
 
-        <p><strong>Instead of videofiles, veejay can use images as source</strong>  </p>
-<p>Working:  </p>
-<ul>
-<li></li>
-<li><p>jpeg</p>
-</li>
-<li></li>
-<li><p>png</p>
-</li>
-<li></li>
-<li><p>bmp</p>
-</li>
-<li></li>
-</ul>
-<p>gdk-pixbuf supports at least  </p>
-<ul>
-<li></li>
-<li><p>jpeg</p>
-</li>
-<li></li>
-<li><p>png</p>
-</li>
-<li></li>
-</ul>
-<p>Possibly also:  </p>
-<ul>
-<li></li>
-<li><p>wbmp</p>
-</li>
-<li></li>
-<li><p>wmf</p>
-</li>
-<li></li>
-<li><p>ani</p>
-</li>
-<li></li>
-<li><p>bmp</p>
-</li>
-<li></li>
-<li><p>gif</p>
-</li>
-<li></li>
-<li><p>ico</p>
-</li>
-<li></li>
-<li><p>pcx</p>
-</li>
-<li></li>
-<li><p>pnm</p>
-</li>
-<li></li>
-<li><p>ras</p>
-</li>
-<li></li>
-<li><p>tga</p>
-</li>
-<li></li>
-<li><p>xmb</p>
-</li>
-<li></li>
-<li><p>xpm</p>
-</li>
-<li></li>
-<li><p>tiff</p>
-</li>
-<li></li>
-<li><p>svg</p>
-</li>
-<li></li>
-</ul>
-<p><strong>Outputting images:  
-</strong><br>Making screenshots (scales and save image to file)  </p>
-<p>330:<output width> <output height> <filename>;  </p>
-<p>for example  </p>
-<pre><code>$ sayVIMS &quot;330:640 480 screenshot.png;&quot;
-</code></pre>
+        <h3 id="-for-the-first-time-"><strong>For the first time:</strong></h3>
+<p>open a terminal<br>Copy a truetype font to $HOME/.veejay/fonts  </p>
+<p><code>$ mkdir -p ~/.veejay/fonts  
+$ cp /usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf ~/.veejay/fonts</code>  </p>
+<h3 id="-running-veejay-"><strong>Running veejay</strong></h3>
+<p><strong>1. Play</strong>  </p>
+<p>open a terminal  </p>
+<p><code>$ veejay -d -n</code>  </p>
+<p>To run veejay without accelerated display  </p>
+<p><code>$ veejay -O5 -d -n</code>  </p>
+<p>To run veejay in verbose mode  </p>
+<p><code>$ veejay -O5 -d -n -v</code>  </p>
+<p>To run veejay with openGL display  </p>
+<p><code>$ veejay -O4 -d -n</code>  </p>
+<p>Start another terminal and type  </p>
+<p><code>$ reloaded</code>  </p>
+<p>or  </p>
+<p><code>$ reloaded -n</code>  </p>
+<p><strong>2. Stop</strong>  </p>
+<p>Open another terminal  </p>
+<p><code>$ sayVIMS &quot;600:;&quot;</code><br>(or press CTRL-C in the terminal running veejay)</p>
+
     </div><!-- /.blog-post -->
 
         </div><!-- /.blog-main -->

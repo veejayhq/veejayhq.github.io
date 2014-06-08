@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>MIDI</title>
+    <title>Veejay Basics</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
     <div class="container">
 
       <div class="blog-header">
-        <h2 class="blog-title">MIDI</h2>
+        <h2 class="blog-title">Veejay Basics</h2>
         <p class="lead blog-description">Veejay community site</p>
       </div>
 
@@ -48,26 +48,39 @@
         <div class="col-sm-8 blog-main">
             
     <div class="blog-post">
-        <h1 id="configuring-the-midi-device">Configuring the MIDI device</h1>
-<p>Reloaded supports MIDI devices through ALSA, which means you have to connect<br>your MIDI device to reloaded.  </p>
-<p>To start, launch reloaded<br><code>control@veejay-1:~$ reloaded -v</code>  </p>
-<p>To list the input (readable) clients, type &#39;aconnect -i&#39;<br><code>c0ntrol@veejay-1:~$ aconnect -i  
-client 0: &#39;System&#39; [type=kernel]  
-0 &#39;Timer &#39;  
-1 &#39;Announce &#39;  
-client 14: &#39;Midi Through&#39; [type=kernel]  
-0 &#39;Midi Through Port-0&#39;  
-client 128: &#39;Virtual Keyboard&#39; [type=user]  
-0 &#39;Virtual Keyboard&#39;</code>  </p>
-<p>To list the output (writeable) clients, type &#39;aconnect -o&#39;<br><code>control@veejay-1:~$ aconnect -o  
-client 14: &#39;Midi Through&#39; [type=kernel]  
-0 &#39;Midi Through Port-0&#39;  
-client 129: &#39;Veejay&#39; [type=user]  
-0 &#39;Reloaded &#39;</code>  </p>
-<p>Now, we can connect the input to the output, Virtual Keyboard to Reloaded with<br><code>$ aconnect 128 129</code>  </p>
-<p>We&#39;r done on the commandline now and we can start learning midi events in<br>reloaded. Click GVeejay -&gt; Midi -&gt; Learn Midi<br>[caption id=&quot;attachment_173&quot; align=&quot;alignnone&quot; width=&quot;314&quot; caption=&quot;MIDI&quot;]<a href="http://www.veejayhq.net/wp-content/uploads/2008/11/midi.png"><img src="http://www.veejayhq.net/wp-content/uploads/2008/11/midi.png" alt="MIDI" title="MIDI - menuitem"></a>[/caption]  </p>
-<p>In the statusbar , you will see the message &#39;<em>Learning MIDI commands. Touch a midi key and then click a widget.</em>&#39; . Now, we can bind for example NoteOn to the Play Forward button by hitting the note on the keyboard and then by pressing the play forward button. Reloaded will learn MIDI events until you click &#39;Enable MIDI&#39; in the menu.  </p>
-<p>The MIDI events can be saved to file by clicking GVeejay -&gt; Save -&gt; Save MIDI layout</p>
+        <h1 id="rules-of-thumb">Rules of Thumb</h1>
+<ul>
+<li>Veejay is the server  </li>
+<li>Reloaded is the client  </li>
+<li>Sayvims is the console mini-client  </li>
+<li>You can interact with the server directly (SDL mouse and keyboard)  </li>
+<li>Veejay&#39;s console output logs your actions  </li>
+</ul>
+<h2 id="system-docs">system docs</h2>
+<p><code>$ reloaded -h  
+$ veejay -h  
+$ man veejay  
+$ veejay -u</code>  </p>
+<h2 id="various-ways-to-launch-the-server">Various ways to launch the server</h2>
+<p>In dummy mode (just a stream with black video, hit the color wheel in the Stream pad<br>to change its color)<br><code>$ veejay -d</code>  </p>
+<p>To open your Video4Linux device, you can do something like<br><code>$ echo &quot;240:0 1;&quot; | sayVIMS</code>  </p>
+<p>Or you can use reloaded, click GVeejay in the Menu, Stream -&gt; New, and doubleclick<br>your capture device.  </p>
+<p>To start veejay with a videofile (preferred), you can do something like<br><code>$ veejay -v mjpeg-video-file.avi</code>  </p>
+<h2 id="solo-ing-the-server">Solo&#39;ing the server</h2>
+<p>All the keybindings in veejay depend on SDL; if you move your mouse over to the<br>SDL windows to focus it you can interact directly with the output.  </p>
+<p>KP= Numeric KeyPad, check numlock.  </p>
+<p>Create new sample from your entire video file and play it by pressing:<br>KP1, Left Bracket, KP3, Right Bracket , F1  </p>
+<p>If you press &#39;KP divide&#39; , veejay will return to plain video mode so you can create more clips. If you press &#39;ESC&#39; , veejay will switch from playing streams to playing clips or vice versa  </p>
+<p>Press F1 to F12 to select a clip,<br>Press 1 to 9 to select a bank (1 = clips 1 to 12, 2 = clips 12 to 24, etc )  </p>
+<p>Once you are playing a clip/stream, simply press &#39;Cursor UP&#39; , &#39;ENTER&#39;<br>If you add a video effect, try pressing &#39;-&#39; and &#39;=&#39; to select another channel and &#39;/&#39; to<br>toggle between clip/stream sources  </p>
+<p>Veejay supports chaining of effects since day 0, a number of keys have some importance  </p>
+<p>&#39;-&#39; ,&#39;=&#39; and &#39;/&#39;<br>&#39;END&#39; for enabling/disabling the chain<br>&#39;KP -&#39; for selecting the previous entry<br>&#39;KP +&#39; for selecting the next entry<br>&#39;ENTER&#39; for adding an effect from the list to the chain<br>&#39;DEL&#39; for removing an effect from the chain  </p>
+<p>Also, you can press &#39;HOME&#39; to see clip or stream information. Try the keys &#39;A&#39; to &#39;L&#39; to increase/decrease playback speed, Press ALT + &#39;A&#39; to &#39;L&#39; to increase/decrease<br>slow motion speed.  </p>
+<h4 id="some-keyboard-bindings">Some keyboard bindings</h4>
+<table border="0" width="80%"><tr><td class="c1">Description</td><td class="c1">SDL key</td><td class="c1">In plain english</td></tr><tr><td>Set the starting position of a new sample</td><td>SDLK_LEFTBRACKET</td><td>Left bracket</td></tr><tr><td>Set ending position and create a new sample</td><td>SDLK_RIGHTBRACKET</td><td>Right bracket</td></tr><tr><td>Select and play sample <strong>1</strong></td><td>SDLK_F1</td><td>F1</td></tr><tr><td>Set playback speed to 3</td><td>SDLK_d</td><td>d</td></tr><tr><td></td></tr><tr><td>Change looptype</td><td>SDLK_KP_MULTIPLY</td><td>asterix on numeric keypad</td></tr><tr><td>Play backward</td><td>SDLK_KP_4</td><td>Cursor left on numeric keypad</td></tr><tr><td>Play forward</td><td>SDLK_KP_6</td><td>Cursor right on numeric keypad</td></tr><tr><td>Skip 1 second</td><td>SDLK_KP_8</td><td>Cursor up on numeric keypad</td></tr><tr><td>Switch playmode to Plain</td><td>SDLK_KP_DIVIDE</td><td>Divide on numeric keypad</td></tr><tr><td>Print information about sample</td><td>SDLK_HOME</td><td>Home</td></tr></table>  
+
+
+<p>All keys are listed in<br><code>$ man veejay</code></p>
 
     </div><!-- /.blog-post -->
 

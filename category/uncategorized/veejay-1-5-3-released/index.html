@@ -11,10 +11,10 @@
     <title>veejay 1.5.3 released</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/veejayhq/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/veejayhq/css/blog.css" rel="stylesheet">
+    <link href="/css/blog.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -49,9 +49,46 @@
             
     <div class="blog-post">
         <h2 class="blog-post-title"></h2>
-        <p class="blog-post-meta">June 06, 14</p>
+        <p class="blog-post-meta">June 09, 14</p>
 
-        <p><strong>veejay 1.5.3 is out now!</strong><a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-src/veejay-1.5.3.tar.bz2/download">veejay-1.5.3 all-in-one package</a>- Added support for basic (CCD) image calibration.(Dark Current subtraction &amp; Flat Field Correction)There are two methods to combine frames: Average or Median Filter- Added new Stream &#39;Calibration Image&#39; (bugged)Use this to load your calibration config and apply it to existing video- Added Constant-time median filtering from Simon Perreault( <a href="http://nomis80.org/ctmf.html">http://nomis80.org/ctmf.html</a> )- Fixed VIMS 330 &#39;Screenshot&#39;- Fixed TrueType font name display- Fixed synchronization problem in Reloaded- Added VIMS message &#39;VIMS_CONTINUOUS_PLAY&#39; for continuous sampleplaying(positions are not reset when switching samples. Required for veejay-radar)- Added absolute cycle count to StatusMessage(status token #19 and #- Fixed setting Norm on commandline (fixes David&#39;s problem)- Fixed Dummy Mode- Changed Dummy mode to playback in 720x5476 PAL or 720x480 NTSC resolution( set VEEJAY_RUN_MODE=CLASSIC environment variable to get old behaviour)- Refactorized OSC event handling. Use veejay -u to dump namespace. No pulling of data yet, only triggers.The new OSC namespaces matches VIMS 1:1- Added VIMS_SAMPLE_STACK message to pull FX mixing sources (veejay-radar)- Added VIMS_CHAIN_FOLLOW_FADE message to switch sources after fadingautomatically(Also added toggle button in Reloaded below the Chain Fade Slider)- Added the Constant-time median filtering algorithm as a new Image FX- Updated veejay&#39;s MAN page 20) Required for veejay-radar- Fixed connection instability issues (libvjnet)- Lots of bugfixes</p>
+        <p><strong>veejay 1.5.3 is out now!</strong>  </p>
+<p><a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-src/veejay-1.5.3.tar.bz2/download">veejay-1.5.3 all-in-one package</a>  </p>
+<ul>
+<li><p>Added support for basic (CCD) image calibration.<br>(Dark Current subtraction &amp; Flat Field Correction)<br>There are two methods to combine frames: Average or Median Filter  </p>
+</li>
+<li><p>Added new Stream &#39;Calibration Image&#39; (bugged)<br>Use this to load your calibration config and apply it to existing video  </p>
+</li>
+<li><p>Added Constant-time median filtering from Simon Perreault<br>( <a href="http://nomis80.org/ctmf.html">http://nomis80.org/ctmf.html</a> )  </p>
+</li>
+<li><p>Fixed VIMS 330 &#39;Screenshot&#39;  </p>
+</li>
+<li><p>Fixed TrueType font name display  </p>
+</li>
+<li><p>Fixed synchronization problem in Reloaded  </p>
+</li>
+<li><p>Added VIMS message &#39;VIMS_CONTINUOUS_PLAY&#39; for continuous sample<br>playing<br>(positions are not reset when switching samples. Required for veejay-<br>radar)  </p>
+</li>
+<li><p>Added absolute cycle count to StatusMessage<br>(status token #19 and #- Fixed setting Norm on commandline (fixes David&#39;s problem)  </p>
+</li>
+<li><p>Fixed Dummy Mode  </p>
+</li>
+<li><p>Changed Dummy mode to playback in 720x5476 PAL or 720x480 NTSC resolution<br>( set VEEJAY_RUN_MODE=CLASSIC environment variable to get old behaviour)  </p>
+</li>
+<li><p>Refactorized OSC event handling. Use veejay -u to dump namespace. No pulling of data yet, only triggers.<br>The new OSC namespaces matches VIMS 1:1  </p>
+</li>
+<li><p>Added VIMS_SAMPLE_STACK message to pull FX mixing sources (veejay-<br>radar)  </p>
+</li>
+<li><p>Added VIMS_CHAIN_FOLLOW_FADE message to switch sources after fading<br>automatically<br>(Also added toggle button in Reloaded below the Chain Fade Slider)  </p>
+</li>
+<li><p>Added the Constant-time median filtering algorithm as a new Image FX  </p>
+</li>
+<li><p>Updated veejay&#39;s MAN page 20) Required for veejay-radar  </p>
+</li>
+<li><p>Fixed connection instability issues (libvjnet)  </p>
+</li>
+<li><p>Lots of bugfixes</p>
+</li>
+</ul>
 
     </div><!-- /.blog-post -->
 
@@ -78,7 +115,7 @@
                 
                 <li><a href="/colorspaces/">Colorspaces</a></li>
                 
-                <li><a href="/compiling-on-ubuntu/">Compiling on Ubuntu</a></li>
+                <li><a href="/compiling-on-ubuntu/">Compiling on Ubuntu </a></li>
                 
                 <li><a href="/contact/">Contact</a></li>
                 
@@ -92,6 +129,8 @@
                 
                 <li><a href="/download/">Download</a></li>
                 
+                <li><a href="/facebook/">Facebook</a></li>
+                
                 <li><a href="/features/">Features</a></li>
                 
                 <li><a href="/fx-stuff/">fx stuff</a></li>
@@ -99,8 +138,6 @@
                 <li><a href="/getting-started/">Getting Started</a></li>
                 
                 <li><a href="/links/">links</a></li>
-                
-                <li><a href="/livido-osc/">LiViDO/OSC</a></li>
                 
                 <li><a href="/midi/">MIDI</a></li>
                 
@@ -121,6 +158,8 @@
                 <li><a href="/veejay-1-5/">veejay 1.5</a></li>
                 
                 <li><a href="/veejay-advanced/">Veejay Advanced</a></li>
+                
+                <li><a href="/veejay-basics/">Veejay Basics</a></li>
                 
                 <li><a href="/veejay-environment-variables/">veejay environment variables</a></li>
                 

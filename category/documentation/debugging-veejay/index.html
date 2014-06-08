@@ -11,10 +11,10 @@
     <title>debugging veejay</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/veejayhq/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/veejayhq/css/blog.css" rel="stylesheet">
+    <link href="/css/blog.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -49,9 +49,24 @@
             
     <div class="blog-post">
         <h2 class="blog-post-title"></h2>
-        <p class="blog-post-meta">June 06, 14</p>
+        <p class="blog-post-meta">June 09, 14</p>
 
-        <p>To help us fix things in veejay faster, please provide the followinginformation:1. full veejay console output(always run veejay with the &#39;-v&#39; commandline option)In case of segmentation faults,1. Run configure with &#39;--enable- debug &#39; for both server and client2. Run veejay-server and reloaded in the debugger$ gdb /full/path/to/veejay(gdb) r -v /path/to/some/videofile.avi3. When it crashes,(gdb) btAnd copy&amp;paste the outputAlso, valgrind is an excellent tool for debugging veejay, I&#39;m alwaysinterested ina few valgrind logs to make veejay more robuust. This will only beusefull ifyou have run configure with --enable- debug (from a clean source tree)$ valgrind --log-file=/tmp/veejay.log --leak-resolution=high --leak-check=full /full/path/to/veejay -v /path/to/videofile.avi</p>
+        <p>To help us fix things in veejay faster, please provide the following<br>information:  </p>
+<ol>
+<li>full veejay console output<br>(always run veejay with the &#39;-v&#39; commandline option)  </li>
+</ol>
+<p>In case of segmentation faults,  </p>
+<ol>
+<li>Run configure with &#39;--enable-<span class="nfakPe">debug</span>&#39; for both server and client  </li>
+<li>Run veejay-server and reloaded in the debugger  </li>
+</ol>
+<p>$ gdb /full/path/to/veejay<br>(gdb) r -v /path/to/some/videofile.avi  </p>
+<ol>
+<li>When it crashes,<br>(gdb) bt  </li>
+</ol>
+<p>And copy&amp;paste the output  </p>
+<p>Also, valgrind is an excellent tool for debugging veejay, I&#39;m always<br>interested in<br>a few valgrind logs to make veejay more robuust. This will only be<br>usefull if<br>you have run configure with --enable-<span class="nfakPe">debug</span>(from a clean source tree)  </p>
+<p>$ valgrind --log-file=/tmp/veejay.log --leak-resolution=high --leak-<br>check=full /full/path/to/veejay -v /path/to/videofile.avi</p>
 
     </div><!-- /.blog-post -->
 
@@ -78,7 +93,7 @@
                 
                 <li><a href="/colorspaces/">Colorspaces</a></li>
                 
-                <li><a href="/compiling-on-ubuntu/">Compiling on Ubuntu</a></li>
+                <li><a href="/compiling-on-ubuntu/">Compiling on Ubuntu </a></li>
                 
                 <li><a href="/contact/">Contact</a></li>
                 
@@ -92,6 +107,8 @@
                 
                 <li><a href="/download/">Download</a></li>
                 
+                <li><a href="/facebook/">Facebook</a></li>
+                
                 <li><a href="/features/">Features</a></li>
                 
                 <li><a href="/fx-stuff/">fx stuff</a></li>
@@ -99,8 +116,6 @@
                 <li><a href="/getting-started/">Getting Started</a></li>
                 
                 <li><a href="/links/">links</a></li>
-                
-                <li><a href="/livido-osc/">LiViDO/OSC</a></li>
                 
                 <li><a href="/midi/">MIDI</a></li>
                 
@@ -121,6 +136,8 @@
                 <li><a href="/veejay-1-5/">veejay 1.5</a></li>
                 
                 <li><a href="/veejay-advanced/">Veejay Advanced</a></li>
+                
+                <li><a href="/veejay-basics/">Veejay Basics</a></li>
                 
                 <li><a href="/veejay-environment-variables/">veejay environment variables</a></li>
                 

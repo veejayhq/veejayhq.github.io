@@ -11,10 +11,10 @@
     <title>Projection Mapping</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/veejayhq/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/veejayhq/css/blog.css" rel="stylesheet">
+    <link href="/css/blog.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -49,35 +49,105 @@
             
     <div class="blog-post">
         <h2 id="linux-vj-projection-mapping-using-veejay-lpmt">Linux VJ Projection Mapping using Veejay + LPMT</h2>
-<p>The output from Veejay may be used as a real-time projection-mapped surface using a program called Little Projection-Mapping Tool (LPMT). Using more than one projection-mapped Veejay instance should be possible, but is not covered by this document. Video is shared between the two applications using the v4l2loopback kernel module.LPMT - Little Projection-Mapping Tool; is a simple and powerful cross-platform tool for Projection-Mapping. Based on OpenFrameworks C++ toolkit.Both Veejay and LPMT are Free software with source code released under versions of the GNU GPL. Also, both can be controlled through OSC messages allowing them to play nicely with custom clients and other warez.</p>
+<p>The output from Veejay may be used as a real-time projection-mapped surface using a program called Little Projection-Mapping Tool (LPMT). Using more than one projection-mapped Veejay instance should be possible, but is not covered by this document. Video is shared between the two applications using the v4l2loopback kernel module.  </p>
+<p>LPMT - Little Projection-Mapping Tool; is a simple and powerful cross-platform tool for Projection-Mapping. Based on OpenFrameworks C++ toolkit.  </p>
+<p>Both Veejay and LPMT are Free software with source code released under versions of the GNU GPL. Also, both can be controlled through OSC messages allowing them to play nicely with custom clients and other warez.  </p>
 <h4 id="websites-">WEBSITES:</h4>
 <ul>
-<li>LPMT: <a href="http://hv-a.com/lpmt/">http://hv-a.com/lpmt/</a></li>
-<li>v4l2loopback: <a href="https://github.com/umlaeute/v4l2loopback">https://github.com/umlaeute/v4l2loopback</a></li>
+<li></li>
+<li><p>LPMT: <a href="http://hv-a.com/lpmt/">http://hv-a.com/lpmt/</a></p>
+</li>
+<li></li>
+<li><p>v4l2loopback: <a href="https://github.com/umlaeute/v4l2loopback">https://github.com/umlaeute/v4l2loopback</a></p>
+</li>
+<li></li>
 </ul>
 <h4 id="references-">REFERENCES:</h4>
 <ul>
-<li>A work-in-progress &quot;Super-Sexy Secret Manual&quot; for LPMT version 1.4 <a href="http://hv-a.com/lpmt/?page_id=195">http://hv-a.com/lpmt/?page_id=195</a></li>
-<li>v4l2loopback usage examples <a href="https://github.com/umlaeute/v4l2loopback/wiki">https://github.com/umlaeute/v4l2loopback/wiki</a></li>
+<li></li>
+<li><p>A work-in-progress &quot;Super-Sexy Secret Manual&quot; for LPMT version 1.4 <a href="http://hv-a.com/lpmt/?page_id=195">http://hv-a.com/lpmt/?page_id=195</a></p>
+</li>
+<li></li>
+<li><p>v4l2loopback usage examples <a href="https://github.com/umlaeute/v4l2loopback/wiki">https://github.com/umlaeute/v4l2loopback/wiki</a></p>
+</li>
+<li></li>
 </ul>
 <h4 id="installation-">INSTALLATION:</h4>
-<pre><code>* v4l2loopback$ git clone [https://github.com/umlaeute/v4l2loopback.git][4] v4l2loopback$ cd v4l2loopback$ make &amp;amp;&amp;amp; sudo make installLoad the v4l2loopback kernel module:$ sudo modprobe v4l2loopback* yuv4mpeg_to_v4l2A tiny example application included with the v4l2loopback source codeis used to stream YUV4MPEG output from Veejay into a v4l2 device.$ cd v4l2loopback/examples$ make yuv4mpeg_to_v4l2You may want to manually install the resulting yuv4mpeg_to_v4l2 binarysomewhere in your $PATH for easier execution.* LPMT:Either, Download a pre-compiled binary:[http://hv-a.com/lpmt/?page_id=63][5]Or, Luke, use the Source:[http://hv-a.com/lpmt/?page_id=70][6]The following instructions are based on usage of the 64bit Linux binary.There&#39;s no real installation of the binary, run LPMT from its directory:$ tar -xjf lpmt_1.4_linux_x64.tar.bz2$ cd lpmt_1.4_linux_x64$ ./lpmt
-</code></pre><p>Play around, LPMT is cool! Press &quot;h&quot; for a command overview and refer to the manual for more help.</p>
+<pre><code>* v4l2loopback  
+$ git clone &lt;https://github.com/umlaeute/v4l2loopback.git&gt; v4l2loopback  
+$ cd v4l2loopback  
+$ make &amp;&amp; sudo make install  
+
+Load the v4l2loopback kernel module:  
+$ sudo modprobe v4l2loopback  
+
+* yuv4mpeg_to_v4l2  
+A tiny example application included with the v4l2loopback source code  
+is used to stream YUV4MPEG output from Veejay into a v4l2 device.  
+$ cd v4l2loopback/examples  
+$ make yuv4mpeg_to_v4l2  
+
+You may want to manually install the resulting yuv4mpeg_to_v4l2 binary  
+somewhere in your $PATH for easier execution.  
+
+* LPMT:  
+Either, Download a pre-compiled binary:&lt;http://hv-a.com/lpmt/?page_id=63&gt;  
+Or, Luke, use the Source:&lt;http://hv-a.com/lpmt/?page_id=70&gt;  
+
+The following instructions are based on usage of the 64bit Linux binary.  
+There&#39;s no real installation of the binary, run LPMT from its directory:  
+
+$ tar -xjf lpmt_1.4_linux_x64.tar.bz2  
+$ cd lpmt_1.4_linux_x64  
+$ ./lpmt
+</code></pre><p>Play around, LPMT is cool! Press &quot;h&quot; for a command overview and refer to the manual for more help.  </p>
 <h4 id="configuration-">CONFIGURATION:</h4>
 <h4 id="when-the-v4l2loopback-kernel-module-is-successfully-loaded-it-will-create-a-device-at-dev-videox-where-x-is-a-number-that-depends-on-how-many-video-devices-you-already-have-loaded-my-computer-has-a-connected-webcam-so-this-is-what-i-have-">When the v4l2loopback kernel module is successfully loaded, it will create a device at /dev/videoX where &quot;X&quot; is a number that depends on how many video devices you already have loaded. My computer has a connected webcam so this is what I have:</h4>
-<pre><code>$ ls -l /dev/video*crw-rw----+ 1 root video 81, 0 Nov 15 15:12 /dev/video0crw-rw----+ 1 root video 81, 1 Nov 15 23:02 /dev/video1
-</code></pre><p>/dev/video0 is my webcam (because it was already loaded first) and /dev/video1 is the v4l2loopback video device -- it is the most recently created device with the highest number. The rest of this document uses /dev/video1 as the v4l2loopback device, substitute according to your setup. Make sure the system user that will be running Veejay and LPMT has permission to read and write to the device. In my case, my user needs to be in the &quot;video&quot; group.Now, to configure LPMT. In the directory containing the lpmt binary, you should also find a &quot;data&quot; and &quot;libs&quot; directory.</p>
-<pre><code>$ ls lpmt_1.4_linux_x64datalibslpmt
-</code></pre><p>Edit data/config.xml and add a CAMERA section with the WIDTH and HEIGHT set to the dimensions of your Veejay output and ID set to &quot;X&quot; (the number of the /dev/video device created by the v4l2loopback module). My CAMERAS section looks like this:</p>
-<pre><code>&amp;lt;CAMERAS&amp;gt;&amp;lt;CAMERA&amp;gt;&amp;lt;WIDTH&amp;gt;640&amp;lt;/WIDTH&amp;gt;&amp;lt;HEIGHT&amp;gt;480&amp;lt;/HEIGHT&amp;gt;&amp;lt;ID&amp;gt;0&amp;lt;/ID&amp;gt;&amp;lt;/CAMERA&amp;gt;&amp;lt;CAMERA&amp;gt;&amp;lt;WIDTH&amp;gt;720&amp;lt;/WIDTH&amp;gt;&amp;lt;HEIGHT&amp;gt;480&amp;lt;/HEIGHT&amp;gt;&amp;lt;ID&amp;gt;1&amp;lt;/ID&amp;gt;&amp;lt;/CAMERA&amp;gt;&amp;lt;/CAMERAS&amp;gt;
-</code></pre><p>Configuration is complete!</p>
+<pre><code>$ ls -l /dev/video*  
+crw-rw----+ 1 root video 81, 0 Nov 15 15:12 /dev/video0  
+crw-rw----+ 1 root video 81, 1 Nov 15 23:02 /dev/video1
+</code></pre><p>/dev/video0 is my webcam (because it was already loaded first) and /dev/video1 is the v4l2loopback video device -- it is the most recently created device with the highest number. The rest of this document uses /dev/video1 as the v4l2loopback device, substitute according to your setup. Make sure the system user that will be running Veejay and LPMT has permission to read and write to the device. In my case, my user needs to be in the &quot;video&quot; group.  </p>
+<p>Now, to configure LPMT. In the directory containing the lpmt binary, you should also find a &quot;data&quot; and &quot;libs&quot; directory.  </p>
+<pre><code>$ ls lpmt_1.4_linux_x64  
+data  
+libs  
+lpmt
+</code></pre><p>Edit data/config.xml and add a CAMERA section with the WIDTH and HEIGHT set to the dimensions of your Veejay output and ID set to &quot;X&quot; (the number of the /dev/video device created by the v4l2loopback module). My CAMERAS section looks like this:  </p>
+<pre><code>&lt;CAMERAS&gt;  
+&lt;CAMERA&gt;  
+&lt;WIDTH&gt;640&lt;/WIDTH&gt;  
+&lt;HEIGHT&gt;480&lt;/HEIGHT&gt;  
+&lt;ID&gt;0&lt;/ID&gt;  
+&lt;/CAMERA&gt;  
+&lt;CAMERA&gt;  
+&lt;WIDTH&gt;720&lt;/WIDTH&gt;  
+&lt;HEIGHT&gt;480&lt;/HEIGHT&gt;  
+&lt;ID&gt;1&lt;/ID&gt;  
+&lt;/CAMERA&gt;  
+&lt;/CAMERAS&gt;
+</code></pre><p>Configuration is complete!  </p>
 <h4 id="execution-">EXECUTION:</h4>
-<p>You may want to use several terminal windows for this. You may need to specify the full path of the executables depending on where you installed them and if they are in your $PATH.</p>
-<pre><code>Create a named pipe:$ mkfifo /tmp/pipeFeed the video loopback device with yuv4mpeg (Y4M) data that enters the pipe:$ yuv4mpeg_to_v4l2 /dev/video1 &amp;lt; /tmp/pipeStart veejay, directing a Y4M output stream to the pipe:$ veejay --output 4 --output-file /tmp/pipeStart LPMT$ lpmt
-</code></pre><p>Refer to the LPMT manual for how to configure your projection mapping. Do this to see veejay output right away:</p>
+<p>You may want to use several terminal windows for this. You may need to specify the full path of the executables depending on where you installed them and if they are in your $PATH.  </p>
+<pre><code>Create a named pipe:  
+$ mkfifo /tmp/pipe  
+
+Feed the video loopback device with yuv4mpeg (Y4M) data that enters the pipe:  
+$ yuv4mpeg_to_v4l2 /dev/video1 &lt; /tmp/pipe  
+
+Start veejay, directing a Y4M output stream to the pipe:  
+$ veejay --output 4 --output-file /tmp/pipe  
+
+Start LPMT  
+$ lpmt
+</code></pre><p>Refer to the LPMT manual for how to configure your projection mapping. Do this to see veejay output right away:  </p>
 <ul>
-<li>press &lt;F2&gt; (or &quot;x&quot;)</li>
-<li>click &quot;cam on/off&quot; to enable it. You may need to select a different camera number from the &quot;select camera&quot; list.</li>
+<li></li>
+<li><p>press <F2> (or &quot;x&quot;)</p>
+</li>
+<li></li>
+<li><p>click &quot;cam on/off&quot; to enable it. You may need to select a different camera number from the &quot;select camera&quot; list.</p>
+</li>
+<li></li>
 </ul>
 <h4 id="conclusion-">CONCLUSION:</h4>
 <p>Epic!!! A Free VJ projection mapping solution for Linux! Thanks to all the people who have created these open source softwares and for their foresight and attention that has enabled interoperability.</p>
@@ -107,7 +177,7 @@
                 
                 <li><a href="/colorspaces/">Colorspaces</a></li>
                 
-                <li><a href="/compiling-on-ubuntu/">Compiling on Ubuntu</a></li>
+                <li><a href="/compiling-on-ubuntu/">Compiling on Ubuntu </a></li>
                 
                 <li><a href="/contact/">Contact</a></li>
                 
@@ -121,6 +191,8 @@
                 
                 <li><a href="/download/">Download</a></li>
                 
+                <li><a href="/facebook/">Facebook</a></li>
+                
                 <li><a href="/features/">Features</a></li>
                 
                 <li><a href="/fx-stuff/">fx stuff</a></li>
@@ -128,8 +200,6 @@
                 <li><a href="/getting-started/">Getting Started</a></li>
                 
                 <li><a href="/links/">links</a></li>
-                
-                <li><a href="/livido-osc/">LiViDO/OSC</a></li>
                 
                 <li><a href="/midi/">MIDI</a></li>
                 
@@ -150,6 +220,8 @@
                 <li><a href="/veejay-1-5/">veejay 1.5</a></li>
                 
                 <li><a href="/veejay-advanced/">Veejay Advanced</a></li>
+                
+                <li><a href="/veejay-basics/">Veejay Basics</a></li>
                 
                 <li><a href="/veejay-environment-variables/">veejay environment variables</a></li>
                 

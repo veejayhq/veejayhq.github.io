@@ -55,9 +55,9 @@
 <ul>
 <li>Flext (Development layer for puredata):<br><a href="http://puredata.info/Members/thomas/flext">http://puredata.info/Members/thomas/flext</a>  </li>
 <li>Niklas Klügel vinylcontrol~ external:<br><a href="http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html">http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html</a>  </li>
-<li><a href="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl.pd_.tar.gz">VeeJayVinylControl.pd.tar</a>:  </li>
+<li><a href="/uploads/2013/09/VeeJayVinylControl.pd_.tar.gz">VeeJayVinylControl.pd.tar</a>:  </li>
 </ul>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl.png"><img src="http://www.veejayhq.net/wp-content/uploads/2013/09/VeeJayVinylControl-300x225.png" alt="" title="VeeJay Vinyl Control"></a>  </p>
+<p>[<img src="/uploads/2013/09/VeeJayVinylControl.png" alt="">  </p>
 <p>Build flext could be not so easy, so I give you a little guide. Let&#39;s build flext with the build bash script:  </p>
 <blockquote>
 <p>./build.sh pd gcc<br>Then a few configuration files will be created. Now we have to move to buildsys/config-lnx-pd-gcc.txt and edit some lines to point at PD directories, in my case:  </p>
@@ -72,7 +72,7 @@
 <p>Load VeeJayVinylControl.pd, and you&#39;ll be able to start scratching your video!! Let&#39;s explain how it work and how we can calibrate the patch in order to get it working better.  </p>
 <p>The external provide 3 outlets:<br>1) alive - bang is sent when the decoding starts/stops (ie. input is above a certain threshold and timecode is being tracked)<br>2) pitch - float that is 1 at 33 rpm in forward direction; negative values indicate backward-movement<br>3) relative position; the start is the first cue-point (first tracked timecode where the needle was dropped) and can be reset to the current timecode-position by sending a bang to the third inlet. The end position is the last sane timecode on the record. The position is calculated using (current_position-start_position)/(last_position-start_posit ion), thus giving a range between 0 and 1 between the end position and the relative start position and negative values for positions before the start position.  </p>
 <p>And 3 inlets:<br>1) left input<br>2) right input (take care of the cabling from your turntable)<br>3) reset for the relative start position  </p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2013/09/vinylcontrol.png"><img src="http://www.veejayhq.net/wp-content/uploads/2013/09/vinylcontrol-300x264.png" alt="" title="Vinyl Control"></a>  </p>
+<p>[<img src="/uploads/2013/09/vinylcontrol.png" alt="">  </p>
 <p>The external doesn&#39;t work perfectly, so you have to measure the audio input gain until the number on the 3rd patch outlet increases when the vinyl starts. This is multiplied by the frame&#39;s number of our video (I think that it could be took from VeeJay, but I&#39;m not too sure), and is connected to veejay current frame.  </p>
 <p>The 2nd outlet have a &quot;moses 0&quot; message box, that means that when it&#39;s under 0 it will play the video backward, and when is above 0 it will play forward.  </p>
 <p>The 1st outlet just bang the play/stop. It uses a threshold that I&#39;m almost sure it&#39;s defined by the timecode.c file.  </p>
@@ -125,8 +125,8 @@
 <p>Press CTRL-s to bring up the setup screen:  </p>
 <p>As shown in the preview, the camera was mounted with an angle and doesnt capture the full projection area. We simply select the edges of the projection we see in the camera image, select forward transformation and press CTRL-s again to leave the setup.  </p>
 <p><table class="c3" border="0" width="688"><tbody><tr><td align="left"><a href="file:///home/control/Desktop/projector-camera-calibration_files/start.png"></a>  </p>
-<p>[caption id=&quot;attachment_123&quot; align=&quot;aligncenter&quot; width=&quot;150&quot; caption=&quot;Setup screen&quot;]<a href="http://www.veejayhq.net/wp-content/uploads/2008/11/start1.png"><img src="http://www.veejayhq.net/wp-content/uploads/2008/11/start1-150x150.png" alt="Setup screen" title="start1"></a>[/caption]</td><td class="c1"></td></tr></tbody><tbody><tr><td align="left"><a href="http://www.veejayhq.net/wp-content/uploads/2008/11/result1.png"></a>  </p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2008/11/result1.png"><img src="http://www.veejayhq.net/wp-content/uploads/2008/11/result1-300x230.png" alt="" title="calibrated video"></a><br></td><td class="c1"></td></tr></tbody></table><br>After pressing CTRL-s, we return to our now calibrated camera image.<br>This image you can use to process it for motion detection. In order to have veejay pre process filters on your camera stream while playing a sample press CTRL-d</p>
+<p>[caption id=&quot;attachment_123&quot; align=&quot;aligncenter&quot; width=&quot;150&quot; caption=&quot;Setup screen&quot;][<img src="/uploads/2008/11/result1.png" alt="Setup screen">  </p>
+<p>[<img src="/uploads/2008/11/result1.png" alt=""><br></td><td class="c1"></td></tr></tbody></table><br>After pressing CTRL-s, we return to our now calibrated camera image.<br>This image you can use to process it for motion detection. In order to have veejay pre process filters on your camera stream while playing a sample press CTRL-d</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -335,19 +335,19 @@
         <p class="blog-post-meta">May 02, 2007</p>
         <p>sendVIMS is an external for <a href="http://www.puredata.org">Pure Data</a>. with sendVIMS, you can send VIMS messages directly to veejay, and receive the complete status back. With a little patching and trial&amp;error you could easily built a custom interface for a performance or installation.  </p>
 <p>I&#39;ve whipped up some examples of what can be done in sendVIMS, wich also shows how fast a little prototyping can be done in pure data.  </p>
-<p>The pd patches in one tarbal: <a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-patchestar.gz" title="help-vims-patchestar.gz">help-vims-patchestar.gz</a>  </p>
+<p>The pd patches in one tarbal: <a href="/uploads/2007/05/help-vims-patchestar.gz" title="help-vims-patchestar.gz">help-vims-patchestar.gz</a>  </p>
 <p><strong>1. Triggering actions with audio</strong>  </p>
 <p>shouting at the video makes it look weirder...  </p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-audiotrigger.png" title="Triggering actions from audio"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-audiotrigger-150x150.png" alt="Triggering actions from audio"></a>  </p>
+<p>[<img src="/uploads/2007/05/help-vims-audiotrigger.png" alt="Triggering actions from audio" title="Triggering actions from audio">  </p>
 <p><strong>2. Create a midi - videomixer</strong>  </p>
 <p>As of 1.0, midi is built into veejay, making this example less useful. Still, it shows some basic controlling done easily... replace <midi> with <joystick> or <extra mice>  </p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-midi.png" title="Using MIDI to control playback"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-midi-150x150.png" alt="Using MIDI to control playback"></a>  </p>
+<p>[<img src="/uploads/2007/05/help-vims-midi.png" alt="Using MIDI to control playback" title="Using MIDI to control playback">  </p>
 <p><strong>3. Building your custom playback-scrubber</strong>  </p>
 <p>See the sound example, maybe connect these two?  </p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-scrubbing.png" title="Controlling the timeline in YOUR way"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-scrubbing-150x150.png" alt="Controlling the timeline in YOUR way"></a>  </p>
+<p>[<img src="/uploads/2007/05/help-vims-scrubbing.png" alt="Controlling the timeline in YOUR way" title="Controlling the timeline in YOUR way">  </p>
 <p><strong>4. A simple video sequencer</strong>  </p>
 <p>Simple sequencing, or multiple veejays all controlled by one shout, it can be done.  </p>
-<p><a href="http://www.veejayhq.net/wp-content/uploads/2007/05/help-vims-sequencer.png" title="A simple video sequencer"><img src="http://veejayhq.ischen.nl/wp-content/uploads/2007/05/help-vims-sequencer-150x150.png" alt="A simple video sequencer"></a>  </p>
+<p>[<img src="/uploads/2007/05/help-vims-sequencer.png" alt="A simple video sequencer" title="A simple video sequencer">  </p>
 <h2 id="a-simple-video-sequencer">A simple video sequencer</h2>
 
     </div><!-- /.blog-post -->
@@ -408,11 +408,11 @@
         <p class="blog-post-meta">April 27, 2007</p>
         <p>If you have started veejay with one or more video file(s) (thus <strong>not with</strong> <code>$ veejay -d</code> ), you can easily create new samples;  </p>
 <p>First, Veejay must be running in <em>plain mode</em>  </p>
-<p><img src="http://www.veejayhq.net/wp-content/galleries/screenshots/reloaded_bar1.png" alt="top buttonbar">  </p>
+<p><img src="/galleries/screenshots/reloaded_bar1.png" alt="top buttonbar">  </p>
 <p>Then, you can press the In and Out button to set the starting and ending position of a sample ; Pressing the &#39;Out&#39;<br>button immedialty commits the new sample. The keyboard shortcuts are Left bracket and Right bracket resp.  </p>
 <p>When a sample is created it has a partial copy of the Edit Decision List; You can change the starting positions by at most -2.0 seconds and the ending positions +2.0 seconds.  </p>
 <p>After each commit, the starting position of the sample is set equal to the ending position of the last created sample,<br>you can repeatedly press the Out point button to quickly create a series of samples.  </p>
-<p><img src="http://www.veejayhq.net/wp-content/galleries/screenshots/reloaded_nav1.png" alt="navigation buttons">  </p>
+<p><img src="/galleries/screenshots/reloaded_nav1.png" alt="navigation buttons">  </p>
 <p>If you have started Veejay in dummy mode, the only way to add videofiles is by GVeejay -&gt; Sample -&gt; New from file.  </p>
 <p>To play a sample, you can either press one of the F-keys, or doubleclick a sample slot in the samplebank.<br>You can activate up to 120 samples per keyboard; To play in range 12-24, press &#39;2&#39;, To play in range 1-12, press &#39;1&#39;.<br>The &#39;a,s,d,f,g,h,j,k,l&#39; keys can be used for faster playback , ALT + &#39;a,s,d,f,g,h,j,k,l&#39; for slower playback.<br>To see a full overview of the keyboard comments, use <code>$ man veejay</code> or click View -&gt; VIMS bundles in reloaded which displays a list of all valid events and their bindings).</p>
 
@@ -510,6 +510,8 @@
                 <li><a href="/getting-started/">Getting Started</a></li>
                 
                 <li><a href="/links/">links</a></li>
+                
+                <li><a href="/livido-osc/">LiViDO/OSC</a></li>
                 
                 <li><a href="/midi/">MIDI</a></li>
                 

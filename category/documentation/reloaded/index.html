@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Reloaded</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      img {
+        max-width: 100%;
+      }
+
+      .blog-sidebar a {
+        text-transform: capitalize;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      h1, h2, h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">VeejayHQ</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a class="blog-nav-item" href="/">Home</a></li>
+          <li><a class="blog-nav-item" href="/features">Features</a></li>
+          <li><a class="blog-nav-item" href="/category/news">News</a></li>
+          <li><a class="blog-nav-item" href="/category/documentation">Documentation</a></li>
+          <li><a class="blog-nav-item" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="container">
+      <div class="span-12">
+        <img src="/img/header.png" />
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+            
+    <div class="blog-post">
+        <h2 class="blog-post-title"></h2>
+        <p class="blog-post-meta">June 19, 14</p>
+
+        <h3 id="introduction">Introduction</h3>
+<p>Veejay has a client-server architecture. This means that multiple clients can connect to
+the same veejay <code>server</code> or even multiple servers, possible running on different computers even.</p>
+<p>Reloaded is a graphical client for veejay, providing nice buttons and sliders to play with.</p>
+<h3 id="sample-sequencer">Sample sequencer</h3>
+<p>Its easy to sequence Samples with Reloaded - and to record the sequence to a new sample.</p>
+<p>This is how the Sequencer looks like:
+[caption id=&quot;attachment_200&quot; align=&quot;aligncenter&quot; width=&quot;194&quot; caption=&quot;Sequencer&quot;][<img src="/uploads/2008/11/sequencer.png" alt="Sequencer">[/caption]</p>
+<p>In the 10x10 board below you have 100 slots, in each you can place exactly one sample.
+First, play the sample you want to sequence and left-mouse click one of the slots. Do
+so for the other samples you want to sequence. The grid is played from top left to
+bottom right and empty slots are simply skipped. The play pattern in the grid below is:
+1,2,3,1,2,3,4,5,6,7,8,9</p>
+<p>You can click the &#39;Play and repeat sample grid&#39; which will do the obvious, play the pattern.</p>
+<h3 id="video-mixing">Video mixing</h3>
+<p>Veejay can (down)mix from multiple sources</p>
+<p><strong>Method 1/2. Mixing plain samples</strong></p>
+<p>To mix &#39;plain&#39; samples, i.e samples with no FX you can simply add a video effect to the current sample ,
+click it in the FX chain and select a secondary source for it from the FX sources list.
+This method will not render the FX that may be present on the secondary source.
+You can use method 2, or play and record the secondary sample to a new sample before mixing.</p>
+<p><strong>Method 2/2. Mixing composed samples</strong></p>
+<p>To mix &#39;composed&#39; samples, i.e. samples with all FX rendered, you can use the MT panel in Reloaded.
+The MultiTrack panel is used to track multiple veejay servers and can be used to connect video streams.</p>
+<p>If you have a few fast machines and a fast network at your disposal, you can easily drive 4 veejays simultaneously.
+The maximum number of tracks can be increased on reloaded&#39;s command line.</p>
+<p>The MT panel provides synchronized playback controls</p>
+<h3 id="multi-veejay-tracker">Multi (Veejay) Tracker</h3>
+<p>Reloaded can track multiple veejay servers.</p>
+<p>Double click the preview of the Track to have reloaded reconnect to that
+particular veejay-server.</p>
+<h4 id="1-click-add-track-red-dot-to-add-another-veejay-server-to-reloaded">1. Click &#39;Add Track&#39; (red dot) to add another veejay server to Reloaded</h4>
+<p>[<img src="/uploads/2008/11/mtstep1.png" alt=""></p>
+<h4 id="2-fill-in-the-connection-details-of-the-other-veejay-server">2. Fill in the connection details of the other veejay server</h4>
+<p>[<img src="/uploads/2008/11/mtstep2.png" alt=""></p>
+<h4 id="3-click-the-preview-togglebutton-red-dot-to-see-what-the-other-veejay-server-is-delivering">3. Click the preview togglebutton (red dot) to see what the other veejay server is delivering</h4>
+<p>[<img src="/uploads/2008/11/mtstep3.png" alt=""></p>
+<h4 id="4-click-the-track-1-checkbox-of-track-0-red-dot-to-use-track-1-as-an-input-stream-">4. Click the &#39;Track 1&#39; checkbox of Track 0 (red dot) to use Track 1 as an input stream.</h4>
+<p>[<img src="/uploads/2008/11/mtstep4.png" alt=""></p>
+<h4 id="start-playing-the-newly-created-input-stream">Start playing the newly created input stream</h4>
+<p>[caption id=&quot;attachment_187&quot; align=&quot;alignnone&quot; width=&quot;300&quot; caption=&quot;Enable Track 1&quot;][<img src="/uploads/2008/11/mtstep5.png" alt="Enable Track 1">[/caption]</p>
+
+    </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            
+
+            <h4>Categories</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/category/sendvims/">sendvims</a></li>
+                
+                <li><a href="/category/reference/">reference</a></li>
+                
+                <li><a href="/category/news/">news</a></li>
+                
+                <li><a href="/category/howto/">howto</a></li>
+                
+                <li><a href="/category/documentation/">documentation</a></li>
+                
+            </ol>
+            <h4>Pages</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/contact/">Contact</a></li>
+                
+                <li><a href="/contributing/">Contributing</a></li>
+                
+                <li><a href="/documentation/">Documentation</a></li>
+                
+                <li><a href="/features/">Features</a></li>
+                
+                <li><a href="/installing/">Installation</a></li>
+                
+                <li><a href="/roadmap/">Roadmap</a></li>
+                
+                <li><a href="/screenshots/">Screenshots</a></li>
+                
+                <li><a href="/showcase/">showcase</a></li>
+                
+            </ol>
+        </div>
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+  </body>
+</html>

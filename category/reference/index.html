@@ -1,0 +1,3957 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>reference</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      img {
+        max-width: 100%;
+      }
+
+      .blog-sidebar a {
+        text-transform: capitalize;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      h1, h2, h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">VeejayHQ</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a class="blog-nav-item" href="/">Home</a></li>
+          <li><a class="blog-nav-item" href="/features">Features</a></li>
+          <li><a class="blog-nav-item" href="/category/news">News</a></li>
+          <li><a class="blog-nav-item" href="/category/documentation">Documentation</a></li>
+          <li><a class="blog-nav-item" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="container">
+      <div class="span-12">
+        <img src="/img/header.png" />
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+            
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/reference/livido-osc/">LiViDO/OSC</a></h2>
+        <p class="blog-post-meta">November 14, 2010</p>
+        <p><img src="veejay-icon.png" alt="">  </p>
+<h2 id="technical-specification">Technical Specification</h2>
+<h3 id="livido-osc-technical-specification-for-veejay-http-www-veejayhq-net-">LiViDO/OSC Technical Specification for <a href="http://www.veejayhq.net">Veejay</a></h3>
+<p>(C) Niels Elburg 2010  </p>
+<p><em>Drafting LiViDO/OSC specification for Veejay</em>  </p>
+<h2 id="versions">Versions</h2>
+<p>LiViDO/OSC Nov 11th , 2010  </p>
+<ul>
+<li></li>
+<li><p><em>added &quot;identifier&quot; to PORT_TYPE_PLUGIN_INFO</em></p>
+</li>
+<li></li>
+<li><p><em>added &quot;organization&quot; to PORT_TYPE_PLUGIN_INFO</em></p>
+</li>
+<li></li>
+<li><p><em>added &quot;path&quot; to PORT_TYPE_FILTER_INSTANCE  
+</em></p>
+</li>
+<li></li>
+</ul>
+<p>LiViDO/OSC April. 11th , 2010  </p>
+<ul>
+<li></li>
+<li><p>added OSC extension</p>
+</li>
+<li></li>
+</ul>
+<p>Livido 1.0 beta version 2005- 2010  </p>
+<p>(C) Gabriel &quot;Salsaman&quot; Finch, Niels Elburg, Dennis &quot;Jaromil&quot; Rojo, Daniel Fischer, Martin Bayer, Kentaro Fukuchi, Andraz Tori 2005.  </p>
+<h3 id="livido_api_version">LIVIDO_API_VERSION</h3>
+<p>This is defined as 102 for this version of the specification.  </p>
+<h3 id="livido-general-design">LIVIDO GENERAL DESIGN</h3>
+<p>Livido is an architecture to enable interchange of video processing plugins between video applications in a standardized and compatible way.  </p>
+<p>This document describes the LiViDO/OSC extension for Veejay  </p>
+<h3 id="livido">LiViDO</h3>
+<p>Livido plugin is a shared object that application can load. Inside a plugin there can be implementations of many different filters, each filter implementation is called a filter class. Host gets to know a list of classes a plugin provides when calling livido_setup function. A class description includes descriptions of inputs and outputs filter can handle. Inputs and outputs can be channels and parameters. Descriptions of acceptable types of channels and parameters are called channel templates and parameter templates respectively. Host prepares for instantination of the filter by setting input and output channels and input parameters and then instantinates a filter. Host can use process_func() on that instance until it deinits an instance.<br>All passing of data between hosts and plugins is done trough ports, ports are the only C structures defined in Livido.  </p>
+<h3 id="osc">OSC</h3>
+<p><strong>OpenSound Control</strong>(OSC) is a content format for sharing (music) performance data (such as gestures, parameters and note sequenecs) between (musical) instruments.  </p>
+<p>Each LiViDO plugin exports its capability set to the outside world using a OSC namespace  </p>
+<p><strong>Mandatory properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;instance&quot; : LIVIDO_PORT_TYPE_FILTER_INSTANCE</p>
+</li>
+<li></li>
+<li><p>&quot;HOST_osc_cb&quot; : Host OSC callback function  </p>
+</li>
+</ul>
+<pre><code>    typedef   void  (*generic_osc_cb_f)(void *userdata, void *port, void *value );  
+</code></pre><ul>
+<li></li>
+<li><p>&quot;HOST_osc_data&quot; : LIVIDO_PORT_TYPE_VOIDPTR: Host private data</p>
+</li>
+<li></li>
+<li><p>&quot;root&quot; : LIVIDO_PORT_TYPE_VOIDPTR: Plugin&#39;s OSC namespace</p>
+</li>
+<li></li>
+</ul>
+<h4 id="osc-namespace">OSC Namespace</h4>
+<h4 id="container">Container</h4>
+<ul>
+<li></li>
+<li><p>&quot;name&quot; : LIVIDO_ATOM_TYPE_STRING : Name</p>
+</li>
+<li></li>
+<li><p>&quot;description&quot; : LIVIDO_ATOM_TYPE_STRING : Short descriptive information</p>
+</li>
+<li></li>
+<li><p>&quot;help&quot; : LIVIDO_ATOM_TYPE_STRING : Help information</p>
+</li>
+<li></li>
+<li><p>&quot;format&quot; : LIVIDO_ATOM_TYPE_STRING : OSC parameter format</p>
+</li>
+<li></li>
+<li><p>&quot;path&quot; : LIVIDO_ATOM_TYPE_STRING : OSC path to identify this instance. For example /myorg/myname/myplugin/</p>
+</li>
+<li></li>
+<li><p>&quot;template&quot; : LIVIDO_ATOM_TYPE_FILTERCLASS: Port reference to Plugins&#39;s Filter Class</p>
+</li>
+<li></li>
+</ul>
+<h4 id="method">Method</h4>
+<ul>
+<li></li>
+<li><p>&quot;name&quot; : LIVIDO_ATOM_TYPE_STRING:</p>
+</li>
+<li></li>
+<li><p>&quot;format&quot; : LIVIDO_ATOM_TYPE_STRING:</p>
+</li>
+<li></li>
+<li><p>&quot;description&quot; : LIVIDO_ATOM_TYPE_DESCRIPTION:</p>
+</li>
+<li></li>
+<li><p>&quot;parent&quot; : LIVIDO_ATOM_TYPE_VOIDPTR:</p>
+</li>
+<li></li>
+<li><p>&quot;path&quot; : LIVIDO_ATOM_TYPE_STRING: OSC path</p>
+</li>
+<li></li>
+<li><p>&quot;instance&quot; : LIVIDO_ATOM_TYPE_VOIDPTR:</p>
+</li>
+<li></li>
+</ul>
+<h4 id="naming-convention">Naming convention</h4>
+<ul>
+<li></li>
+<li><p>All names are lowercase alphanumeric characters [a-z0-9] and the character &#39;_&#39;</p>
+</li>
+<li></li>
+<li><p>The root of a plugin&#39;s namespace is &#39;/&#39; followed by the plugins name</p>
+</li>
+<li></li>
+<li><p>The only reserved keywords are &#39;ID&#39;, &#39;bind&#39; and &#39;unbind&#39; to allow (de)coupling of Plugins</p>
+</li>
+<li></li>
+<li><p>The &#39;*&#39; (asterix) denotes a numeric identifier to uniquely identify a plugin&#39;s instance</p>
+</li>
+<li></li>
+<li><p>The &#39;?&#39; returns a plugins full namespace including all parameters and channels</p>
+</li>
+<li></li>
+</ul>
+<pre><code>/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Parameter Name&gt;/&lt;Parameter Value&gt;  
+/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Channel Name&gt;/bind/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Channel Name&gt;  
+/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Channel Name&gt;/unbind/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Channel Name&gt;  
+/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Parameter Name&gt;/bind/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Parameter Name&gt;  
+/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Parameter Name&gt;/unbind/&lt;Plugin Name&gt;/&lt;ID*&gt;/&lt;Parameter Name&gt;  
+</code></pre><h3 id="ports">PORTS</h3>
+<p>A <em>port</em> is a set of one or more <em>properties</em>:  </p>
+<p>Each port has a mandatory property called &quot;type&quot; (see below), depending upon &quot;type&quot; property port has other mandatory and optional properties.  </p>
+<p>&quot;type&quot; can be one of:  </p>
+<ul>
+<li></li>
+<li><p>LIVIDO_PORT_TYPE_PLUGIN_INFO : Information about plugin and list of filter classes it includes</p>
+</li>
+<li></li>
+<li><p>LIVIDO_PORT_TYPE_FILTER_CLASS : Descriptive information about single filter class</p>
+</li>
+<li></li>
+<li><p>LIVIDO_PORT_TYPE_CHANNEL_TEMPLATE : Information about what kinds of channels filter accepts</p>
+</li>
+<li></li>
+<li><p>LIVIDO_PORT_TYPE_PARAMETER_TEMPLATE : Information about what kinds of parameters filter has</p>
+</li>
+<li></li>
+<li><p>LIVIDO_PORT_TYPE_FILTER_INSTANCE : All data about an instance</p>
+</li>
+<li></li>
+<li><p>LIVIDO_PORT_TYPE_CHANNEL : Instantination of a channel</p>
+</li>
+<li></li>
+<li><p>LIVIDO_PORT_TYPE_PARAMETER : Instantination of a parameter</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>LIVIDO_PORT_TYPE_GUI : described in the separate <a href="/wiki/TechnicalSpecCurrentGUI">livido GUI extension</a> (TODO)</p>
+</li>
+<li></li>
+</ul>
+<p>&quot;type&quot; is a single valued property with atom_type LIVIDO_ATOM_TYPE_INT.  </p>
+<p>The &quot;type&quot; is passed as a parameter in the livido_port_new() function as:  </p>
+<pre><code>livido_port_t *livido_port_new( int port_type );  
+</code></pre><p>This returns a pointer to newly allocated port with the &quot;type&quot; property set to <em>port_type</em>.  </p>
+<p>Port types &gt;=512 are available for custom use.  </p>
+<h3 id="properties">PROPERTIES</h3>
+<p>As mentioned above, each port is a set of one or more properties.  </p>
+<p>A property has:  </p>
+<ul>
+<li></li>
+<li><p>a <em>key</em> (which is a non-NULL string - (const char *) ASCII encoded)</p>
+</li>
+<li></li>
+<li><p>a <em>value</em> (0 or more elements)</p>
+</li>
+<li></li>
+<li><p><em>number of elements</em> (&gt;=0) contained in the value field.</p>
+</li>
+<li></li>
+<li><p>an <em>atom_type</em></p>
+</li>
+<li></li>
+<li><p>a bitmap <em>flags</em> field</p>
+</li>
+<li></li>
+</ul>
+<h3 id="property-restrictions">PROPERTY RESTRICTIONS</h3>
+<p>Access to properties is restricted in certain cases, these are restriction flags used troughout this document:  </p>
+<ul>
+<li></li>
+<li><p>HOSTSET - Read-only for the plugin</p>
+</li>
+<li></li>
+<li><p>PLUGINSET - Read-only for the host</p>
+</li>
+<li></li>
+<li><p>FINAL - Not allowed to change after it was set</p>
+</li>
+<li></li>
+<li><p>MANDATORY - mandatory property that MUST exist at some point in time</p>
+</li>
+<li></li>
+<li><p>OPTIONAL - property that COULD exist</p>
+</li>
+<li></li>
+</ul>
+<p>Properties inherit restriction of the port where we do not specify otherwise.  </p>
+<h3 id="atom-types">ATOM TYPES</h3>
+<p>LiViDO offers the following <strong>fundamental</strong> types (number &lt;64):  </p>
+<ul>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_INT : signed int32_t</p>
+</li>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_DOUBLE : corresponds to C type &quot;double&quot;</p>
+</li>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_BOOLEAN : signed int32_t, constrained to take values 0 (FALSE) or 1 (TRUE)</p>
+</li>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_STRING : array of char</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Note</strong>: STRINGS are all utf-8 encoded in Livido, except property Keys, which are ASCII encoded.  </p>
+<p><strong>Pointer</strong> types (number&gt;=64 and &lt;512):  </p>
+<ul>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_VOIDPTR : corresponds to C void * type</p>
+</li>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_PORTPTR : livido_port_t <em> : a void </em> to a livido_property_t, currently used only for channel properties &quot;same_as_size&quot;, &quot;same_as_palette&quot;)</p>
+</li>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_INIT_F : pointer to a livido_init_f function</p>
+</li>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_PROCESS_F : pointer to a livido_process_f function</p>
+</li>
+<li></li>
+<li><p>LIVIDO_ATOM_TYPE_DEINIT_F : pointer to a livido_deinit_f function</p>
+</li>
+<li></li>
+</ul>
+<p>Types &gt;=512 are available for custom use. Custom atom types must be pointer types, since livido cannot guess their byte size or type.  </p>
+<h3 id="port-type-plugin-info">PORT TYPE PLUGIN INFO</h3>
+<p>Port enables a plugin function livido_setup to tell the host what filter classes are available. Port is PLUGINSET and FINAL after livido_setup() finishes.  </p>
+<ul>
+<li></li>
+<li><p>&quot;type&quot; == LIVIDO_PORT_TYPE_PLUGIN_INFO</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Mandatory properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;filters&quot; : LIVIDO_ATOM_TYPE_PORTPTR : atom or array of livido_filter_t,</p>
+</li>
+<li></li>
+<li><p>&quot;maintainer&quot; : LIVIDO_ATOM_TYPE_STRING : maintainer of plugin package</p>
+</li>
+<li></li>
+<li><p>&quot;version&quot; : LIVIDO_ATOM_TYPE_STRING : plugin package version</p>
+</li>
+<li></li>
+<li><p>&quot;api_version&quot; : LIVIDO_ATOM_TYPE_INT : livido api version: MUST be set to the LIVIDO_API_VERSION as defined above in this spec</p>
+</li>
+<li></li>
+<li><p>&quot;identifier&quot;: LIVIDO_ATOM_TYPE_STRING: a unique identifier for this plugin. the field is mandatory. Use a DNS prefix. For example ( veejayhq.net.Negation )</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Optional properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;url&quot; : LIVIDO_ATOM_TYPE_STRING : URL of plugin package</p>
+</li>
+<li></li>
+</ul>
+<h3 id="port-type-filter-class">PORT TYPE FILTER CLASS</h3>
+<p>Port type filter class is used to describe all properties of a single filter class. Port is PLUGINSET and FINAL after livido_setup().  </p>
+<p>&quot;type&quot; == LIVIDO_PORT_TYPE_FILTER_CLASS  </p>
+<p><strong>Mandatory properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;name&quot; : LIVIDO_ATOM_TYPE_STRING : the filter name</p>
+</li>
+<li></li>
+<li><p>&quot;author&quot; : LIVIDO_ATOM_TYPE_STRING : the filter author(s)</p>
+</li>
+<li></li>
+<li><p>&quot;organization&quot;: LIVIDO_ATOM_TYPE_STRING: name of organization providing the plugin</p>
+</li>
+<li></li>
+<li><p>&quot;description&quot; : LIVIDO_ATOM_TYPE_STRING : filter description</p>
+</li>
+<li></li>
+<li><p>&quot;version&quot; : LIVIDO_ATOM_TYPE_INT : filter version.</p>
+</li>
+<li></li>
+<li><p>&quot;license&quot; : LIVIDO_ATOM_TYPE_STRING : license of filter</p>
+</li>
+<li></li>
+<li><p>&quot;flags&quot; : LIVIDO_ATOM_TYPE_INT : bitmap of filter flags</p>
+</li>
+<li></li>
+<li><p>&quot;init_func&quot; : LIVIDO_ATOM_TYPE_INIT_F : pointer to a init_func()</p>
+</li>
+<li></li>
+<li><p>&quot;process_func&quot; : LIVIDO_ATOM_TYPE_PROCESS_F : pointer to a process_func()</p>
+</li>
+<li></li>
+<li><p>&quot;deinit_func&quot; : LIVIDO_ATOM_TYPE_DEINIT_F : pointer to a deinit_func()</p>
+</li>
+<li></li>
+<li><p>&quot;in_channel_templates&quot; : LIVIDO_ATOM_TYPE_PORTPTR, list of 0 or more elements: input ports of input channel templates, <strong>type</strong> of the referenced port MUST be LIVIDO_PORT_TYPE_CHANNEL_TEMPLATE</p>
+</li>
+<li></li>
+<li><p>&quot;out_channel_templates&quot; : LIVIDO_ATOM_TYPE_PORTPTR, list of 0 or more elements : ports of output channel templates, <strong>type</strong> of the referenced port MUST be LIVIDO_PORT_TYPE_CHANNEL_TEMPLATE</p>
+</li>
+<li></li>
+<li><p>&quot;in_parameter_templates&quot; : LIVIDO_ATOM_TYPE_PORTPTR, list of 0 or more elements : ports of input parameter templates, <strong>type</strong> of the referenced port MUST be LIVIDO_PORT_TYPE_PARAMETER_TEMPLATE</p>
+</li>
+<li></li>
+<li><p>&quot;out_parameter_templates&quot; : LIVIDO_ATOM_TYPE_PORTPTR, list of 0 or more elements : ports of output parameter templates, <strong>type</strong> of the referenced port MUST be LIVIDO_PORT_TYPE_PARAMETER_TEMPLATE</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Optional properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;url&quot; : LIVIDO_ATOM_TYPE_STRING</p>
+</li>
+<li></li>
+</ul>
+<h3 id="port-type-filter-instance">PORT TYPE FILTER INSTANCE</h3>
+<p>Port type filter instance is used to hold all data that are related to a single instance of the filter all properties of a single filter class. Port is HOSTSET after livido_setup.  </p>
+<p>&quot;type&quot; == LIVIDO_PORT_TYPE_FILTER_INSTANCE  </p>
+<p><strong>Mandatory properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;filter_class&quot; : LIVIDO_ATOM_TYPE_PORTPTR : Pointer to a filter class port this filter instance is based on</p>
+</li>
+<li></li>
+<li><p>&quot;in_channels&quot; : LIVIDO_ATOM_TYPE_PORTPTR, list of 0 or more elements : ports of input channels, <strong>type</strong> of the referenced port MUST be LIVIDO_PORT_TYPE_CHANNEL</p>
+</li>
+<li></li>
+<li><p>&quot;out_channels&quot; : LIVIDO_ATOM_TYPE_PORTPTR, list of 0 or more elements : ports of output channels , <strong>type</strong> of the referenced port MUST be LIVIDO_PORT_TYPE_CHANNEL</p>
+</li>
+<li></li>
+<li><p>&quot;in_parameters&quot; : LIVIDO_ATOM_TYPE_PORTPTR, list of 0 or more elements : ports of input parameters, <strong>type</strong> of the referenced port MUST be LIVIDO_PORT_TYPE_PARAMETER</p>
+</li>
+<li></li>
+<li><p>&quot;out_parameters&quot; : LIVIDO_ATOM_TYPE_PORTPTR, list of 0 or more elements : ports of output parameters, <strong>type</strong> of the referenced port MUST be LIVIDO_PORT_TYPE_PARAMETER</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Optional properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>Every filter instance can have its internal properties stored inside this port, and host MUST ignore them. Those internal properties MUST have keys prefixed with &quot;PLUGIN_&quot;</p>
+</li>
+<li></li>
+<li><p>Every host can have its internal properties stored inside this port, and filter MUST ignore them. Those internal properties MUST have keys prefixed with &quot;HOST_&quot;</p>
+</li>
+<li></li>
+<li><p>&quot;path&quot; : LIVIDO_ATOM_TYPE_STRING: relative or absolute path to plugin data directory. Field is set by host. Plugin can use it to load extra data during initialization.</p>
+</li>
+<li></li>
+</ul>
+<h3 id="port-type-channel-template">PORT TYPE CHANNEL TEMPLATE</h3>
+<p>Port type channel template is used as a description of a single channel (input or output) a filter can handle. Port is PLUGINSET and FINAL after livido_setup.  </p>
+<ul>
+<li></li>
+<li><p>&quot;type&quot; == LIVIDO_PORT_TYPE_CHANNEL_TEMPLATE</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Mandatory properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;name&quot; : LIVIDO_ATOM_TYPE_STRING : name of the channel, MUST be unique across all channels in the filter class</p>
+</li>
+<li></li>
+<li><p>&quot;flags&quot; : LIVIDO_ATOM_TYPE_INT : bitmap of channel_flags that plugin sets</p>
+</li>
+<li></li>
+<li><p>&quot;palette_list&quot; : LIVIDO_ATOM_TYPE_INT : the plugin sets this to an array of allowed palettes for the channel. Its order is plugin&#39;s preference for a palette</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Optional properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;description&quot; : LIVIDO_ATOM_TYPE_STRING : description of this channel</p>
+</li>
+<li></li>
+<li><p>&quot;width&quot; : LIVIDO_ATOM_TYPE_INT : If set, frame width in pixels that a plugin can handle. If it is set, host is forbidden to set the width in channel instance to anything else</p>
+</li>
+<li></li>
+<li><p>&quot;height&quot; : LIVIDO_ATOM_TYPE_INT : If set, frame height in pixels that a plugin can handle. If it is set, host is forbidden to set the height in channel instance to anything else</p>
+</li>
+<li></li>
+<li><p>&quot;same_as_size&quot; : LIVIDO_ATOM_TYPE_PORTPTR : plugin can set this to indicate that this channel must match &quot;height&quot; and &quot;width&quot; with another channel. The pointer points to another in/out channel template</p>
+</li>
+<li></li>
+<li><p>&quot;same_as_palette&quot; : LIVIDO_ATOM_TYPE_PORTPTR : plugin can set this to indicate that this channel must match &quot;current_palette&quot; with another channel. The pointer points to another in/out channel template</p>
+</li>
+<li></li>
+<li><p>&quot;optional&quot; : LIVIDO_ATOM_TYPE_BOOLEAN : the plugin may set this to TRUE for channels that can be left out at initialization time.</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Restrictions to properties</strong>  </p>
+<p>Each channel template can only reference another through *_same_as or be referenced by another, not both.  </p>
+<p>There can be only backward references in the array. For example channel 2 can have *_same_as to channel 1, but not the other way around.  </p>
+<p>Output channels can, however, reference input channels at will  </p>
+<h3 id="port-type-channel">PORT TYPE CHANNEL</h3>
+<p>Port type channel is used as a fixation of channel properties that the host sets and plugin reads to know what it is getting. Port is HOSTSET after init_func(). Channels should be a one-one match with channel templates (same order, same number).  </p>
+<ul>
+<li></li>
+<li><p>&quot;type&quot; == LIVIDO_PORT_TYPE_CHANNEL</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Mandatory properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;parent_template&quot; : LIVIDO_ATOM_TYPE_PORT : Pointer to a channel template port this channel instance is based on. FINAL.</p>
+</li>
+<li></li>
+<li><p>&quot;timecode&quot; : LIVIDO_ATOM_TYPE_DOUBLE : time in seconds for this channel, host can choose what exactly it represents</p>
+</li>
+<li></li>
+<li><p>&quot;width&quot; : LIVIDO_ATOM_TYPE_INT : The chosen frame width in pixels</p>
+</li>
+<li></li>
+<li><p>&quot;height&quot; : LIVIDO_ATOM_TYPE_INT : The chosen height in pixels</p>
+</li>
+<li></li>
+<li><p>&quot;current_palette&quot; : LIVIDO_ATOM_TYPE_INT: The chosen palette, which must be one of the palettes contained in &quot;palette_list&quot; of a channel template</p>
+</li>
+<li></li>
+<li><p>&quot;pixel_data&quot; : LIVIDO_ATOM_TYPE_VOIDPTR : array of size 4 of pointers to the image pixels data. depending on the value of &quot;current_palette&quot;, only the first pointer is used for packed modes and in planar modes each plane has its own pointer.</p>
+</li>
+<li></li>
+<li><p>&quot;rowstrides&quot; : LIVIDO_ATOM_TYPE_INT : array of size 4 carrying the row width of EACH PLANE in bytes (include padding)</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Optional properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;fps&quot; : LIVIDO_ATOM_TYPE_DOUBLE : fps of channel;</p>
+</li>
+<li></li>
+<li><p>&quot;pixel_aspect_ratio&quot; : LIVIDO_ATOM_TYPE_DOUBLE : physical aspect ratio of the pixel of the image (pixel aspect ratio different than 1.0 means pixels are non-square)</p>
+</li>
+<li></li>
+<li><p>&quot;v_shift&quot; : LIVIDO_ATOM_TYPE_INT : vertical shift in the pixels of the sampling of crominance planes for planar yuv palletes</p>
+</li>
+<li></li>
+<li><p>&quot;h_shift&quot; : LIVIDO_ATOM_TYPE_INT : horizontal shift in the pixels of the sampling of crominance planes for planar yuv palletes</p>
+</li>
+<li></li>
+<li><p>&quot;YUV_sampling&quot; : LIVIDO_ATOM_TYPE_INT : Sampling type for YUV palettes, enum defined below</p>
+</li>
+<li></li>
+<li><p>&quot;interlacing&quot; : LIVIDO_ATOM_TYPE_INT : Interlacing type, defined below. if not present, the image must be NON INTERLACED</p>
+</li>
+<li></li>
+<li><p>&quot;disabled&quot; : LIVIDO_ATOM_TYPE_BOOLEAN : the host MAY set this to TRUE before calling init_func() if the coresponding channel template has optional property set to true</p>
+</li>
+<li></li>
+</ul>
+<h3 id="port-type-parameter-template">PORT TYPE PARAMETER TEMPLATE</h3>
+<p>Port type parameter template is used as a description of a single parameter (input or output) filter can handle. Port is PLUGINSET and FINAL after livido_setup.  </p>
+<p><strong>Mandatory properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;name&quot; : LIVIDO_ATOM_TYPE_STRING : name of the parameter, MUST be unique across the in_parameter_templates/out_parameter_templates</p>
+</li>
+<li></li>
+<li><p>&quot;default&quot; : any of the fundamental atom type : sane default value of the parameter</p>
+</li>
+<li></li>
+<li><p>&quot;kind&quot; : LIVIDO<em>ATOM_TYPE_STRING : Tells the host the _minimal</em> needed information to be able to present a parameter. Depending of the value of &quot;kind&quot;, there are additional properties that are mandatory or optional. The rules for additional properties are spelled out below.</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Optional properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;flags&quot; : LIVIDO_ATOM_TYPE_INT : Plugin sets this to LIVIDO_PARAMETER_CHANGE_UNADVISED if a change in the &quot;value&quot; of instance of the parameter causes some kind of internal reinit of the plugin (realtime hosts can use this to be able to avoid slow behaviour of he plugins).</p>
+</li>
+<li></li>
+<li><p>&quot;description&quot; : LIVIDO_ATOM_TYPE_STRING : parameter description, FINAL</p>
+</li>
+<li></li>
+</ul>
+<h4 id="parameter-constraining">PARAMETER CONSTRAINING</h4>
+<p>Parameter constraining in Livido is minimalistic, all GUI related stuff is to be defined in separate document. Parameter constraining is derived from additional properties defined for parameter template that depend on the value of the property &quot;kind&quot;.  </p>
+<p>The <strong>kind</strong> is a mandatory property of every parameter, the defined values are:  </p>
+<ul>
+<li></li>
+<li><p>&quot;INDEX&quot; (discrete)</p>
+</li>
+<li></li>
+<li><p>&quot;NUMBER&quot; (continuous)</p>
+</li>
+<li></li>
+<li><p>&quot;TEXT&quot; (utf-8)</p>
+</li>
+<li></li>
+<li><p>&quot;SWITCH&quot; (boolean)</p>
+</li>
+<li></li>
+<li><p>&quot;COLOR_RGBA&quot;</p>
+</li>
+<li></li>
+<li><p>&quot;COORDINATE&quot;</p>
+</li>
+<li></li>
+</ul>
+<p>Depending on the &quot;kind&quot; parameter atom type and mandatory additional properties MUST BE:  </p>
+<ul>
+<li></li>
+<li><p>&quot;INDEX&quot;</p>
+</li>
+<li></li>
+</ul>
+<p>Kind index means a discret number, which can be used for index choosing or passing integer values. It is constrained by min and max: min &lt;= value &lt;= max<br>The <strong>default</strong> property can only be of atom type LIVIDO_ATOM_TYPE_INT.<br>Additional properties that kind causes:  </p>
+<ul>
+<li></li>
+<li><p><strong>min</strong> : LIVIDO_ATOM_TYPE_INT : minimal value of the parameter, MANDATORY</p>
+</li>
+<li></li>
+<li><p><strong>max</strong> : LIVIDO_ATOM_TYPE_INT : maximal value of the parameter, MANDATORY</p>
+</li>
+<li></li>
+<li><p><strong>wrap</strong> : LIVIDO_ATOM_TYPE_BOOLEAN : indicates that the &quot;value&quot; should wrap when going below min or above max, OPTIONAL</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>&quot;NUMBER&quot;</p>
+</li>
+<li></li>
+</ul>
+<p>Kind index means a continuous number, which can be used for index choosing or passing integer values. It is constrained by min and max: min &lt;= value &lt;= max<br>The <strong>default</strong> property can only be of atom type LIVIDO_ATOM_TYPE_DOUBLE.<br>Additional properties that kind causes:  </p>
+<ul>
+<li></li>
+<li><p><strong>min</strong> : LIVIDO_ATOM_TYPE_DOUBLE : minimal value of the parameter, MANDATORY for in parameters, OPTIONAL for out parameters.</p>
+</li>
+<li></li>
+<li><p><strong>max</strong> : LIVIDO_ATOM_TYPE_DOUBLE : maximal value of the parameter, MANDATORY for in parameters, OPTIONAL for out parameters.</p>
+</li>
+<li></li>
+<li><p><strong>wrap</strong> : LIVIDO_ATOM_TYPE_BOOLEAN : indicates that the &quot;value&quot; should wraped when going below min or above max, OPTIONAL</p>
+</li>
+<li></li>
+<li><p><strong>transition</strong> : LIVIDO_ATOM_TYPE_BOOLEAN : Indicates that this parameter is transition, OPTIONAL</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>&quot;TEXT&quot;</p>
+</li>
+<li></li>
+</ul>
+<p>Kind text means a string, which can be used for passing strings.<br>The <strong>default</strong> property can only be of atom type LIVIDO_ATOM_TYPE_STRING.  </p>
+<ul>
+<li></li>
+<li><p>&quot;SWITCH&quot;</p>
+</li>
+<li></li>
+</ul>
+<p>Kind switch can be used for passing yes/no choices.<br>The <strong>default</strong> property can only be of atom type LIVIDO_ATOM_TYPE_BOOLEAN.  </p>
+<ul>
+<li></li>
+<li><p>&quot;COLOR_RGBA&quot;</p>
+</li>
+<li></li>
+</ul>
+<p>Kind color can be used for passing colors. Colors are represented as a list of 3 or 4 elements of type LIVIDO_ATOM_TYPE_DOUBLE. Depending on the default value, host knows if it has to pass 3 or 4 elements in the list to filter. Values of elements consecutively are red, green, blue and alpha, values are generally between 0.0 and 1.0.ccc<br>Additional properties that kind causes:  </p>
+<ul>
+<li></li>
+<li><p><strong>min</strong> : LIVIDO_ATOM_TYPE_DOUBLE array of N elements: minimal value of the parameter, MANDATORY</p>
+</li>
+<li></li>
+<li><p><strong>max</strong> : LIVIDO_ATOM_TYPE_DOUBLE array of N elements: maximal value of the parameter, MANDATORY</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>&quot;COORDINATE&quot;</p>
+</li>
+<li></li>
+</ul>
+<p>Kind coordinate can be used for passing 2d normalized cartesian coordinats. Coordinates are represented as a list of 2 elements of type LIVIDO_ATOM_TYPE_DOUBLE. First value in a list presents an x coordinate and second one y in cartesian coordinates, coordinates inside the picture they relate to are considered to be between 0.0 and 1.0<br>The <strong>default</strong> property can only be of atom type LIVIDO_ATOM_TYPE_DOUBLE and an array of 2 elements.<br>Additional properties that kind causes:  </p>
+<ul>
+<li></li>
+<li><p><strong>min</strong> : LIVIDO_ATOM_TYPE_DOUBLE array of 2 elements: minimal value of the parameter, MANDATORY</p>
+</li>
+<li></li>
+<li><p><strong>max</strong> : LIVIDO_ATOM_TYPE_DOUBLE array of 2 elements: maximal value of the parameter, MANDATORY</p>
+</li>
+<li></li>
+</ul>
+<h3 id="port-type-parameter">PORT TYPE PARAMETER</h3>
+<p>Port type parameter is used for passing a single (input or output) . Input parameters are HOSTSET and output parameters are PLUGINSET. Parameters should be a one-one match with channel templates (same order, same number).  </p>
+<p><strong>Mandatory properties</strong>:  </p>
+<ul>
+<li></li>
+<li><p>&quot;parent_template&quot; : LIVIDO_ATOM_TYPE_PORT : Pointer to a parameter template port this parameter instance is based on</p>
+</li>
+<li></li>
+<li><p>&quot;value&quot; : type of the value MUST match the type of <strong>default</strong> property of the parent_template</p>
+</li>
+<li></li>
+</ul>
+<h3 id="getting-setting-property-values">GETTING/SETTING PROPERTY VALUES</h3>
+<p>On livido_property_set(), the host/plugin programmer does not need to worry about allocating and freeing memory for the data to store. The model (or more precisely the Mediation layer) will take care of that for you. If you store an object the model will make a copy and store that. Later, when you set a new value in this property, the model will automatically livido_free() the old value and make a copy of the new value and store the copy.  </p>
+<p>The exception to this is any atom type of type PTR. If you allocate a chunk of data or a complex structure only the pointer value is stored (!). The model does not know anything about the content of the data your pointer refers to so it will not make a copy. Instead, you need to allocate and free the memory yourself in this case.  </p>
+<p>The plugin and host programmer can both retrieve and set values by Key.  </p>
+<p>On livido_property_get(), Livido will copy the data stored in the property, except for pointer types. For pointer types only the reference to the memory block is copied. The programmer should first allocate a memory area for livido_property_get() to copy to.  </p>
+<p>For setting pointer types, host/plugin must pass in a size_t array with the atom sizes.  </p>
+<h3 id="livido-core-functions">LIVIDO CORE FUNCTIONS</h3>
+<p>All host implementations must implement and offer the following core functions. The functions reside inside a host and plugin dynamically links to them upon loading.  </p>
+<ul>
+<li></li>
+<li><p>livido_port_t *livido_port_new (int port_type)</p>
+</li>
+<li></li>
+<li><p>void livido_port_free (livido_port_t *port) // only used by host</p>
+</li>
+<li></li>
+<li><p>char <em>*livido_list_properties (livido_port_t </em>port) // returns NULL terminated char * array of properties</p>
+</li>
+<li></li>
+<li><p>int livido_property_set (livido_port_t <em>port, const char </em>key, int atom_type, int num_elems, void *value) // returns a livido error</p>
+</li>
+<li></li>
+<li><p>int livido_property_get (livido_port_t <em>port, const char </em>key, int idx, void *value) // returns a livido error</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>int livido_property_num_elements (livido_port_t <em>port, const char </em>key)</p>
+</li>
+<li></li>
+<li><p>size_t livido_property_element_size (livido_port_t <em>port, const char </em>key, int idx)</p>
+</li>
+<li></li>
+<li><p>int livido_property_atom_type(livido_port_t <em>port, const char </em>key)</p>
+</li>
+<li></li>
+<li><p>void *livido_malloc_f (size_t size)</p>
+</li>
+<li></li>
+<li><p>void livido_free_f (void *ptr)</p>
+</li>
+<li></li>
+<li><p>void <em>livido_memset_f (void </em>s, int c, size_t n)</p>
+</li>
+<li></li>
+<li><p>void <em>livido_memcpy_f (void </em>dest, const void *src, size_t n)</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Notes</strong>:  </p>
+<p>livido_port_new() will set the &quot;type&quot; property to <em>port_type</em>, and will set it readonly.  </p>
+<p>livido_property_set() will create the property if the property does not exist.  </p>
+<p>livido_property_set() will return LIVIDO_ERROR_PROPERTY_READONLY if the property has the flag bit LIVIDO_PROPERTY_READONLY set.  </p>
+<p>livido_property_set() will return an error LIVIDO_ERROR_WRONG_ATOM_TYPE if you try to change the atom_type of a property.  </p>
+<p>For livido_property_set(), num_elems can be 0 and value can then be NULL. In this way, just the atom_type of the property can be set.  </p>
+<p>The <em>sizes</em> field of livido_property_set() is only used for pointer type values. It should be an array of size num_elems. For fundamental types, the sizes field should be set to NULL.  </p>
+<p>livido_property_get() will return LIVIDO_ERROR_NOSUCH_PROPERTY if a property does not exist. In this way the existence of a property can be determined. To assist with this, livido_property_get() can be called with a NULL void * value. The function will then not attempt to copy the value, but will return either LIVIDO_ERROR_NOSUCH_PROPERTY, or LIVIDO_NO_ERROR depending on whether the property exists or not.  </p>
+<p>The return values of livido_property_num_elements(), livido_property_element_size(), livido_property_atom_type(), and livido_property_get_readonly() are all undefined if the property does not exist.  </p>
+<p>The void <em> for livido_property_set() and livido_property_get() is a (void </em>) typecast to/from an array of the appropriate type:<br>e.g. for LIVIDO_ATOM_TYPE_INT it is an int *. The number of elements in the array must match num_elems in livido_property_set().  </p>
+<p>Functions livido_malloc_f(), livido_free_f(), livido_memset_f(), livido_memcpy_f() have exactly the same semantics as malloc, free(), memset() and memcpy() from libc. Their purpose is to allow a host to provide a plugin with the application-specific memory managment. Plugins MUST NOT use malloc, free and memset, but have to use livido counterparts.  </p>
+<h3 id="plugin-functions">PLUGIN FUNCTIONS</h3>
+<p>The only symbol plugin MUST export is livido_setup() function pointer, all other information is passed through respective ports (classes, functions, etc...)  </p>
+<h4 id="livido_setup">livido_setup</h4>
+<pre><code>livido_port_t *livido_setup(void);  
+</code></pre><p>This function returns a PLUGIN INFO port that specifies what is the content of this plugin - which filter classes it has, who is the maintainer, etc.  </p>
+<p>Plugin implements livido_setup() in following way: the PLUGIN INFO port is first created by using livido_port_new().<br>The individual filters are then created and added to the property &quot;filters&quot; in the PLUGIN INFO port.<br>If no filters can be created (because of memory or other problems), the function should return NULL.  </p>
+<p>The returned port MUST have <strong>type</strong> LIVIDO_PORT_TYPE_PLUGIN_INFO.  </p>
+<h4 id="init_func">init_func</h4>
+<pre><code>int init_func(livido_port_t *)  
+</code></pre><p>The port MUST have <strong>type</strong> LIVIDO_PORT_TYPE_FILTER_INSTANCE  </p>
+<p>The host calls this and passes in the desired filter.<br>The filter port instance passed to the init_func MUST have been correctly setup to match the filter class it relats to, this means that all the mandatory properties of input and output channels and of input parameters MUST be set.<br>The function returns a livido error code (see below).  </p>
+<p>The init<em>func() function allows the plugin to create any internal memory structures it needs; plugin store internal data as properties that have keys prefixed with &quot;PLUGIN</em>&quot; (see the definition of filter intance port)  </p>
+<h4 id="process_func">process_func</h4>
+<pre><code>int process_func(livido_port_t *, double timestamp)  
+</code></pre><p>The port MUST have <strong>type</strong> LIVIDO_PORT_TYPE_FILTER_INSTANCE  </p>
+<p>host calls this for each processing cycle; the plugin can do its frame processing here. The function returns a livido error code (see below). Timestamp is the presentation time in seconds (can be e.g. time since playback start). The function returns a livido error code (see below).  </p>
+<h4 id="deinit_func">deinit_func</h4>
+<pre><code>int deinit_func(livido_port_t *)  
+</code></pre><p>The port MUST have <strong>type</strong> LIVIDO_PORT_TYPE_FILTER_INSTANCE  </p>
+<p>host calls this to allow the plugin to free() any internal memory. Following this the host may free() the instance&#39;s port. The plugin does not need to free any ports or parameters, the host should take care of this.c  </p>
+<h3 id="outline-livido-process-flow-overview">OUTLINE LIVIDO PROCESS FLOW OVERVIEW</h3>
+<ul>
+<li></li>
+<li><p>Host loads plugin (dlopen)</p>
+</li>
+<li></li>
+<li><p>Host calls the livido_setup() function.</p>
+</li>
+<li></li>
+<li><p>in livido_setup(), for each filter class, the plugin creates and initializes the port of a type LIVIDO_PORT_TYPE_FILTER_CLASS and adds it to the <strong>filter_list</strong> property of the returned port.</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>Host creates a FILTER_INSTANCE: Host examines the in_channel and out_channel ports, and sets the &quot;disabled&quot; flag for any optional channels it does not wish to use. It also checks &quot;palette_list&quot;, selects a palette it would like to start using on that channel and sets the chosen value in the &quot;current_palette&quot; property. It also sets the sizes (&quot;width&quot; and &quot;height&quot; properties) if the plugin left them as zero. All input parameters have to have values set at this point. This means host now has a port that it will instantiate.</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>Host calls init_func() from the filter info port, passing a pointer to a FILTER_INSTANCE it would like to instantiate.</p>
+</li>
+<li></li>
+<li><p>Plugin now knows the channel sizes, palettes and which channels are in use. The plugin may now livido_malloc() internal data.</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>Host may now change parameter values (respecting &quot;max&quot; and &quot;min&quot; properties) and it after that it may call process_func() in the plugin, passing in the initialised FILTER_INSTANCE.</p>
+</li>
+<li></li>
+<li><p>When the host has finished with the FILTER_INSTANCE, or if it needs to re-initialise it, the host must call deinit_func() in the plugin, passing in a pointer to the FILTER_INSTANCE. The plugin MUST now livido_free() any internally allocated data.</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>Host can now livido_port_free() the FILTER_INSTANCE, or it can adjust the non-final properties of the ports used and reuse the FILTER_INSTANCE by calling init_func() once more.</p>
+</li>
+<li></li>
+</ul>
+<h3 id="livido-flags-and-types">LIVIDO FLAGS AND TYPES</h3>
+<h4 id="livido-palette-types">Livido palette types</h4>
+<p>Palettes are all unsigned in LiViDO.  </p>
+<p>Some palettes have aliases; these are shown on the same line.  </p>
+<p><strong>RGB Palettes</strong><br>Palette numbers &gt;0 and &lt;512  </p>
+<pre><code>LIVIDO_PALETTE_RGB888         LIVIDO_PALETTE_RGB24  
+LIVIDO_PALETTE_BGR888         LIVIDO_PALETTE_BGR24  
+LIVIDO_PALETTE_RGBA8888       LIVIDO_PALETTE_RGBA32  
+LIVIDO_PALETTE_ARGB8888       LIVIDO_PALETTE_ARGB32  
+LIVIDO_PALETTE_RGBFLOAT  
+LIVIDO_PALETTE_RGBAFLOAT  
+LIVIDO_PALETTE_RGB565  
+</code></pre><p><strong>YUV Palettes</strong><br>Palette numbers &gt;=512 and &lt;1024  </p>
+<p>Ranges are 16-235 for Y, 16 - 240 for U and V.  </p>
+<pre><code>LIVIDO_PALETTE_YUV422P           LIVIDO_PALETTE_YV16  
+[Official name &#39;YV16&#39;, 8 bit Y plane followed by 8  
+bit 2x1 subsampled V and U planes. Planar.]  
+
+LIVIDO_PALETTE_YUV420P           LIVIDO_PALETTE_YV12  
+[8 bit Y plane followed by 8 bit 2x2 subsampled V and U planes. Planar  
+(Official name YV12)]  
+
+LIVIDO_PALETTE_YVU420P           LIVIDO_PALETTE_I420  
+[Same as YUV420P , but U and V are swapped. Planar.]  
+
+LIVIDO_PALETTE_YUV444P  
+[Unofficial , 8 bit Y plane followed by 8 bit U and V planes, no  
+subsampling. Planar.]  
+
+LIVIDO_PALETTE_YUVA4444P         LIVIDO_PALETTE_YUV4444P  
+[Unofficial, like YUV444P but with Alpha. Planar.]  
+
+LIVIDO_PALETTE_YUYV8888  
+[Like YUV 4:2:2 but with different component ordering within the  
+u_int32 macropixel. Packed.]  
+
+LIVIDO_PALETTE_UYVY8888  
+[YUV 4:2:2 (Y sample at every pixel, U and V sampled at every second  
+pixel horizontally on each line). A macropixel contains 2 pixels in 1  
+u_int32. Packed.]  
+
+LIVIDO_PALETTE_YUV411  
+[IEEE 1394 Digital Camera 1.04 spec. Is packed YUV format  
+with a 6 pixel macroblock structure containing 4 pixels.  
+Ordering is U2 Y0 Y1 V2 Y2 Y3. Uses same bandwith as YUV420P  
+Only used for SMPTE DV NTSC.]  
+</code></pre><p><strong>Alpha Palettes</strong><br>Palette numbers &gt;=1024 and &lt;2048  </p>
+<p>Alpha palettes have two uses: 1) for masks, 2) to split colour inputs into single colour channels, or to combine single colour channels into a combined channel. The order of colour channels is the same as the order in the combined channel. For example if an input in RGB24 palette is split into 3 non-mask alpha channels, then the alpha channels will be in the order: Red, Green, Blue. A single non-mask alpha channel would represent the luminance.  </p>
+<pre><code>LIVIDO_PALETTE_A1  
+LIVIDO_PALETTE_A8  
+LIVIDO_PALETTE_AFLOAT  
+</code></pre><p>Palette numbers &gt;=2048 are available for custom palettes.  </p>
+<h4 id="filter-flags">Filter flags</h4>
+<ul>
+<li></li>
+<li><p>LIVIDO_FILTER_NON_REALTIME</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>non-realtime filter property: the filter is too slow to use in realtime processing.  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_FILTER_CAN_DO_INPLACE</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>If this property is set, the filter can do inplace operations.<br>Hosts can select this mode by setting &quot;pixel_data&quot; for the first out_channel to NULL.<br>Plugin will then return the output in &quot;pixel_data&quot; of the first in_channel.<br>This can save a memcpy() in the host.  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_FILTER_STATEFUL</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>plugin is stateful ; it has information about what occurred previously. I.e. it has internal state data.  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_FILTER_IS_CONVERTER</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>This flag bit should be set if the plugin does not alter the image pixels except for resizing or palette conversion between in channel and out channel(s). It should only be set for the following types of plugins: plugins which only resize the in frame to out frame(s); plugins which only convert the palette from in frame to out frame(s), plugins which simply duplicate the in frame to out frame(s). It is used to assist with categorisation of the plugin type.  </p>
+</blockquote>
+<p>Flag bits &gt;=30 are available for custom flags.  </p>
+</blockquote>
+<h4 id="channel-flags">Channel flags</h4>
+<ul>
+<li></li>
+<li><p>LIVIDO_CHANNEL_CHANGE_UNADVISED</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>plugin MAY use this flag to tell the host, that changing of channel size causes possibly unwanted behaviour of the filter. Unwanted behaviour can for example be reseting the accumulated values which causes the visual result of filter to change in unexpected way or maybe the next call to process function will take disproportional amount of time due to reinitialization. Host is safe to ignore the flag and plugin MUST still be useful, though functionality may suffer.  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_CHANNEL_PALETTE_UNADVISED</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>plugin MAY use this flag to tell the host, that changing of channel palette causes possibly unwanted behaviour of the filter. Unwanted behaviour can for example be reseting the accumulated values which causes the visual result of filter to change in unexpected way or maybe the next call to process function will take disproportional amount of time due to reinitialization. Host is safe to ignore the flag and plugin MUST still be useful, though functionality may suffer.  </p>
+</blockquote>
+<p>Flag bits &gt;=30 are available for custom flags.  </p>
+</blockquote>
+<h4 id="parameter-flags">Parameter flags</h4>
+<ul>
+<li></li>
+<li><p>LIVIDO_PARAMETER_CHANGE_UNADIVSED</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>plugin MAY use this flag to tell the host, that changing of this parameter causes possibly unwanted behaviour of the filter. Unwanted behaviour can for example be reseting the accumulated values which causes the visual result of filter to change in unexpected way or maybe the next call to process function will take disproportional amount of time due to reinitialization. Host is safe to ignore the flag and plugin MUST still be useful, though functionality may suffer.  </p>
+</blockquote>
+<p>Flag bits &gt;=30 are available for custom flags.  </p>
+</blockquote>
+<h4 id="property-flags">Property flags</h4>
+<ul>
+<li></li>
+<li><p>LIVIDO_PROPERTY_READONLY</p>
+</li>
+<li></li>
+</ul>
+<p>Flag bits &gt;=30 are available for custom flags.  </p>
+<h4 id="yuv-sampling-types">YUV sampling types</h4>
+<ul>
+<li></li>
+<li><p>LIVIDO_YUV_SAMPLING_NONE : No subsampling (always YUV 4:4:4)</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>LIVIDO_YUV_SAMPLING_SMPTE : Chroma is sampled at half the horizontal frequency and is aligned horizontally with luma samples (YUV 4:2:2)</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>LIVIDO_YUV_SAMPLING_JPEG : Chroma is sampled at half the horizontal and half the vertical frequency. (YUV 4:2:0). Chroma samples are centered between luma samples.</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>LIVIDO_YUV_SAMPLING_MPEG2 : Same as JPEG, but Chroma samples are horizontally aligned and vertically centered between luma samples. There is notion of fields. (YUV 4:2:0)</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>LIVIDO_YUV_SAMPLING_DVPAL : Subsampling per field, Chroma samples are located above luma samples, but CB and CR samples are located on alternate lines (YUV 4:2:0)</p>
+</li>
+<li></li>
+</ul>
+<ul>
+<li></li>
+<li><p>LIVIDO_YUV_SAMPLING_DVNTSC : Chroma is sampled at 1/4 the horizontal frequency as luma but at full vertical frequency. The chroma samples are horizontally aligned with luma samples. (YUV 4:1:1)</p>
+</li>
+<li></li>
+</ul>
+<p>Sampling types &gt;=1024 are available for custom samplings.  </p>
+<h4 id="interlace-types">Interlace types</h4>
+<ul>
+<li></li>
+<li><p>LIVIDO_INTERLACE_NONE</p>
+</li>
+<li></li>
+<li><p>LIVIDO_INTERLACE_TOPFIRST</p>
+</li>
+<li></li>
+<li><p>LIVIDO_INTERLACE_BOTTOMFIRST</p>
+</li>
+<li></li>
+<li><p>LIVIDO_INTERLACE_PROGRESSIVE</p>
+</li>
+<li></li>
+</ul>
+<p>Interlace types &gt;=1024 are available for custom interlacing.  </p>
+<h3 id="livido-errors">Livido errors</h3>
+<ul>
+<li></li>
+<li><p>LIVIDO_NO_ERROR</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>return code means no problem  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_ERROR_MEMORY_ALLOCATION</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>memory allocation by the filter has failed  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_ERROR_PROPERTY_READONLY</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>plugin/host tried to set readonly property; returned from livido_property_set()  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_ERROR_NOSUCH_ELEMENT</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>plugin/host tried to read value of an invalid element number in a property; returned from livido_property_get()  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_ERROR_NOSUCH_PROPERTY</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>property does not exist for the specified port; returned from livido_property_get()  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_ERROR_WRONG_ATOM_TYPE</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>once the atom_type of a property is set, you cannot change it. livido_property_set() will return this error if you attempt such a thing, and the value of the property will not be amended.  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_ERROR_TOO_MANY_INSTANCES</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>can&#39;t create: plugin allows only limited number of filter instances, returned from init_func()  </p>
+</blockquote>
+</blockquote>
+<ul>
+<li></li>
+<li><p>LIVIDO_ERROR_HARDWARE</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>there was an error initialising hardware for the filter; returned from init_func()  </p>
+</blockquote>
+<p>Error numbers &gt;=1024 are available for custom errors.  </p>
+</blockquote>
+<h3 id="livido-h">livido.h</h3>
+<pre><code>/* LiViDO is free software; you can redistribute it and/or  
+modify it under the terms of the GNU Lesser General Public  
+License as published by the Free Software Foundation; either  
+version 2.1 of the License, or (at your option) any later version.  
+
+LiViDO is distributed in the hope that it will be useful,  
+but WITHOUT ANY WARRANTY; without even the implied warranty of  
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  
+Lesser General Public License for more details.  
+
+You should have received a copy of the GNU Lesser General Public  
+License along with this source code; if not, write to the Free Software  
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA  
+
+LiViDO is developed by:  
+
+Niels Elburg - http://veejay.sf.net  
+
+Gabriel &quot;Salsaman&quot; Finch - http://lives.sourceforge.net  
+
+Denis &quot;Jaromil&quot; Rojo - http://freej.dyne.org  
+
+Tom Schouten - http://zwizwa.fartit.com  
+
+Andraz Tori - http://cvs.cinelerra.org  
+
+reviewed with suggestions and contributions from:  
+
+Silvano &quot;Kysucix&quot; Galliani - http://freej.dyne.org  
+
+Kentaro Fukuchi - http://megaui.net/fukuchi  
+
+Jun Iio - http://www.malib.net  
+
+Carlo Prelz - http://www2.fluido.as:8080/  
+
+*/  
+
+/* (C) Gabriel &quot;Salsaman&quot; Finch, Niels Elburg, Dennis &quot;Jaromil&quot; Rojo, 2005 */  
+
+* ifndef __LIVIDO_H__  
+* define __LIVIDO_H__  
+
+* ifdef __cplusplus  
+extern &quot;C&quot;  
+{  
+* endif /* __cplusplus */  
+
+* define LIVIDO_API_VERSION 1  
+
+/* Palette types */  
+/* RGB palettes */  
+* define LIVIDO_PALETTE_RGB888 1  
+* define LIVIDO_PALETTE_RGB24 1  
+* define LIVIDO_PALETTE_BGR888 2  
+* define LIVIDO_PALETTE_BGR24 2  
+* define LIVIDO_PALETTE_RGB161616 3  
+* define LIVIDO_PALETTE_RGB48 3  
+* define LIVIDO_PALETTE_BGR161616 4  
+* define LIVIDO_PALETTE_BGR48 4  
+* define LIVIDO_PALETTE_RGBA8888 5  
+* define LIVIDO_PALETTE_RGBA32 5  
+* define LIVIDO_PALETTE_ABGR8888 6  
+* define LIVIDO_PALETTE_ABGR32 6  
+* define LIVIDO_PALETTE_RGBA161616 7  
+* define LIVIDO_PALETTE_RGBA64 7  
+* define LIVIDO_PALETTE_ABGR161616 8  
+* define LIVIDO_PALETTE_ABGR64 8  
+* define LIVIDO_PALETTE_ARGB8888 9  
+* define LIVIDO_PALETTE_ARGB32 9  
+* define LIVIDO_PALETTE_BGRA8888 10  
+* define LIVIDO_PALETTE_BGRA32 10  
+* define LIVIDO_PALETTE_ARGB161616 11  
+* define LIVIDO_PALETTE_ARGB64 11  
+* define LIVIDO_PALETTE_BGRA161616 12  
+* define LIVIDO_PALETTE_BGRA64 12  
+* define LIVIDO_PALETTE_RGBFLOAT 13  
+* define LIVIDO_PALETTE_BGRFLOAT 14  
+* define LIVIDO_PALETTE_RGBAFLOAT 15  
+* define LIVIDO_PALETTE_ABGRFLOAT 16  
+* define LIVIDO_PALETTE_ARGBFLOAT  17  
+* define LIVIDO_PALETTE_BGRAFLOAT 18  
+* define LIVIDO_PALETTE_RGB565 19  
+* define LIVIDO_PALETTE_BGR565 20  
+
+/* YUV palettes */  
+* define LIVIDO_PALETTE_YUV422P 513  
+* define LIVIDO_PALETTE_YV16 513  
+* define LIVIDO_PALETTE_YUV420P 514  
+* define LIVIDO_PALETTE_YV12 514  
+* define LIVIDO_PALETTE_YVU420P 515  
+* define LIVIDO_PALETTE_I420 515  
+* define LIVIDO_PALETTE_YUV444P 516  
+* define LIVIDO_PALETTE_YUVA4444P 517  
+* define LIVIDO_PALETTE_YUV4444P 517  
+* define LIVIDO_PALETTE_YUYV8888 518  
+* define LIVIDO_PALETTE_UYVY8888 519  
+* define LIVIDO_PALETTE_YUV411 520  
+
+/* Alpha palettes */  
+* define LIVIDO_PALETTE_A1 1025  
+* define LIVIDO_PALETTE_A2 1026  
+* define LIVIDO_PALETTE_A4 1027  
+* define LIVIDO_PALETTE_A8 1028  
+* define LIVIDO_PALETTE_A16 1029  
+* define LIVIDO_PALETTE_AFLOAT 1030  
+
+/* Filter flags */  
+* define LIVIDO_FILTER_NON_REALTIME    (1&lt;&lt;0)  
+* define LIVIDO_FILTER_CAN_DO_INPLACE  (1&lt;&lt;1)  
+* define LIVIDO_FILTER_CAN_DO_SCALED   (1&lt;&lt;2)  
+* define LIVIDO_FILTER_CAN_DO_VIEWPORT (1&lt;&lt;3)  
+* define LIVIDO_FILTER_SELF_AUTOMATION (1&lt;&lt;4)  
+* define LIVIDO_FILTER_FPS_NEEDED      (1&lt;&lt;5)  
+* define LIVIDO_FILTER_STATELESS       (1&lt;&lt;6)  
+
+/* Channel flags */  
+* define LIVIDO_CHANNEL_MASK (1&lt;&lt;0)  
+* define LIVIDO_CHANNEL_HOST_CAN_RESIZE (1&lt;&lt;1)  
+* define LIVIDO_CHANNEL_HOST_CAN_CHANGE_PALETTE (1&lt;&lt;2)  
+
+/* Parameter flags */  
+* define LIVIDO_PARAMETER_NEEDS_REINIT (1&lt;&lt;0)  
+
+/* Property flags */  
+* define LIVIDO_PROPERTY_READONLY (1&lt;&lt;0)  
+
+/* YUV sampling types */  
+* define LIVIDO_YUV_SAMPLING_NONE 0  
+* define LIVIDO_YUV_SAMPLING_SMPTE 1  
+* define LIVIDO_YUV_SAMPLING_JPEG 2  
+* define LIVIDO_YUV_SAMPLING_MPEG2 3  
+* define LIVIDO_YUV_SAMPLING_DVPAL 4  
+* define LIVIDO_YUV_SAMPLING_DVNTSC 5  
+
+/* Interlace types */  
+* define LIVIDO_INTERLACE_NONE            0  
+* define LIVIDO_INTERLACE_TOPFIRST        1  
+* define LIVIDO_INTERLACE_BOTTOMFIRST     2  
+* define LIVIDO_INTERLACE_PROGRESSIVE     3  
+
+/* Viewport types */  
+* define LIVIDO_VIEWPORT_RECTANGLE 1  
+* define LIVIDO_VIEWPOERT_POLYGON 2  
+* define LIVIDO_VIEWPORT_CIRCLE 3  
+* define LIVIDO_VIEWPORT_OVAL 4  
+* define LIVIDO_VIEWPORT_TRIANGLE 5  
+
+/* Colorkey colorspaces */  
+* define LIVIDO_COLORKEY_RGB  0  
+* define LIVIDO_COLORKEY_HSV  1  
+* define LIVIDO_COLORKEY_HSL  2  
+* define LIVIDO_COLORKEY_CMYK 3  
+
+/* Livido errors */  
+/* Core errors */  
+* define LIVIDO_NO_ERROR 0  
+* define LIVIDO_ERROR_MEMORY_ALLOCATION 1  
+* define LIVIDO_ERROR_PROPERTY_READONLY 2  
+* define LIVIDO_ERROR_NOSUCH_ELEMENT 3  
+* define LIVIDO_ERROR_NOSUCH_PROPERTY 4  
+* define LIVIDO_ERROR_WRONG_ATOM_TYPE 5  
+
+/* Plugin errors */  
+* define LIVIDO_ERROR_TOO_MANY_INSTANCES 6  
+* define LIVIDO_ERROR_HARDWARE 7  
+
+/* Atom types */  
+/* Fundamental atoms */  
+* define LIVIDO_ATOM_TYPE_INT 1  
+* define LIVIDO_ATOM_TYPE_FLOAT 2  
+* define LIVIDO_ATOM_TYPE_LONG 3  
+* define LIVIDO_ATOM_TYPE_BOOLEAN 4  
+* define LIVIDO_ATOM_TYPE_STRING 5  
+
+/* Pointer atoms */  
+* define LIVIDO_ATOM_TYPE_VOIDPTR 65  
+* define LIVIDO_ATOM_TYPE_UINT8PTR 66  
+* define LIVIDO_ATOM_TYPE_UINT16PTR 67  
+* define LIVIDO_ATOM_TYPE_UINT32PTR 68  
+* define LIVIDO_ATOM_TYPE_FLOATPTR 69  
+* define LIVIDO_ATOM_TYPE_FILTERPTR 70  
+* define LIVIDO_ATOM_TYPE_PORTPTR 71  
+
+/* Port types */  
+* define LIVIDO_PORT_TYPE_FILTER_LIST 1  
+* define LIVIDO_PORT_TYPE_INFO 2  
+* define LIVIDO_PORT_TYPE_CHANNEL 3  
+* define LIVIDO_PORT_TYPE_PARAMETER 4  
+* define LIVIDO_PORT_TYPE_KEYFRAME 5  
+* define LIVIDO_PORT_TYPE_GUI 6  
+
+/* Parameter port hints */  
+* define NUMBER 1  
+* define TEXT 2  
+* define SWITCH 3  
+* define LIST 4  
+* define CHOICE 5  
+* define COLORKEY 6  
+* define COORDINATE 7  
+* define TRANSITION 8  
+
+extern void *livido_malloc_f (size_t size);  
+extern void livido_free_f (void *ptr);  
+extern void *livido_memset_f (void *s, int c, size_t n);  
+extern void *livido_memcpy_f (void *dest, const void *src, size_t n);  
+
+* ifndef HAVE_LIVIDO_PORT_T  
+* define HAVE_LIVIDO_PORT_T  
+
+typedef struct livido_property livido_property_t;  
+typedef livido_property_t livido_port_t;  
+
+typedef struct livido_atom {  
+size_t size;  
+void *value;  
+} livido_atom_t;  
+
+typedef struct livido_storage {  
+int num_elements;  
+int atom_type;  
+union {  
+livido_atom_t *atom;  
+livido_atom_t **array;  
+};  
+} livido_storage_t;  
+
+struct livido_property {  
+const char *key;  
+livido_storage_t *data;  
+int flags;  
+livido_property_t *next;  
+};  
+
+* endif  
+
+typedef struct livido_filter {  
+livido_port_t *info;  
+livido_port_t **in_channels;  
+livido_port_t **out_channels;  
+livido_port_t **in_parameters;  
+livido_port_t **out_parameters;  
+} livido_filter_t;  
+
+extern void livido_port_free (livido_port_t *prop);  
+extern livido_port_t *livido_port_new(int port_type);  
+extern char **livido_list_properties(livido_port_t *port);  
+extern int livido_property_set(livido_port_t *port, const char *key, int atom_type, int num_elems, void *value, size_t *size);  
+extern int livido_property_get(livido_port_t *port, const char *key, int idx, void *value);  
+extern int livido_property_num_elements(livido_port_t *port, const char *key);  
+extern int livido_property_element_size(livido_port_t *port, const char *key, int idx);  
+extern int livido_property_atom_type(livido_port_t *port, const char *key);  
+extern int livido_property_set_readonly(livido_port_t *port, const char *key);  
+extern int livido_property_get_readonly(livido_port_t *port, const char *key);  
+
+* ifdef __cplusplus  
+}  
+* endif /* __cplusplus */  
+
+* endif // #ifndef __LIVIDO_H__  
+</code></pre><h3 id="livido-c">livido.c</h3>
+<p>This is a reference implementation of the livido core library. It will eventually be made into a library which can be linked in at compile time.  </p>
+<h4 id="code">Code</h4>
+<pre><code>/* LiViDO is free software; you can redistribute it and/or  
+modify it under the terms of the GNU Lesser General Public  
+License as published by the Free Software Foundation; either  
+version 2.1 of the License, or (at your option) any later version.  
+
+LiViDO is distributed in the hope that it will be useful,  
+but WITHOUT ANY WARRANTY; without even the implied warranty of  
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  
+Lesser General Public License for more details.  
+
+You should have received a copy of the GNU Lesser General Public  
+License along with this source code; if not, write to the Free Software  
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA  
+
+LiViDO is developed by:  
+
+Niels Elburg - http://veejay.sf.net  
+
+Gabriel &quot;Salsaman&quot; Finch - http://lives.sourceforge.net  
+
+Denis &quot;Jaromil&quot; Rojo - http://freej.dyne.org  
+
+Tom Schouten - http://zwizwa.fartit.com  
+
+Andraz Tori - http://cvs.cinelerra.org  
+
+reviewed with suggestions and contributions from:  
+
+Silvano &quot;Kysucix&quot; Galliani - http://freej.dyne.org  
+
+Kentaro Fukuchi - http://megaui.net/fukuchi  
+
+Jun Iio - http://www.malib.net  
+
+Carlo Prelz - http://www2.fluido.as:8080/  
+
+*/  
+
+/* (C) Gabriel &quot;Salsaman&quot; Finch, Niels Elburg, Dennis &quot;Jaromil&quot; Rojo, 2005 */  
+
+* include &lt;string.h&gt;  
+* include &lt;sys/types.h&gt;  
+
+static inline int livido_atom_type_is_ptr (int atom_type) {  
+return (atom_type==LIVIDO_ATOM_TYPE_VOIDPTR||atom_type==LIVIDO_ATOM_TYPE_PORTPTR||\  
+atom_type==LIVIDO_ATOM_TYPE_FILTERPTR)?1:0;  
+}  
+
+static inline size_t livido_atom_type_get_size (int atom_type, void *value) {  
+return livido_atom_type_is_ptr (atom_type)?0:\  
+(atom_type==LIVIDO_ATOM_TYPE_BOOLEAN||atom_type==LIVIDO_ATOM_TYPE_INT)?sizeof(int):\  
+(atom_type==LIVIDO_ATOM_TYPE_FLOAT)?sizeof(float):\  
+(atom_type==LIVIDO_ATOM_TYPE_LONG)?sizeof(long):\  
+(atom_type==LIVIDO_ATOM_TYPE_STRING)?strlen((const char *)value):0;  
+}  
+
+static inline void livido_atom_free(livido_atom_t *atom, int atom_type) {  
+if (!livido_atom_type_is_ptr(atom_type)) livido_free_f (atom-&gt;value);  
+livido_free_f (atom);  
+}  
+
+static inline livido_atom_t *livido_atom_new(void *value, int atom_type, size_t size) {  
+livido_atom_t *atom=(livido_atom_t *)livido_malloc_f(sizeof(livido_atom_t));  
+if (atom==NULL) return NULL;  
+if (livido_atom_type_is_ptr(atom_type)) {  
+atom-&gt;size=size;  
+livido_memcpy_f (&amp;atom-&gt;value,value,sizeof(void *));  
+}  
+else {  
+if (atom_type==LIVIDO_ATOM_TYPE_STRING) {  
+char ** valuecharptrptr=(char **)value;  
+atom-&gt;size=livido_atom_type_get_size(atom_type,*valuecharptrptr);  
+}  
+else atom-&gt;size=livido_atom_type_get_size(atom_type,value);  
+atom-&gt;value=livido_malloc_f(atom-&gt;size);  
+if (atom-&gt;value==NULL) {  
+livido_free_f (atom);  
+return NULL;  
+}  
+if (atom_type==LIVIDO_ATOM_TYPE_STRING) {  
+char ** valuecharptrptr=(char **)value;  
+livido_memcpy_f (atom-&gt;value,*valuecharptrptr,atom-&gt;size);  
+}  
+else livido_memcpy_f (atom-&gt;value,value,atom-&gt;size);  
+}  
+return atom;  
+}  
+
+static inline void livido_storage_free(livido_storage_t *store) {  
+register int i;  
+if (store-&gt;num_elements==1) livido_atom_free(store-&gt;atom,store-&gt;atom_type);  
+else for (i=0;i&lt;store-&gt;num_elements;i++) livido_atom_free(store-&gt;array[i],store-&gt;atom_type);  
+}  
+
+static inline livido_storage_t *livido_storage_new(int atom_type, int num_elems, void *value, size_t *sizes) {  
+livido_storage_t *store=(livido_storage_t *)livido_malloc_f(sizeof(livido_storage_t));  
+if (store==NULL) return NULL;  
+store-&gt;num_elements=num_elems;  
+store-&gt;atom_type=atom_type;  
+if (num_elems==0) store-&gt;atom=NULL;  
+else {  
+if (num_elems==1) {  
+if ((store-&gt;atom=livido_atom_new (value, atom_type, livido_atom_type_is_ptr(atom_type)?sizes[0]:0))==NULL) {  
+livido_free_f (store);  
+return NULL;  
+}  
+}  
+else {  
+register int i;  
+void **valuevoidptrptr=(void **)value;  
+if ((store-&gt;array=(livido_atom_t **)livido_malloc_f(num_elems*sizeof(livido_atom_t *)))==NULL) {  
+livido_free_f (store);  
+return NULL;  
+}  
+for (i=0;i&lt;num_elems;i++) {  
+if (livido_atom_type_is_ptr(atom_type)) store-&gt;array[i]=livido_atom_new(&amp;valuevoidptrptr[i],atom_type,sizes[i]);  
+else {  
+if (atom_type==LIVIDO_ATOM_TYPE_STRING) store-&gt;array[i]=livido_atom_new(valuevoidptrptr[i],atom_type,0);  
+else store-&gt;array[i]=livido_atom_new(&amp;valuevoidptrptr[i],atom_type,0);  
+}  
+if (store-&gt;array[i]==NULL) { // memory error  
+for (--i;i&gt;=0;i--) livido_free_f (store-&gt;array[i]);  
+livido_free_f (store);  
+return NULL;  
+}  
+}  
+}  
+}  
+return store;  
+}  
+
+static inline livido_property_t *livido_find_property(livido_port_t *prop, const char *key) {  
+while (prop!=NULL) {  
+if (!strcmp((char *)prop-&gt;key,(char *)key)) return prop;  
+prop=prop-&gt;next;  
+}  
+return NULL;  
+}  
+
+static inline livido_storage_t *livido_get_storage_for(livido_port_t *port, const char *key) {  
+livido_property_t *prop=livido_find_property (port,key);  
+if (prop==NULL) return NULL;  
+return prop-&gt;data;  
+}  
+
+static inline livido_atom_t *livido_get_atom_from_storage(livido_storage_t *store, int idx) {  
+if (idx&gt;store-&gt;num_elements||store-&gt;num_elements==0) return NULL;  
+if (store-&gt;num_elements==1) return store-&gt;atom;  
+return store-&gt;array[idx];  
+}  
+
+static inline void livido_property_free(livido_property_t *prop) {  
+livido_storage_t *store=prop-&gt;data;  
+if (store==NULL) return;  
+livido_storage_free (store);  
+livido_free_f ((char *)prop-&gt;key);  
+}  
+
+static inline livido_property_t *livido_property_new(const char *key) {  
+size_t lstrlen;  
+livido_property_t *prop=(livido_property_t *)livido_malloc_f(sizeof(livido_property_t));  
+if (prop==NULL) return NULL;  
+if ((prop-&gt;key=(char *)livido_malloc_f((lstrlen=(strlen(key)+1))))==NULL) {  
+livido_free_f (prop);  
+return NULL;  
+}  
+livido_memcpy_f ((char *)prop-&gt;key,key,lstrlen);  
+prop-&gt;data=NULL;  
+prop-&gt;next=NULL;  
+prop-&gt;flags=0;  
+return prop;  
+}  
+
+static inline void livido_property_append(livido_port_t *prop,livido_property_t *newprop) {  
+livido_property_t *propnext;  
+while (prop!=NULL) {  
+propnext=prop-&gt;next;  
+if (propnext==NULL) {  
+prop-&gt;next=newprop;  
+return;  
+}  
+prop=propnext;  
+}  
+}  
+
+void livido_port_free(livido_port_t *prop) {  
+livido_property_t *propnext;  
+while (prop!=NULL) {  
+propnext=prop-&gt;next;  
+livido_property_free (prop);  
+prop=propnext;  
+}  
+}  
+
+livido_port_t *livido_port_new(int port_type) {  
+livido_property_t *prop;  
+size_t size=livido_atom_type_get_size(LIVIDO_ATOM_TYPE_INT,NULL);  
+if ((prop=livido_property_new(&quot;type&quot;))==NULL) return NULL;  
+if ((prop-&gt;data=livido_storage_new (LIVIDO_ATOM_TYPE_INT,1,&amp;port_type,&amp;size))==NULL) {  
+livido_free_f ((char *)prop-&gt;key);  
+livido_free_f (prop);  
+return NULL;  
+}  
+prop-&gt;next=NULL;  
+livido_property_set_readonly (prop,&quot;type&quot;);  
+return prop;  
+}  
+
+char **livido_list_properties(livido_port_t *port) {  
+livido_property_t *prop=port;  
+char **proplist;  
+register int i=1;  
+size_t lstrlen;  
+for (;prop!=NULL;i++) {  
+prop=prop-&gt;next;  
+}  
+if ((proplist=(char **)livido_malloc_f(i*sizeof(char *)))==NULL) return NULL;  
+i=0;  
+for (prop=port;prop!=NULL;prop=prop-&gt;next) {  
+if ((proplist[i]=(char *)livido_malloc_f((lstrlen=strlen(prop-&gt;key))+1))==NULL) {  
+for (--i;i&gt;=0;i--) livido_free_f (proplist[i]);  
+livido_free_f (proplist);  
+return NULL;  
+}  
+livido_memcpy_f (proplist[i],prop-&gt;key,lstrlen);  
+livido_memset_f (proplist[i++]+lstrlen,0,1);  
+}  
+proplist[i]=NULL;  
+return proplist;  
+}  
+
+int livido_property_set(livido_port_t *port, const char *key, int atom_type, int num_elems, void *value, size_t *size) {  
+livido_storage_t *store;  
+livido_property_t *prop=livido_find_property (port,key);  
+if (prop==NULL) {  
+if ((prop=livido_property_new (key))==NULL) return LIVIDO_ERROR_MEMORY_ALLOCATION;  
+livido_property_append (port,prop);  
+}  
+else {  
+if (prop-&gt;flags&amp;LIVIDO_PROPERTY_READONLY) return LIVIDO_ERROR_PROPERTY_READONLY;  
+if (atom_type!=prop-&gt;data-&gt;atom_type) return LIVIDO_ERROR_WRONG_ATOM_TYPE;  
+livido_storage_free (prop-&gt;data);  
+prop-&gt;data=NULL;  
+}  
+if ((store=livido_storage_new (atom_type,num_elems,value,size))==NULL) {  
+return LIVIDO_ERROR_MEMORY_ALLOCATION;  
+}  
+prop-&gt;data=store;  
+return LIVIDO_NO_ERROR;  
+}  
+
+int livido_property_get(livido_port_t *port, const char *key, int idx, void *value) {  
+livido_atom_t *atom;  
+livido_storage_t *store=livido_get_storage_for (port,key);  
+if (store==NULL) return LIVIDO_ERROR_NOSUCH_PROPERTY;  
+if ((atom=livido_get_atom_from_storage (store,idx))==NULL) return LIVIDO_ERROR_NOSUCH_ELEMENT;  
+if (livido_atom_type_is_ptr (store-&gt;atom_type)) livido_memcpy_f (value,&amp;atom-&gt;value,sizeof(void *));  
+else {  
+if (store-&gt;atom_type==LIVIDO_ATOM_TYPE_STRING) {  
+char **valuecharptrptr=(char **)value;  
+livido_memcpy_f(*valuecharptrptr,atom-&gt;value,atom-&gt;size);  
+livido_memset_f(*valuecharptrptr+atom-&gt;size,0,1);  
+}  
+else livido_memcpy_f (value,atom-&gt;value,atom-&gt;size);  
+}  
+return LIVIDO_NO_ERROR;  
+}  
+
+int livido_property_num_elements(livido_port_t *port, const char *key) {  
+livido_storage_t *store=livido_get_storage_for (port, key);  
+if (store==NULL) return 0;  
+return store-&gt;num_elements;  
+}  
+
+int livido_property_element_size(livido_port_t *port, const char *key, int idx) {  
+livido_atom_t *atom;  
+livido_storage_t *store=livido_get_storage_for (port, key);  
+if (store==NULL) return 0;  
+if ((atom=livido_get_atom_from_storage (store, idx))==NULL) return 0;  
+return atom-&gt;size;  
+}  
+
+int livido_property_atom_type(livido_port_t *port, const char *key) {  
+livido_storage_t *store=livido_get_storage_for (port, key);  
+if (store==NULL) return 0;  
+return store-&gt;atom_type;  
+}  
+
+int livido_property_set_readonly(livido_port_t *port, const char *key) {  
+livido_property_t *prop=livido_find_property (port, key);  
+if (prop==NULL) return LIVIDO_ERROR_NOSUCH_PROPERTY;  
+prop-&gt;flags|=LIVIDO_PROPERTY_READONLY;  
+return LIVIDO_NO_ERROR;  
+}  
+
+int livido_property_get_readonly(livido_port_t *port, const char *key) {  
+livido_property_t *prop=livido_find_property (port, key);  
+if (prop==NULL) return 0;  
+return prop-&gt;flags&amp;LIVIDO_PROPERTY_READONLY;  
+}  
+</code></pre><h3 id="sample-code">Sample code</h3>
+<h3 id="section-1-examples-using-only-the-core-functions">Section 1: Examples using only the core functions</h3>
+<h4 id="example-1-1-creating-and-freeing-a-port">Example 1.1: Creating and freeing a port</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+if (filter!=NULL) livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-2-creating-a-port-setting-and-reading-an-int-and-freeing-the-port">Example 1.2: Creating a port, setting and reading an int, and freeing the port</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+int in_int=55;  
+int out_int;  
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+livido_property_set (filter,&quot;test&quot;,LIVIDO_ATOM_TYPE_INT,1,&amp;in_int);  
+livido_property_get (filter,&quot;test&quot;,0,&amp;out_int);  
+
+printf (&quot;test is %d\n&quot;,out_int);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-3-creating-a-port-setting-and-retrieving-a-utf-8-string-and-freeing-the-port">Example 1.3: Creating a port, setting and retrieving a UTF-8 string, and freeing the port</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+char *in_string=&quot;LiViDO Test&quot;;  
+char *out_string;  
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+livido_property_set (filter,&quot;name&quot;,LIVIDO_ATOM_TYPE_STRING,1,&amp;in_string,NULL);  
+
+/* don&#39;t forget to add one byte for the terminating NULL */  
+out_string=(char *)malloc(livido_property_element_size(info,&quot;name&quot;,0)+1);  
+livido_property_get (filter,&quot;name&quot;,0,&amp;out_string);  
+printf (&quot;name is %s\n&quot;,out_string);  
+
+free (out_string);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-4-storing-a-reference-to-pointer-type-retrieving-and-copying">Example 1.4: Storing a reference to pointer type, retrieving and copying</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+void *source_blob=malloc(1024);  
+void *blob_ptr,*dest_blob;  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+livido_property_set (filter,&quot;internal&quot;,LIVIDO_ATOM_TYPE_VOIDPTR,1,&amp;source_blob);  
+livido_property_get (filter,&quot;internal&quot;,0,&amp;blob_ptr);  
+
+if (blob_ptr==source_blob) printf (&quot;pointer was stored correctly\n&quot;);  
+printf (&quot;stored a pointer to a memory block %p\n&quot;,blob_ptr);  
+
+free (source_blob);  
+free (dest_blob);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-5-setting-and-reading-a-double-array">Example 1.5: Setting and reading a double array</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+double in_doubles[3]={25.31,19.76,7.65};  
+double out_doubles;  
+int num_elements,i;  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+livido_property_set (filter,&quot;double array&quot;,LIVIDO_ATOM_TYPE_DOUBLE,3,&amp;in_doubles);  
+
+num_elements=livido_property_num_elements (filter,&quot;double array&quot;);  
+printf (&quot;stored an array with %d elements\n&quot;,num_elements);  
+
+for (i=0;i&lt;num_elements;i++) {  
+livido_property_get (filter,&quot;double array&quot;,i,&amp;out_doubles);  
+printf (&quot;element %d is %.2f\n&quot;,i,out_doubles);  
+}  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-6-setting-and-reading-a-pointer-array">Example 1.6: Setting and reading a pointer array</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+void *in_array[3];  
+void *out_blob;  
+int num_elements,i;  
+size_t sizes[3]={128,256,1024};  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+in_array[0]=malloc(sizes[0]);  
+in_array[1]=malloc(sizes[1]);  
+in_array[2]=malloc(sizes[2]);  
+
+printf (&quot;ptrs are: %p %p %p\n&quot;,in_array[0],in_array[1],in_array[2]);  
+
+livido_property_set (filter,&quot;void array&quot;,LIVIDO_ATOM_TYPE_VOIDPTR,3,&amp;in_array,sizes);  
+
+num_elements=livido_property_num_elements (filter,&quot;void array&quot;);  
+printf (&quot;stored an array with %d elements\n&quot;,num_elements);  
+
+for (i=0;i&lt;num_elements;i++) {  
+livido_property_get (filter,&quot;void array&quot;,i,&amp;out_blob);  
+printf (&quot;element %d is %p\n&quot;,i,out_blob);  
+}  
+
+free (in_array[0]);  
+free (in_array[1]);  
+free (in_array[2]);  
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-7-setting-the-type-of-a-property-without-setting-its-value">Example 1.7: Setting the type of a property without setting its value</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+int type;  
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+/* set just the property type, without setting a value */  
+livido_property_set (filter,&quot;test&quot;,LIVIDO_ATOM_TYPE_INT,0,NULL);  
+
+type=livido_property_atom_type (filter,&quot;test&quot;);  
+
+if (type==LIVIDO_ATOM_TYPE_INT) printf (&quot;\&quot;test\&quot; is an int property\n&quot;);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-8-setting-the-type-of-a-property-then-trying-to-change-it">Example 1.8: Setting the type of a property, then trying to change it</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+int inint=5;  
+int outint;  
+int type;  
+double mydouble=7.6;  
+int error;  
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_INFO);  
+
+/* make &quot;test&quot; an int property */  
+livido_property_set (filter,&quot;test&quot;,LIVIDO_ATOM_TYPE_INT,1,&amp;inint);  
+type=livido_property_atom_type (filter,&quot;test&quot;);  
+livido_property_get (filter,&quot;test&quot;,0,&amp;outint);  
+
+if (type==LIVIDO_ATOM_TYPE_INT) printf (&quot;\&quot;test\&quot; is an int property, its value is %d\n&quot;,outint);  
+
+/* now we try to set a double in it, we should get an error */  
+error=livido_property_set (filter,&quot;test&quot;,LIVIDO_ATOM_TYPE_DOUBLE,1,&amp;mydouble);  
+
+printf (&quot;error was %d\n&quot;,error);  
+if (error==LIVIDO_ERROR_WRONG_ATOM_TYPE) printf (&quot;The type could not be changed !\n&quot;);  
+
+type=livido_property_atom_type (filter,&quot;test&quot;);  
+livido_property_get (filter,&quot;test&quot;,0,&amp;outint);  
+
+if (type==LIVIDO_ATOM_TYPE_INT) printf (&quot;\&quot;test\&quot; is still an int property, its value is %d\n&quot;,outint);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-9-setting-a-property-readonly">Example 1.9 setting a property readonly</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+
+int inint=5;  
+int outint;  
+int error;  
+int is_rdonly;  
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+/* make &quot;test&quot; an int property */  
+livido_property_set (filter,&quot;test&quot;,LIVIDO_ATOM_TYPE_INT,1,&amp;inint);  
+livido_property_get (filter,&quot;test&quot;,0,&amp;outint);  
+is_rdonly=livido_property_get_readonly (filter,&quot;test&quot;);  
+
+printf (&quot;The value of \&quot;test\&quot; is %d, readonly state is %d\n&quot;,outint,is_rdonly);  
+
+/* now we set it readonly */  
+livido_property_set_readonly (filter, &quot;test&quot;);  
+
+inint=7;  
+
+/* now we try to change the value, we should get an error */  
+error=livido_property_set (filter,&quot;test&quot;,LIVIDO_ATOM_TYPE_INT,1,&amp;inint);  
+if (error==LIVIDO_ERROR_PROPERTY_READONLY) printf (&quot;The property is readonly !\n&quot;);  
+
+livido_property_get (filter,&quot;test&quot;,0,&amp;outint);  
+is_rdonly=livido_property_get_readonly (filter,&quot;test&quot;);  
+printf (&quot;The value of \&quot;test\&quot; is %d, readonly state is %d\n&quot;,outint,is_rdonly);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-1-10-setting-all-mandatory-properties-for-an-index-parameter-template-then-lisiting-its-properties">Example 1.10: setting all mandatory properties for an &quot;index&quot; parameter template, then lisiting its properties</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+char *name=&quot;Parameter 1&quot;;  
+char *kind=&quot;INDEX&quot;;  
+int default=100;  
+int min=0;  
+int max=255;  
+int i;  
+char **prop_list;  
+livido_port_t *param=livido_port_new (LIVIDO_PORT_TYPE_PARAMETER_TEMPLATE);  
+
+/* set all of the mandatory properties */  
+livido_property_set (param,&quot;kind&quot;,LIVIDO_ATOM_TYPE_STRING,1,&amp;kind);  
+livido_property_set (param,&quot;name&quot;,LIVIDO_ATOM_TYPE_STRING,1,&amp;name);  
+livido_property_set (param,&quot;default&quot;,LIVIDO_ATOM_TYPE_INT,1,&amp;default);  
+livido_property_set (param,&quot;min&quot;,LIVIDO_ATOM_TYPE_INT,1,&amp;min);  
+livido_property_set (param,&quot;max&quot;,LIVIDO_ATOM_TYPE_INT,1,&amp;max);  
+
+/* now list the properties */  
+prop_list=livido_list_properties (param);  
+
+if (prop_list!=NULL) {  
+for (i=0;prop_list[i]!=NULL;i++) {  
+printf (&quot;Property %d is called \&quot;%s\&quot;\n&quot;,i,prop_list[i]);  
+free (prop_list[i]);  
+}  
+free (prop_list);  
+}  
+
+livido_port_free (param);  
+return 1;  
+}  
+</code></pre><h3 id="section-2-examples-using-the-livido-utility-functions">Section 2: Examples using the livido-utility functions</h3>
+<h4 id="example-2-1-creating-and-freeing-a-port-setting-and-reading-an-int-property-checking-if-properties-exist">Example 2.1: Creating and freeing a port, setting and reading an int property, checking if properties exist</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+* include &quot;livido-utils.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+int in_int=55;  
+int out_int;  
+int error;  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+livido_set_int_value (filter,&quot;test&quot;,in_int);  
+if (livido_has_property (filter,&quot;test&quot;)) printf (&quot;filter has property \&quot;test\&quot;\n&quot;);  
+
+out_int=livido_get_int_value (filter,&quot;test&quot;,&amp;error);  
+
+printf (&quot;test is %d\n&quot;,out_int);  
+
+if (!livido_has_property (filter,&quot;test2&quot;)) printf (&quot;filter does not have property \&quot;test2\&quot;\n&quot;);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-2-2-creating-and-freeing-a-port-setting-and-reading-a-string-property">Example 2.2: Creating and freeing a port, setting and reading a string property</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+* include &quot;livido-utils.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+char *in_string=&quot;LiViDO test&quot;;  
+char *out_string;  
+int error;  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+livido_set_string_value (filter,&quot;test&quot;,in_string);  
+
+out_string=livido_get_string_value (filter,&quot;test&quot;,&amp;error);  
+
+printf (&quot;\&quot;test\&quot; is \&quot;%s\&quot;\n&quot;,out_string);  
+
+free (out_string);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-2-3-creating-and-freeing-a-port-setting-and-reading-a-voidptr-property">Example 2.3: Creating and freeing a port, setting and reading a voidptr property</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+* include &quot;livido-utils.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+void *in_voidptr=malloc(1024);  
+void *out_voidptr;  
+int error;  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+livido_set_voidptr_value (filter,&quot;test&quot;,in_voidptr);  
+out_voidptr=livido_get_voidptr_value (filter,&quot;test&quot;,&amp;error);  
+
+printf (&quot;\&quot;test\&quot; is %p, in ptr was %p\n&quot;,out_voidptr,in_voidptr);  
+
+free (in_voidptr);  
+
+livido_port_free (info);  
+return 1;  
+}  
+</code></pre><h4 id="example-2-4-creating-and-freeing-a-port-setting-and-reading-a-double-array">Example 2.4: Creating and freeing a port, setting and reading a double array</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+* include &quot;livido-utils.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+float in_doubles[]={48.1,42.9};  
+float *out_doubles;  
+int error;  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+livido_set_double_array (filter,&quot;test&quot;,2,in_doubles);  
+out_doubles=livido_get_double_array (filter,&quot;test&quot;,&amp;error);  
+
+printf (&quot;\&quot;test\&quot; is %.2f and %.2f\n&quot;,out_doubles[0],out_doubles[1]);  
+
+free (out_doubles);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-2-5-creating-and-freeing-a-port-setting-and-reading-a-string-array">Example 2.5: Creating and freeing a port, setting and reading a string array</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+* include &quot;livido-utils.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+char *in_strings[]={&quot;test string 1&quot;,&quot;test string 2&quot;};  
+char **out_strings;  
+int error;  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_INFO);  
+
+livido_set_string_array (filter,&quot;test&quot;,2,in_strings);  
+
+out_strings=livido_get_string_array (filter,&quot;test&quot;,&amp;error);  
+
+printf (&quot;\&quot;test\&quot; is %s and %s\n&quot;,out_strings[0],out_strings[1]);  
+
+free (out_strings[0]);  
+free (out_strings[1]);  
+free (out_strings);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-2-6-creating-and-freeing-a-port-setting-and-reading-a-voidptr-array">Example 2.6: Creating and freeing a port, setting and reading a voidptr array</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+* include &quot;livido-utils.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+void *in_voids[2];  
+void **out_voids;  
+size_t in_sizes[2]={1024,256};  
+int error;  
+
+livido_port_t *filter=livido_port_new (LIVIDO_PORT_TYPE_FILTER_CLASS);  
+
+in_voids[0]=malloc(in_sizes[0]);  
+in_voids[1]=malloc(in_sizes[1]);  
+
+livido_set_voidptr_array (filter,&quot;test&quot;,2,in_voids);  
+
+/* warning, out_voids are reference only */  
+out_voids=livido_get_voidptr_array (filter,&quot;test&quot;,&amp;error);  
+
+printf (&quot;\&quot;test\&quot; is %p and %p, original was %p and %p\n&quot;,out_voids[0],out_voids[1],in_voids[0],in_voids[1]);  
+
+free (out_voids);  
+
+livido_port_free (filter);  
+return 1;  
+}  
+</code></pre><h4 id="example-2-7-creating-and-freeing-an-index-parameter-template-setting-all-the-mandatory-properties-setting-readonly-and-listing-them">Example 2.7: Creating and freeing an INDEX parameter template, setting all the mandatory properties, setting readonly and listing them</h4>
+<pre><code>#include &lt;stdlib.h&gt; // for malloc(), free()  
+* include &lt;string.h&gt; // for memset(), memcpy()  
+* include &lt;stdio.h&gt;  
+* include &quot;livido.h&quot;  
+* include &quot;livido.c&quot;  
+* include &quot;livido-utils.c&quot;  
+
+void *livido_malloc_f (size_t size) {return malloc(size);}  
+void livido_free_f (void *ptr) {free(ptr);}  
+void *livido_memset_f (void *s, int c, size_t n) {return memset(s,c,n);}  
+void *livido_memcpy_f (void *dest, const void *src, size_t n) {return memcpy(dest,src,n);}  
+
+int main (void) {  
+int i;  
+char **prop_list;  
+livido_port_t *param=livido_port_new (LIVIDO_PORT_TYPE_PARAMETER);  
+
+/* set all of the mandatory properties */  
+livido_set_int_value (param,&quot;kind&quot;,&quot;INDEX&quot;);  
+livido_set_string_value (param,&quot;name&quot;,&quot;Parameter1&quot;);  
+livido_set_int_value (param,&quot;default&quot;,100);  
+livido_set_int_value (param,&quot;min&quot;,0);  
+livido_set_int_value (param,&quot;max&quot;,255);  
+
+/* now list the properties */  
+prop_list=livido_list_properties (param);  
+
+if (prop_list!=NULL) {  
+for (i=0;prop_list[i]!=NULL;i++) {  
+printf (&quot;Property %d is called \&quot;%s\&quot;\n&quot;,i,prop_list[i]);  
+livido_property_set_readonly (param,prop_list[i]);  
+free (prop_list[i]);  
+}  
+free (prop_list);  
+}  
+
+livido_port_free (param);  
+return 1;  
+}
+</code></pre>
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/reference/fx-stuff/">fx stuff</a></h2>
+        <p class="blog-post-meta">November 18, 2008</p>
+        <p>FX created with veejay.  </p>
+<h2 id="very-old-stuff">very old stuff</h2>
+<div><br><img src="/uploads/2008/11/photo_index.png" alt="Image map"><br><map id="photo_index" name="photo_index"><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/blendkey1.jpg" shape="rect" coords="0,0,53,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/blendkey2.jpg" shape="rect" coords="54,0,107,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/blendkey3.jpg" shape="rect" coords="108,0,161,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis1.jpg" shape="rect" coords="162,0,215,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis10.jpg" shape="rect" coords="216,0,269,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis2.jpg" shape="rect" coords="270,0,323,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis3.jpg" shape="rect" coords="324,0,377,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis4.jpg" shape="rect" coords="378,0,431,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis5.jpg" shape="rect" coords="432,0,485,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis6.jpg" shape="rect" coords="486,0,539,49" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis7.jpg" shape="rect" coords="0,50,53,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis8.jpg" shape="rect" coords="54,50,107,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/capensis9.jpg" shape="rect" coords="108,50,161,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/chromakey3.jpg" shape="rect" coords="162,50,215,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/chromakey4.jpg" shape="rect" coords="216,50,269,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/chromakey5.jpg" shape="rect" coords="270,50,323,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/chromakey6.jpg" shape="rect" coords="324,50,377,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/chromamagick4.jpg" shape="rect" coords="378,50,431,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/cubics.jpg" shape="rect" coords="432,50,485,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/effectv1.jpg" shape="rect" coords="486,50,539,99" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/effectv2.jpg" shape="rect" coords="0,100,53,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/effectv3.jpg" shape="rect" coords="54,100,107,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/effectv4.jpg" shape="rect" coords="108,100,161,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/effectv5.jpg" shape="rect" coords="162,100,215,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/emboss1.jpg" shape="rect" coords="216,100,269,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/fib1.jpg" shape="rect" coords="270,100,323,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/fib2.jpg" shape="rect" coords="324,100,377,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-1.jpg" shape="rect" coords="378,100,431,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-10.jpg" shape="rect" coords="432,100,485,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-3.jpg" shape="rect" coords="486,100,539,149" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-4.jpg" shape="rect" coords="0,150,53,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-5.jpg" shape="rect" coords="54,150,107,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-6.jpg" shape="rect" coords="108,150,161,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-7.jpg" shape="rect" coords="162,150,215,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-8.jpg" shape="rect" coords="216,150,269,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/gal2-9.jpg" shape="rect" coords="270,150,323,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/greykey.jpg" shape="rect" coords="324,150,377,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/lumakey1.jpg" shape="rect" coords="378,150,431,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/lumakey2.jpg" shape="rect" coords="432,150,485,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/lumakey3.jpg" shape="rect" coords="486,150,539,199" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/lumamagick10.jpg" shape="rect" coords="0,200,53,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/lumamagick18.jpg" shape="rect" coords="54,200,107,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/lumamagick4.jpg" shape="rect" coords="108,200,161,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/overl-00095.jpg" shape="rect" coords="162,200,215,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sdancer1.jpg" shape="rect" coords="216,200,269,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sdancer2.jpg" shape="rect" coords="270,200,323,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sdancer4.jpg" shape="rect" coords="324,200,377,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sdancer5.jpg" shape="rect" coords="378,200,431,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sdancer6.jpg" shape="rect" coords="432,200,485,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sdancer7.jpg" shape="rect" coords="486,200,539,249" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sdancer9.jpg" shape="rect" coords="0,250,53,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/feet1.jpg" shape="rect" coords="54,250,107,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sfeet2.jpg" shape="rect" coords="108,250,161,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sfeet3.jpg" shape="rect" coords="162,250,215,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sleg3.jpg" shape="rect" coords="216,250,269,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sleg4.jpg" shape="rect" coords="270,250,323,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sleg5.jpg" shape="rect" coords="324,250,377,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sleg6.jpg" shape="rect" coords="378,250,431,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sleg7.jpg" shape="rect" coords="432,250,485,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/sleg8.jpg" shape="rect" coords="486,250,539,299" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/ssmoothkey.jpg" shape="rect" coords="0,300,53,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/ssmoothkey2.jpg" shape="rect" coords="54,300,107,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong1.jpg" shape="rect" coords="108,300,161,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong10.jpg" shape="rect" coords="162,300,215,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong11.jpg" shape="rect" coords="216,300,269,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong12.jpg" shape="rect" coords="270,300,323,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong13.jpg" shape="rect" coords="324,300,377,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong3.jpg" shape="rect" coords="378,300,431,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong4.jpg" shape="rect" coords="432,300,485,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong5.jpg" shape="rect" coords="486,300,539,349" alt=""></area><br><area href="http://www.veejayhq.net/wp-content/uploads/2008/11/strong9.jpg" shape="rect" coords="0,350,53,399" alt=""></area><br></map><br></div>
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/reference/vims-list/">VIMS List</a></h2>
+        <p class="blog-post-meta">November 18, 2008</p>
+        <h2 id="full-list-of-veejay-s-events-and-fx">Full list of veejay&#39;s events and FX</h2>
+<pre><code>VIMS  Syntax: &#39;&lt;selector&gt;:&lt;arguments&gt;;&#39;  
+Use arguments according to FORMAT  
+FORMAT controls the arguments as in C printf. Interpreted sequences are:  
+%d      integer  
+%s      string  
+VIMS selector 001     &#39;Increment index of Effect List&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Step size  
+VIMS selector 002     &#39;Decrement index of Effect List&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Step size  
+VIMS selector 003     &#39;Put selected effect in Effect List to current sample and current entry&#39;  
+VIMS selector 004     &#39;Print current settings&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample or Stream ID (depends on playmode, 0=current playing)  
+VIMS selector 005     &#39;GU Get a list of all tracks (unadvised!)&#39;  
+VIMS selector 006     &#39;Camera/Projection calibration setup&#39;  
+VIMS selector 008     &#39;Toggle grayscale preview on/off (default=off)&#39;  
+VIMS selector 010     &#39;Play forward&#39;  
+VIMS selector 011     &#39;Play backward&#39;  
+VIMS selector 012     &#39;Play stop&#39;  
+VIMS selector 013     &#39;Skip N frames forward&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Number of frames  
+VIMS selector 014     &#39;Skip N frames backward&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Number of frames  
+VIMS selector 015     &#39;Skip N seconds forward&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Number of seconds  
+VIMS selector 016     &#39;Skip N seconds backward&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Number of seconds  
+VIMS selector 017     &#39;Go to starting position&#39;  
+VIMS selector 018     &#39;Go to ending position&#39;  
+VIMS selector 019     &#39;Set current frame number&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Frame number  
+VIMS selector 020     &#39;Change trickplay speed&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Frame step  
+VIMS selector 021     &#39;Change frameduplication&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Frame repeat  
+VIMS selector 022     &#39;Start built-in UDP mcast server (YUV planar)&#39;  
+VIMS selector 023     &#39;Stop built-in UDP mcast server&#39;  
+VIMS selector 020     &#39;Change trickplay speed depending on play direction&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Frame step  
+VIMS selector 033     &#39;Macro keystroke recorder/playback&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Keep or reset (1=reset)  
+Argument 1 is Macro status (0=disabled,1=record,2=playing)  
+VIMS selector 034     &#39;Select a bank to store macro keystrokes&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Bank ID  
+VIMS selector 040     &#39;(OUT) Write video output to (special) file in yuv4mpeg format&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 041     &#39;(OUT) Stop writing video output to yuv4mpeg file&#39;  
+VIMS selector 042     &#39;TCP: Send a frame to a connected veejay client&#39;  
+VIMS selector 045     &#39;OUT: Start writing video output to a vloopback device&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Vloopback pipe number  
+VIMS selector 046     &#39;OUT: Stop writing to vloopback device&#39;  
+VIMS selector 047     &#39;Push current playing sample or stream as viewport input&#39;  
+VIMS selector 048     &#39;Set render depth, use 1 to render chain entries 0,1 and 2 of underlying sample, use 2 to toggle on/off&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Depth switch  
+VIMS selector 050     &#39;Paste frames from buffer at frame into edit descision list&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is EDL position  
+VIMS selector 051     &#39;Copy frames from edit descision list to buffer&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is EDL start position  
+Argument 1 is EDL end position  
+VIMS selector 052     &#39;Delete frames from editlist (no undo!)&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is EDL start position  
+Argument 1 is EDL end position  
+VIMS selector 053     &#39;Crop frames from edit descision list to buffer&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is EDL start position  
+Argument 1 is EDL end position  
+VIMS selector 054     &#39;Cut frames from edit descision list to buffer&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is EDL start position  
+Argument 1 is EDL end position  
+VIMS selector 055     &#39;Add video file to edit descision list&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 056     &#39;GU Append a file to the plain EDL and create a new sample (unadvised!)&#39;  
+FORMAT: &#39;%d %s&#39;, where:  
+Argument 0 is existing or new ID  
+
+Argument 1 is Filename  
+VIMS selector 058     &#39;Save (selection of) edit descision list to new file&#39;  
+FORMAT: &#39;%d %d %s&#39;, where:  
+Argument 0 is EDL start position (0=start position)  
+Argument 1 is EDL end position (0=end position)  
+Argument 2 is Filename  
+VIMS selector 059     &#39;Load edit descision list from file&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 080     &#39;Execute VIMS bundle&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Bundle ID  
+VIMS selector 081     &#39;Delete a VIMS bundle&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Bundle ID  
+VIMS selector 082     &#39;Add a new bundle to the event list&#39;  
+FORMAT: &#39;%d %s&#39;, where:  
+Argument 0 is Bundle ID (0=new, 1=overwrite existing)  
+Argument 1 is VIMS text  
+VIMS selector 083     &#39;Attach/Detach a Key to VIMS Event&#39;  
+FORMAT: &#39;%d %d %d %s&#39;, where:  
+Argument 0 is VIMS ID  
+Argument 1 is SDL Key symbol  
+Argument 2 is SDL Key modifier (0=none,1=alt,2=ctrl,3=shift)  
+Argument 3 is VIMS message  
+VIMS selector 084     &#39;Veejay load action file&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 085     &#39;Veejay save action file&#39;  
+FORMAT: &#39;%d %s&#39;, where:  
+Argument 0 is Mode (0=only Bundles,1=save edl/sample list)  
+Argument 1 is Filename  
+VIMS selector 086     &#39;Capture Effect Chain to a new Bundle&#39;  
+VIMS selector 100     &#39;Create a new sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Starting position  
+Argument 1 is Ending position  
+VIMS selector 101     &#39;Select and play sample&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+VIMS selector 102     &#39;Change looptype of sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Looptype (0=None,1=Normal,2=Pingpong)  
+VIMS selector 103     &#39;Change title of sample&#39;  
+FORMAT: &#39;%d %s&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Title  
+VIMS selector 104     &#39;Change playback speed of sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Speed (0=pause, &gt; 0  and &lt; (end-start)  
+VIMS selector 105     &#39;Change start position of sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Frame number  
+VIMS selector 106     &#39;Change end position of sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Frame number  
+VIMS selector 107     &#39;Change frame repeat for this sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Frame repeat  
+VIMS selector 108     &#39;Set in point in sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Position  
+VIMS selector 109     &#39;Set out point in sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Position  
+VIMS selector 110     &#39;Set in and out points in sample&#39;  
+FORMAT: &#39;%d %d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Starting position  
+Argument 2 is Ending position  
+VIMS selector 111     &#39;Clear in and out points&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+VIMS selector 112     &#39;Enable effect chain of sample&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+VIMS selector 113     &#39;Disable effect chain of sample&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+VIMS selector 120     &#39;Delete sample&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample ID &gt;= 1  
+VIMS selector 121     &#39;Delete all samples (caution!)&#39;  
+VIMS selector 125     &#39;Load samples from file&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 126     &#39;Save samples to file&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 127     &#39;Copy sample to new&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+VIMS selector 130     &#39;Start recording from sample&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Number of frames (0=sample duration)  
+Argument 1 is Auto Play (0=disable, 1=enable)  
+VIMS selector 131     &#39;Stop recording from this sample&#39;  
+VIMS selector 143     &#39;Set sample&#39;s starting and ending position&#39;  
+FORMAT: &#39;%d %d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Starting position  
+Argument 2 is Ending position  
+VIMS selector 144     &#39;Switch between loop types&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample ID (0=current playing, -1=last created, &gt; 0 = Sample ID)  
+Argument 1 is Looptype (0=None, 1=Normal, 2=Pingpong)  
+VIMS selector 145     &#39;Change KF play status for entry X&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Entry ID  
+Argument 1 is Status value  
+VIMS selector 146     &#39;Get keyframes for parameter Y on entry X&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Entry ID  
+Argument 1 is Parameter ID  
+VIMS selector 145     &#39;Clear KF series on entry X&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Entry ID  
+VIMS selector 150     &#39;Store current frame as starting position of new sample&#39;  
+VIMS selector 151     &#39;Store current frame as ending position of a new sample ( and commit )&#39;  
+VIMS selector 160     &#39;Increase projection/camera point&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is X increment  
+Argument 1 is Y increment  
+VIMS selector 161     &#39;Decrease projection/camera point&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is X increment  
+Argument 1 is Y increment  
+VIMS selector 162     &#39;Set a viewport point using scale&#39;  
+FORMAT: &#39;%d %d %d %d&#39;, where:  
+Argument 0 is Point number  
+Argument 1 is Scale factor  
+Argument 2 is X  
+Argument 3 is Y  
+VIMS selector 163     &#39;Get viewport points using scale&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Grid size  
+VIMS selector 164     &#39;Push viewport to secundary input&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is On/Off  
+Argument 1 is Color=0, Grayscale=1  
+VIMS selector 201     &#39;Select and play stream&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Stream ID &gt;= 1  
+VIMS selector 202     &#39;Change RGB color of solid stream&#39;  
+FORMAT: &#39;%d %d %d %d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Red  
+Argument 2 is Green  
+Argument 3 is Blue  
+VIMS selector 203     &#39;Change title of stream&#39;  
+FORMAT: &#39;%d %s&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Title  
+VIMS selector 207     &#39;Set brightness value for Video4linux stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Value 0-65535  
+VIMS selector 208     &#39;Set constrast value for Video4linux stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Value 0-65535  
+VIMS selector 207     &#39;Set hue value for Video4linux stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Value 0-65535  
+VIMS selector 210     &#39;Set color value for Video4linux stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Value 0-65535  
+VIMS selector 211     &#39;Set white balance value for Video4linux stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Value 0-65535  
+VIMS selector 212     &#39;Set ficticious stream length&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Number of frames  
+VIMS selector 213     &#39;Disable effect chain of stream&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+VIMS selector 211     &#39;Set saturation value for Video4linux stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Value 0-65535  
+VIMS selector 220     &#39;Delete stream&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Stream ID &gt;= 1  
+VIMS selector 228     &#39;Start offline recording from stream&#39;  
+FORMAT: &#39;%d %d %d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+Argument 1 is Number of frames  
+Argument 2 is Auto Play (0=disable,1=enable)  
+VIMS selector 229     &#39;Stop offline recording from this stream&#39;  
+VIMS selector 230     &#39;Start recording from stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Number of frames  
+Argument 1 is Auto Play (0=disable,1=enable)  
+VIMS selector 231     &#39;Stop recording from this stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+VIMS selector 240     &#39;Open video4linux device as new input stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Device Number (0=/dev/video0,1=/dev/video1, ... )  
+Argument 1 is Channel Number (0=TV,1=composite,2=svideo)  
+VIMS selector 241     &#39;Open dv1394 device as new input stream&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Channel number  
+VIMS selector 242     &#39;Solid RGB color fill as new input stream&#39;  
+FORMAT: &#39;%d %d %d&#39;, where:  
+Argument 0 is Red  
+Argument 1 is Green  
+Argument 2 is Blue  
+VIMS selector 243     &#39;Open yuv4mpeg (special) file as new input stream&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 245     &#39;Open TCP veejay connection (peer to peer, raw data) as new input stream&#39;  
+FORMAT: &#39;%d %s&#39;, where:  
+Argument 0 is Port number  
+Argument 1 is Hostname or IP address  
+VIMS selector 246     &#39;Open UDP multicast as new input stream&#39;  
+FORMAT: &#39;%d %s&#39;, where:  
+Argument 0 is Port Number  
+Argument 1 is Multicast Address  
+VIMS selector 247     &#39;Open image from file as new input stream&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 254     &#39;Suspend Veejay (caution!)&#39;  
+VIMS selector 300     &#39;Set audio volume&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Volume 0-100  
+VIMS selector 301     &#39;Enable / Disable Fullscreen video output&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is On = 1, Off=0  
+VIMS selector 302     &#39;Set codec to use for recording (global setting)&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Codec name (use &#39;x&#39; to see list)  
+VIMS selector 303     &#39;Change playback mode&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Playback (2=plain,1=stream,0=sample)  
+VIMS selector 305     &#39;Switch between sample and stream playback&#39;  
+VIMS selector 307     &#39;Enable audio playback&#39;  
+VIMS selector 307     &#39;Disable audio playback&#39;  
+VIMS selector 308     &#39;Set current sample bank&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Bank number  
+VIMS selector 309     &#39;Play stream or sample slot (depends on current playmode)&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Slot number  
+VIMS selector 315     &#39;Start sample randomizer&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Mode (0=Random duration, 1=Sample duration)  
+VIMS selector 316     &#39;Stop sample randomizer&#39;  
+VIMS selector 320     &#39;Start recording now and play when finished&#39;  
+VIMS selector 321     &#39;Stop recording&#39;  
+VIMS selector 322     &#39;Start recording&#39;  
+VIMS selector 323     &#39;Change between box or triangle filter for sampling purposes&#39;  
+VIMS selector 324     &#39;Bezerk mode toggle &#39;  
+VIMS selector 325     &#39;More/Less verbosive console output&#39;  
+VIMS selector 326     &#39;(OUT) Resize SDL video window&#39;  
+FORMAT: &#39;%d %d %d %d&#39;, where:  
+Argument 0 is Width  
+Argument 1 is Height  
+Argument 2 is X offset  
+Argument 3 is Y offset  
+VIMS selector 327     &#39;Change playback mode&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Playback mode (0=sample,1=stream,2=plain)  
+VIMS selector 328     &#39;Play sample / stream&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Source type (0=sample,1=stream)  
+VIMS selector 329     &#39;Change YUV &lt;-&gt; RGB conversion (unadvised)&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Mode (0=GIMP,1=CCIR701,2=broken)  
+VIMS selector 330     &#39;Save output frame to file&#39;  
+FORMAT: &#39;%d %d %s&#39;, where:  
+Argument 0 is Width  
+Argument 1 is Height  
+Argument 2 is Filename  
+VIMS selector 331     &#39;Editlist cache mode toggle&#39;  
+VIMS selector 001     &#39;GU Get preview image (raw RGB24)&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Width  
+Argument 1 is Height  
+VIMS selector 334     &#39;Enable/Disable sync correction&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is 0=off,1=on  
+VIMS selector 335     &#39;Change playback engine framerate&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Multiple by 100 (ie. for 25fps, use 2500)  
+VIMS selector 339     &#39;Take current frame as Mask for this Effect&#39;  
+VIMS selector 340     &#39;Set sequence play on or off&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Status 0=off,1=on  
+VIMS selector 341     &#39;Add a sample to the sequence&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Seq ID  
+Argument 1 is Sample ID  
+VIMS selector 342     &#39;Del sample from sequence slot&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Seq ID  
+VIMS selector 350     &#39;Increment current Channel ID on selected chain entry&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Increment vale  
+VIMS selector 351     &#39;Decrement current Channel ID on selected chain entry&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Decrement value  
+VIMS selector 352     &#39;Enable or disable Effect Chain for ALL samples or streams&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is On = 1, Off= 0  
+VIMS selector 353     &#39;Enable Effect Chain&#39;  
+VIMS selector 354     &#39;Disable Effect Chain&#39;  
+VIMS selector 355     &#39;Reset Effect Chain&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+VIMS selector 356     &#39;Fade in effect chain&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Duration in frames  
+VIMS selector 357     &#39;Fade out effet chain&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Duration in frames  
+VIMS selector 358     &#39;GU Get effect chain&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+VIMS selector 359     &#39;Set Chain Index&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Index value  
+VIMS selector 360     &#39;Add effect to chain entry with default values&#39;  
+FORMAT: &#39;%d %d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+Argument 2 is Effect ID  
+VIMS selector 361     &#39;Preset effect on chain entry&#39;  
+FORMAT: &#39;%d %d %d %d %d %d %d %d %d %d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current  
+Argument 2 is Effect ID  
+Argument 3 is Parameter 0  
+Argument 4 is Parameter 1  
+Argument 5 is Parameter 2  
+Argument 6 is Parameter 3  
+Argument 7 is Parameter 4  
+Argument 8 is Parameter 5  
+Argument 9 is Parameter 6  
+Argument 10 is Parameter 7  
+VIMS selector 362     &#39;Set a parameter value&#39;  
+FORMAT: &#39;%d %d %d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+Argument 2 is Parameter number  
+Argument 3 is Value  
+VIMS selector 363     &#39;Enable effect on chain index&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+VIMS selector 364     &#39;Disable effect on chain index&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+VIMS selector 365     &#39;Reset effect to default&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+VIMS selector 366     &#39;Set mixing channel&#39;  
+FORMAT: &#39;%d %d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+Argument 2 is Sample ID  
+VIMS selector 367     &#39;Set mixing source type&#39;  
+FORMAT: &#39;%d %d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+Argument 2 is Source Type (0=sample,1=stream)  
+VIMS selector 368     &#39;Set mixing channel and source type&#39;  
+FORMAT: &#39;%d %d %d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+Argument 2 is Source Type (0=sample,1=stream)  
+Argument 3 is Sample or Stream ID  
+VIMS selector 369     &#39;Reset chain index&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index (-1=current)  
+VIMS selector 370     &#39;Set opacity of Effect Chain&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Opacity value [0-255]  
+VIMS selector 371     &#39;Decrement current FX chain entry&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Decrement value  
+VIMS selector 372     &#39;Increment current FX chain entry&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Increment value  
+VIMS selector 373     &#39;Change source type of a chain entry&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Chain entry  
+Argument 1 is Source type (0=Sample, 1=Stream)  
+VIMS selector 374     &#39;Increment current value of a parameter&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Parameter number  
+Argument 1 is Step size  
+VIMS selector 375     &#39;Decrement current value of a parameter&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Parameter number  
+Argument 1 is Step size  
+VIMS selector 376     &#39;Enable / disable Effect Chain&#39;  
+VIMS selector 377     &#39;Enable / disable effect on current entry&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+VIMS selector 388     &#39;Print help in OSD (if available)&#39;  
+VIMS selector 399     &#39;Print copyright&#39;  
+VIMS selector 390     &#39;Set font position&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is X position  
+Argument 1 is Y position  
+VIMS selector 391     &#39;Set font color&#39;  
+FORMAT: &#39;%d %d %d %d %d&#39;, where:  
+Argument 0 is Red  
+Argument 1 is Green  
+Argument 2 is Blue  
+Argument 3 is Alpha  
+Argument 4 is 0=Transparent 1=BG 2=FG  
+VIMS selector 392     &#39;Set font type and font size&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Font type  
+Argument 1 is Font size  
+VIMS selector 393     &#39;Add a subtitle sequence&#39;  
+FORMAT: &#39;%d %d %d %d %d %s&#39;, where:  
+Argument 0 is Subtitle sequence (0=new)  
+Argument 1 is Start position  
+Argument 2 is End position  
+Argument 3 is X position  
+Argument 4 is Y position  
+Argument 5 is Text  
+VIMS selector 394     &#39;Delete a subtitle sequence&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Subtitle sequence  
+VIMS selector 395     &#39;Update a subtitle sequence&#39;  
+FORMAT: &#39;%d %d %d %s&#39;, where:  
+Argument 0 is Subtitle sequence  
+Argument 1 is Start position  
+Argument 2 is End position  
+Argument 3 is Text  
+VIMS selector 396     &#39;Export subtitles to SRT&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 397     &#39;Import subtitles from SRT&#39;  
+FORMAT: &#39;%s&#39;, where:  
+Argument 0 is Filename  
+VIMS selector 398     &#39;Select a subtitle sequence&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Subtitle sequence  
+VIMS selector 399     &#39;Toggle OSD status&#39;  
+VIMS selector 400     &#39;GU Get video information details&#39;  
+VIMS selector 401     &#39;GU Get all effects&#39;  
+VIMS selector 402     &#39;GU Get EDL&#39;  
+VIMS selector 403     &#39;GU Get all bundles&#39;  
+VIMS selector 405     &#39;GU Get a list of all streams (unadvised!)&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is stream offset  
+VIMS selector 408     &#39;GU Get a list of all samples (unadvised!)&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is sample offset  
+VIMS selector 409     &#39;GU Get video4linux properties&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Stream ID (-1=last created, &gt; 0 = Stream ID)  
+VIMS selector 410     &#39;GU Get effect chain index details&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Chain Index  
+VIMS selector 411     &#39;GU Get all VIMS events&#39;  
+VIMS selector 412     &#39;GU Get console output&#39;  
+VIMS selector 413     &#39;GU Get sample or stream information (unadivsed!)&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Source Type (0=sample,1=stream)  
+VIMS selector 414     &#39;GU Get sample options&#39;  
+FORMAT: &#39;%d %d&#39;, where:  
+Argument 0 is Sample or Stream ID (0=current playing, -1=last created, &gt; 0 = ID)  
+Argument 1 is Source Type (0=sample,1=stream)  
+VIMS selector 415     &#39;GU Get all devices and their locations&#39;  
+VIMS selector 416     &#39;GU Get list of loaded fonts&#39;  
+VIMS selector 417     &#39;GU Get list of loaded subtitle sequences&#39;  
+VIMS selector 418     &#39;GU Get subtitle sequence&#39;  
+FORMAT: &#39;%d&#39;, where:  
+Argument 0 is Subtitle sequence  
+VIMS selector 418     &#39;GU Get list of sample sequences&#39;  
+VIMS selector 420     &#39;GU Get all keys&#39;  
+VIMS selector 600     &#39;Quit Veejay (caution!)&#39;  
+VIMS selector 600     &#39;End sessions with veejay&#39;  
+Veejay OSC  
+When using strings, set it *always* as the first argument  
+
+----- The OSC address space -----  
+/  
+/video/  
+/video/play: play foward  
+/video/reverse: play reverse  
+/video/pause: pause  
+/video/speed: speed ( &lt; 0 = reverse, &gt; 0 = forward)  
+/video/slow: slow  
+/video/goto_start: goto start  
+/video/goto_end: goto end  
+/video/set_frame: set frame &lt;pos&gt;  
+/video/prev_frame: set previous frame  
+/video/next_frame: set next frame  
+/video/next_second: set next second  
+/video/prev_second: set previous second  
+/video/mode: play plain video  
+/video/set/  
+/sample/  
+/sample/new: create new sample &lt;pos start&gt; &lt;pos end&gt;  
+/sample/copy: copy sample &lt;num&gt; as new sample  
+/sample/del: delete sample &lt;num&gt;  
+/sample/select: select and play sample &lt;num&gt;  
+/sample/set/  
+/sample/set/jitter: relative start/end position update &lt;pos1&gt; &lt;pos2&gt;  
+/sample/set/start: set sample new starting position &lt;pos&gt;  
+/sample/set/end: set sample new ending position &lt;pos&gt;  
+/sample/set/looptype: sample set looptype &lt;0 = none, 1 = normal, 2 = bounce&gt;  
+/sample/set/speed: sample set playback speed &lt;num&gt;  
+/sample/set/marker: sample set marker &lt;pos1&gt; &lt;pos2&gt;  
+/sample/set/slow: sample set frame duplicate &lt;num&gt;  
+/sample/set/nomarker: sample delete marker  
+/sample/rec/  
+/sample/rec/start: sample start recording &lt;0=entire sample, N=num frames&gt; &lt;0=dont play 1=play&gt;  
+/sample/rec/stop: sample stop recording  
+/sample/rec/format: sample set recorder format (mjpeg,mpeg4,dv,divx,yv12,yv16)  
+/stream/  
+/stream/select: stream select and play &lt;num&gt;  
+/stream/rec/  
+/stream/rec/o_start: hidden record from stream &lt;num frames&gt; &lt;autoplay bool&gt;  
+/stream/rec/o_stop: stop hidden recording   
+/stream/rec/start: start stream recorder &lt;num frames&gt; &lt;autoplay bool&gt;  
+/stream/rec/stop: stop stream recorder   
+/stream/rec/format: set stream recorder format (mjpeg,divx,dv,yv12,yv16,mpeg4)  
+/stream/new/  
+/stream/new/v4l: new video4linux input stream &lt;device num&gt; &lt;channel num&gt;  
+/stream/new/solid: new solid color stream &lt;R&gt; &lt;G&gt; &lt;B&gt;  
+/stream/new/y4m: new yuv4mpeg input stream &lt;filename&gt;  
+/stream/new/mcast: new multicast input stream &lt;address&gt; &lt;port&gt;  
+/stream/new/net: new peer-to-peer input stream &lt;hostname&gt; &lt;port&gt;  
+/record/  
+/chain/  
+/chain/reset: Effect chain clear  
+/chain/fade_in: Fade in effect chain &lt;num frames&gt;  
+/chain/fade_out: Fade out effect chain &lt;num frames&gt;  
+/chain/enable: Effect chain enabled  
+/chain/disable: Effect chain disabled  
+/chain/opacity: Manual Fader (0=A 255=B  
+/chain/global_fx: All Effect chains on/off (1/0)  
+/out/  
+/out/mcaststop: Stop mcast frame sender  
+/out/mcaststart: Start mcast frame sender  
+/cl/  
+/cl/load: Samplelist load &lt;filename&gt;  
+/cl/save: Samplelist save &lt;filename&gt;  
+/el/  
+/el/add_sample: Editlist add filename (as new sample)  
+/el/paste_at: EditList paste frames from buf at frame &lt;num&gt;  
+/el/copy: EditList copy frames &lt;n1&gt; to &lt;n2&gt; to buffer  
+/el/del: EditList delete frames &lt;n1&gt; to &lt;n2&gt;  
+/el/crop: EditList crop frames 0 - &lt;n1&gt;  &lt;n2&gt; - end  
+/el/cut: EditList cut frames &lt;n1&gt; to &lt;n2&gt; into buffer  
+/el/add: EditList add file &lt;filename&gt;  
+/el/save: EditList save &lt;filename&gt;  
+/el/load: EditList load &lt;filename&gt;  
+/arg/  
+/arg/set: Set argument &lt;num&gt; to value &lt;num&gt; for effect on entry &lt;num&gt;  
+/entry/  
+/entry/disable: Disable effect chain entry &lt;num&gt;  
+/entry/enable: Enable effect chain entry &lt;num&gt;  
+/entry/clear: Clear effect chain entry &lt;num&gt;  
+/entry/select: Select effect chain entry &lt;num&gt;  
+/entry/defaults: Set effect default values on chain entry &lt;num&gt;  
+/entry/preset: Preset an effect on chain entry  
+/entry/channel: Select channel &lt;num&gt; for mixing effect on entry &lt;num&gt;  
+/entry/source: Select source (0=sample,1=stream) for mixing effect on entry &lt;num&gt;  
+/output/  
+/output/resize: Resize SDL video window &lt;width&gt; &lt;height&gt;  
+/output/fullscreen: Toggle SDL video window fullscreen/windowed  
+/config/  
+/config/sampling: Configure sampling mode (linear=0 or triangle=1)  
+/config/verbose: Toggle verbose output mode  
+/config/bezerk: Toggle bezerk mode  
+...end of OSC address space.  
+
+
+Below follow all effects in Veejay,  
+Effect numbers starting with 2xx are effects that use  
+*two* sources (by default a copy of itself)  
+Use the channel/source commands to select another sample/stream  
+to mix with.  
+
+[effect num] [effect name] [arg 0 , min/max ] [ arg 1, min/max ] ...  
+0                       Dummy Frame               
+Color                   0       0 - 7  
+201                     Overlay Magic             
+Mode                    0       1 - 32  
+202                     Luma Magick               
+Mode                    0       1 - 39  
+
+Opacity A                       1       0 - 200  
+
+Opacity B                       2       0 - 200  
+203                     Map B to A (substract background mask)            
+Threshold                       0       0 - 255  
+
+Mode                    1       0 - 1  
+
+Show mask/image                 2       0 - 2  
+
+Thinning                        3       1 - 100  
+204                     Normal Overlay            
+Opacity                 0       0 - 255  
+205                     Luma Key                  
+Feather                 0       0 - 255  
+
+Min Threshold                   1       0 - 255  
+
+Max Threshold                   2       0 - 255  
+
+Distance                        3       1 - 720  
+
+Mode                    4       0 - 2  
+206                     Chroma Key (RGB)                  
+Angle                   0       5 - 900  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+
+Mode                    4       0 - 1  
+
+Noise suppression                       5       1 - 6300  
+207                     Chroma Magic              
+Mode                    0       0 - 25  
+
+Value                   1       0 - 255  
+208                     Opacity by Threshold              
+Mode                    0       0 - 2  
+
+Threshold A                     1       0 - 255  
+
+Threshold B                     2       0 - 255  
+
+Opacity                 3       0 - 255  
+209                     Splitted Screens                  
+Mode                    0       0 - 13  
+
+Switch                  1       0 - 1  
+210                     Colored Border Translation                
+Size                    0       1 - 288  
+
+Color                   1       0 - 7  
+211                     Frame Border Translation                  
+Size                    0       1 - 288  
+212                     AlphaLuma Overlay                 
+213                     Transition Translate Opacity              
+Opacity                 0       0 - 255  
+
+Width                   1       0 - 720  
+
+Height                  2       0 - 576  
+
+Ay                      3       0 - 576  
+
+Ax                      4       0 - 720  
+
+By                      5       0 - 576  
+
+Bx                      6       0 - 720  
+214                     Transition Translate Carot                
+Opacity                 0       0 - 255  
+
+Mode                    1       0 - 1  
+
+Point size                      2       1 - 720  
+
+By start                        3       1 - 576  
+
+By end                  4       1 - 576  
+
+Row                     5       1 - 720  
+215                     Transition Line           
+Opacity                 0       0 - 255  
+
+Line width                      1       1 - 720  
+
+Distance                        2       2 - 720  
+
+Mode                    3       0 - 1  
+216                     Transition Translate Blend                
+Mode                    0       0 - 30  
+
+Width                   1       1 - 720  
+
+Height                  2       1 - 576  
+
+Ax offset                       3       1 - 720  
+
+Ay offset                       4       1 - 576  
+
+Bx offset                       5       1 - 720  
+
+By offset                       6       1 - 576  
+217                     Transition Fade to Color                  
+Opacity                 0       1 - 255  
+
+Color                   1       0 - 7  
+
+Frame length                    2       1 - 3000  
+
+Mode                    3       0 - 1  
+218                     Transition Fade to Color by RGB           
+Opacity                 0       1 - 255  
+
+Red                     1       1 - 255  
+
+Green                   2       1 - 255  
+
+Blue                    3       0 - 255  
+
+Mode                    4       0 - 1  
+
+Frame length                    5       1 - 3000  
+219                     Replace Pure White                
+220                     Simple Mask (black and white)             
+Threshold                       0       0 - 255  
+
+Mode                    1       0 - 1  
+221                     Threshold blur with overlay               
+Opacity                 0       0 - 255  
+
+Min Threshold                   1       0 - 255  
+
+Max Threshold                   2       0 - 255  
+222                     Overlay by Threshold Range                
+Opacity                 0       0 - 255  
+
+Min Threshold                   1       0 - 255  
+
+Max Threshold                   2       0 - 255  
+223                     Transparent Chroma Key (RGB)              
+Angle                   0       5 - 900  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+
+Opacity                 4       0 - 255  
+
+Noise level                     5       0 - 3500  
+224                     Transition Wipe           
+Opacity                 0       0 - 255  
+
+Increment                       1       0 - 25  
+225                     Tracer            
+Opacity                 0       0 - 255  
+
+Buffer length                   1       1 - 25  
+226                     Magic Tracer              
+Mode                    0       0 - 30  
+
+Length                  1       1 - 25  
+227                     Strong Luma Overlay               
+Mode                    0       1 - 13  
+228                     Blend by Color Key                
+Angle                   0       5 - 900  
+
+Red                     1       0 - 256  
+
+Green                   2       0 - 256  
+
+Blue                    3       0 - 256  
+
+Blend mode                      4       0 - 7  
+
+Noise suppression                       5       0 - 3500  
+229                     Complex Threshold (fixme)                 
+Angle                   0       5 - 900  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+
+Smoothen                        4       0 - 4  
+
+Threshold                       5       0 - 255  
+230                     Out of Sync -Replace selection-           
+Vertical size                   0       1 - 575  
+
+Mode                    1       0 - 1  
+
+Framespeed                      2       1 - 250  
+231                     Horizontal Sliding Bars           
+Divider                 0       1 - 576  
+
+Top Y                   1       0 - 576  
+
+Bot Y                   2       0 - 576  
+
+Top X                   3       0 - 576  
+
+Bot X                   4       0 - 576  
+232                     Vertical Sliding Bars             
+Divider                 0       1 - 576  
+
+Top Y                   1       0 - 576  
+
+Bot Y                   2       0 - 576  
+
+Top X                   3       0 - 576  
+
+Bot X                   4       0 - 576  
+233                     Displacement Map                  
+X displacement                  0       1 - 720  
+
+Y displcement                   1       1 - 576  
+
+Mode                    2       0 - 1  
+234                     Binary Overlays           
+Mode                    0       0 - 10  
+235                     Dissolve Overlay                  
+Opacity                 0       0 - 255  
+236                     Normal Overlay (per Channel)              
+Opacity Y                       0       0 - 255  
+
+Opacity Cb                      1       0 - 255  
+
+Opacity Cr                      2       0 - 255  
+237                     Videoplay (timestretched mosaic)                  
+Photos                  0       2 - 10  
+
+Waterfall                       1       1 - 250  
+
+Mode                    2       0 - 3  
+238                     VideoWall / Tile Placement                
+Photos                  0       0 - 10  
+
+X Displacement                  1       0 - 720  
+
+Y displacement                  2       0 - 576  
+
+Lock update                     3       0 - 1  
+239                     Map B from threshold mask                 
+Threshold                       0       0 - 255  
+
+Reverse                 1       0 - 1  
+240                     Map B to A (bitmask)              
+Threshold                       0       0 - 255  
+
+Reverse                 1       0 - 1  
+
+Show                    2       0 - 1  
+241                     Picture in picture                
+Width                   0       8 - 720  
+
+Height                  1       8 - 576  
+
+X offset                        2       8 - 720  
+
+Y offset                        3       8 - 576  
+242                     Chameleon BlendTV                 
+Mode (Appear,Dissapear)                 0       0 - 1  
+243                     RadioActive EffecTV               
+Mode                    0       0 - 6  
+
+Zoom ratio                      1       50 - 100  
+
+Strength                        2       0 - 255  
+
+Difference Threshold                    3       0 - 255  
+244                     Map B to A (sub bg, texture map))                 
+Threshold                       0       0 - 255  
+
+Reverse                 1       0 - 1  
+
+Show mask                       2       0 - 4  
+
+Thinning                        3       1 - 100  
+
+Min blob weight                 4       1 - 5000  
+245                     Water ripples             
+Refresh Frequency                       0       1 - 3600  
+
+Wavespeed                       1       1 - 16  
+
+Decay                   2       1 - 31  
+
+Mode                    3       0 - 6  
+
+Threshold (motion)                      4       0 - 255  
+100                     Dummy Frame               
+Color                   0       0 - 7  
+101                     Mirror            
+H or V mode                     0       0 - 5  
+102                     Multi Mirrors             
+H or V                  0       0 - 3  
+
+Number                  1       0 - 237  
+103                     Width Mirror              
+Widths                  0       2 - 720  
+104                     Flip Frane                
+H or V                  0       0 - 1  
+105                     Posterize (Threshold Range)               
+Posterize                       0       1 - 256  
+
+Min Threshold                   1       0 - 256  
+
+Max Threshold                   2       0 - 256  
+106                     Negation                  
+Value                   0       0 - 255  
+107                     Solarize                  
+Threshold                       0       1 - 255  
+108                     Hue and Saturation                
+Degrees                 0       0 - 360  
+
+Intensity                       1       0 - 256  
+109                     Gamma Correction                  
+Gamma                   0       0 - 500  
+110                     Soft Blur (1x3) and (3x3)                 
+Kernel size                     0       0 - 1  
+111                     RevTV (EffectTV)                  
+Line spacing                    0       1 - 576  
+
+Vertical scale                  1       1 - 720  
+
+Luminance intensity                     2       0 - 255  
+
+Color range                     3       0 - 7  
+112                     Dices (EffectTV)                  
+Mode                    0       0 - 5  
+113                     SmuckTV (EffectTV)                
+Mode                    0       0 - 14  
+114                     Filter out chroma channels                
+Mode                    0       0 - 2  
+115                     Various Weird Effects             
+Mode                    0       0 - 10  
+116                     Matrix Dithering                  
+Mode                    0       2 - 255  
+
+Value                   1       0 - 1  
+117                     Raw Data Manipulation             
+Mode                    0       0 - 4  
+
+Value                   1       1 - 255  
+118                     Raw Chroma Pixel Replacement              
+Old Cb                  0       0 - 255  
+
+Old Cr                  1       0 - 255  
+
+New Cb                  2       0 - 255  
+
+New Cr                  3       0 - 255  
+119                     Transform Cubics                  
+Cubics                  0       1 - 36  
+120                     Fibonacci Downscaler              
+Mode                    0       0 - 1  
+
+Fib                     1       1 - 8  
+121                     Bump 2D           
+Value 1                 0       1 - 256  
+
+Value 2                 1       1 - 256  
+
+Mode                    2       0 - 1  
+122                     Rotozoom                  
+Mode                    0       0 - 8  
+
+Rotate                  1       0 - 255  
+
+Zoom                    2       0 - 255  
+
+Automatic                       3       0 - 3  
+123                     Shift pixel values YCbCr                  
+Mode                    0       0 - 9  
+
+Value                   1       0 - 255  
+124                     Overlay Scratcher                 
+Opacity                 0       0 - 255  
+
+Scratch buffer                  1       1 - 24  
+
+PingPong                        2       0 - 1  
+125                     Magic Overlay Scratcher           
+Mode                    0       0 - 9  
+
+Scratch frames                  1       1 - 24  
+
+PingPong                        2       0 - 1  
+126                     Matte Scratcher           
+Mode                    0       0 - 25  
+
+Value                   1       0 - 255  
+
+Length                  2       0 - 25  
+
+Pingpong                        3       0 - 1  
+127                     Distortion                
+Inc 1                   0       0 - 8  
+
+Inc2                    1       0 - 8  
+128                     Grayscale by Color Key            
+Angle                   0       5 - 900  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+129                     Black and White by Threshold              
+Min threshold                   0       0 - 255  
+
+Max threshold                   1       0 - 255  
+130                     Complex Invert            
+Angle                   0       5 - 900  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+
+Noise suppression                       4       0 - 3500  
+131                     Complex Saturation                
+Angle                   0       5 - 900  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+
+Intensity                       4       0 - 360  
+
+Degrees                 5       0 - 256  
+
+Noise suppression                       6       0 - 3500  
+132                     Isolate Color             
+Angle                   0       5 - 900  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+
+White                   4       0 - 255  
+133                     Sharpen           
+Value                   0       0 - 2048  
+134                     Amplify low noise                 
+Mode                    0       0 - 2  
+
+Amplification                   1       1 - 10000  
+135                     Contrast                  
+Mode                    0       0 - 2  
+
+Intensity 1                     1       0 - 255  
+
+Intensity 2                     2       0 - 255  
+136                     Motion blur               
+Frames                  0       0 - 1000  
+137                     Sinoids           
+Mode                    0       0 - 1  
+
+Sinoids                 1       0 - 1000  
+138                     Average           
+Value                   0       1 - 100  
+139                     Ripple            
+Waves                   0       1 - 3600  
+
+Amplitude                       1       1 - 80  
+
+Attenuation                     2       1 - 360  
+140                     Bathroom Window           
+H or V                  0       0 - 1  
+
+Value                   1       1 - 64  
+141                     Slice Window              
+Slices                  0       2 - 128  
+
+Mode                    1       0 - 1  
+142                     Zoom              
+Width                   0       0 - 720  
+
+Height                  1       0 - 576  
+
+Factor                  2       10 - 100  
+
+Mode                    3       0 - 1  
+143                     Pencil Sketch (8)                 
+Mode                    0       0 - 8  
+
+Min Threshold                   1       0 - 255  
+
+Max Treshold                    2       0 - 255  
+144                     Deinterlace (yuvkineco)           
+Value                   0       0 - 255  
+145                     Pixel Raster              
+Mode                    0       0 - 1  
+
+Size                    1       1 - 40  
+146                     Color Enhance             
+Intensity Y                     0       0 - 255  
+
+Intensity U                     1       0 - 255  
+
+Intensity V                     2       0 - 255  
+147                     Enhanced Magic Blend              
+Mode                    0       0 - 7  
+
+Min threshold                   1       1 - 255  
+
+Max threshold                   2       1 - 255  
+148                     Noise Pencil              
+Mode                    0       0 - 3  
+
+Amplification                   1       1 - 10000  
+
+Min Threshold                   2       0 - 255  
+
+Max Threshold                   3       0 - 255  
+149                     RippleTV  (EffectTV)              
+Refresh Frequency                       0       1 - 3600  
+
+Wavespeed                       1       1 - 16  
+
+Decay                   2       1 - 32  
+150                     Pixelate                  
+Pixels                  0       1 - 27  
+151                     Magic Mirror Surface              
+X                       0       0 - 360  
+
+Y                       1       0 - 288  
+
+X                       2       0 - 100  
+
+Y                       3       0 - 100  
+152                     Pixel Smear               
+Mode                    0       0 - 3  
+
+Value                   1       0 - 255  
+153                     Grid              
+Grid size                       0       4 - 144  
+154                     Fish Eye                  
+Value                   0       -1000 - 1000  
+155                     Swirl             
+Degrees                 0       1 - 360  
+156                     Radial Blur               
+Radius                  0       0 - 90  
+
+Power                   1       0 - 100  
+
+Direction                       2       0 - 2  
+157                     Chromium                  
+Mode                    0       0 - 3  
+158                     Chrominance Palette (rgb key)             
+Angle                   0       1 - 900  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+
+Chroma Blue                     4       0 - 255  
+
+Chroma Red                      5       0 - 255  
+159                     U/V Correction            
+Angle                   0       1 - 360  
+
+U Rotate Center                 1       0 - 255  
+
+V Rotate Center                 2       0 - 255  
+
+Intensity U                     3       0 - 100  
+
+Intensity V                     4       0 - 100  
+
+Minimum UV                      5       0 - 255  
+
+Maximum UV                      6       0 - 255  
+160                     Radial cubics             
+Radius                  0       2 - 72  
+
+Value                   1       1 - 90  
+161                     Cartoon           
+Damp Y                  0       1 - 255  
+
+Damp U                  1       0 - 255  
+
+Damp V                  2       0 - 255  
+162                     Nervous           
+Buffer length                   0       0 - 25  
+163                     Morphology (experimental)                 
+Threshold                       0       0 - 255  
+
+Operator                        1       0 - 8  
+
+Repeat                  2       0 - 1  
+164                     Video Blobs               
+Radius                  0       1 - 360  
+
+Blobs                   1       1 - 100  
+
+Speed                   2       1 - 100  
+
+Shape                   3       0 - 1  
+165                     Video Boids               
+Radius                  0       1 - 360  
+
+Blobs                   1       2 - 256  
+
+Shape                   2       0 - 1  
+
+Cohesion                        3       0 - 100  
+
+Seperation                      4       0 - 100  
+
+Alignment                       5       0 - 100  
+
+Speed                   6       1 - 100  
+
+Home Radius                     7       1 - 360  
+166                     Motion Ghost              
+Opacity                 0       16 - 255  
+167                     ZArtistic Filter (Oilpainting, acc. add )                 
+Brush size                      0       2 - 16  
+
+Smoothness                      1       1 - 255  
+
+Mode (Luma/Chroma)                      2       0 - 1  
+168                     ZArtistic Filter (Oilpaint, acc. avg)             
+Brush size                      0       2 - 16  
+
+Smoothness                      1       1 - 255  
+
+Mode (Luma/Chroma)                      2       0 - 1  
+169                     ZArtistic Filter (Horizontal strokes)             
+Line size                       0       2 - 32  
+
+Smoothness                      1       1 - 255  
+
+Mode (Luma/Chroma)                      2       0 - 1  
+170                     ZArtistic Filter (Round Brush)            
+Radius                  0       2 - 32  
+
+Distance from center                    1       1 - 200  
+
+Smoothness                      2       1 - 255  
+
+Mode (Luma/Chroma)                      3       0 - 1  
+171                     ZArtistic Filter (Vertical strokes)               
+Stroke size                     0       2 - 32  
+
+Smoothness                      1       1 - 255  
+
+Mode (Luma/Chroma)                      2       0 - 1  
+172                     vvCutStop                 
+Threshold                       0       0 - 255  
+
+Frame freq                      1       0 - 255  
+
+Cut mode                        2       0 - 1  
+
+Hold front/back                 3       0 - 1  
+173                     vvMaskStop                
+Negate Mask                     0       0 - 1  
+
+Swap Mask/Frame                 1       0 - 1  
+
+Hold Frame Frequency                    2       0 - 255  
+
+Hold Mask Frequency                     3       0 - 255  
+174                     Photoplay (timestretched mosaic)                  
+Photos                  0       2 - 10  
+
+Waterfall                       1       1 - 250  
+
+Mode                    2       0 - 3  
+175                     Flare (Glow)              
+Mode                    0       0 - 5  
+
+Opacity                 1       0 - 255  
+
+Radius                  2       0 - 100  
+176                     Constant Luminance Blend                  
+Mode                    0       0 - 31  
+
+Threshold                       1       0 - 500  
+
+Constant                        2       16 - 235  
+177                     Color mapping             
+Red                     0       0 - 255  
+
+Green                   1       0 - 255  
+
+Blue                    2       0 - 255  
+178                     Goom              
+Mode                    0       0 - 10  
+
+Value                   1       100 - 5000  
+179                     Colored Morphology                
+Threshold                       0       0 - 255  
+
+Operator mode                   1       0 - 8  
+
+Repeat                  2       0 - 1  
+180                     Color Flash               
+Frametime                       0       0 - 50  
+
+Red                     1       0 - 255  
+
+Green                   2       0 - 255  
+
+Blue                    3       0 - 255  
+
+Delay                   4       1 - 10  
+181                     RGB Channel               
+Red                     0       0 - 1  
+
+Green                   1       0 - 1  
+
+Blue                    2       0 - 1  
+182                     Automatic Histogram Equalizer             
+Channel (Y,U,V,All)                     0       0 - 1  
+
+Intensity                       1       0 - 255  
+
+Strength                        2       0 - 255  
+183                     Color Histogram           
+Mode (R,G,B,All)                        0       0 - 3  
+
+Draw                    1       0 - 1  
+
+Intensity                       2       0 - 255  
+
+Strength                        3       0 - 255  
+184                     Motion Mapping            
+Threshold                       0       0 - 255  
+
+Reverse                 1       50 - 10000  
+
+Draw                    2       0 - 1  
+
+History                 3       2 - 200  
+
+Capture length                  4       0 - 255  
+185                     TimeDistortionTV (EffectTV)               
+Mode                    0       5 - 100  
+186                     ChameleonTV (EffectTV)            
+Appearing/Dissapearing                  0       0 - 1  
+187                     BaltanTV (EffecTV)                
+Stride                  0       2 - 16  
+
+Mode                    1       0 - 1  
+188                     Contour extraction                
+Threshold                       0       0 - 255  
+
+Mode                    1       0 - 1  
+
+Show image/contour                      2       0 - 2  
+
+Thinning                        3       1 - 100  
+
+Min weight                      4       1 - 5000  
+189                     Lens correction           
+Alpha X                 0       1 - 1000  
+
+Alpha Y                 1       1 - 1000  
+
+Direction                       2       0 - 1  
+190                     Substract background (static, requires bg mask)           
+Threshold                       0       0 - 255  
+
+Mode                    1       0 - 1  
+</code></pre><hr>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/reference/dependencies/">Dependencies</a></h2>
+        <p class="blog-post-meta">November 17, 2008</p>
+        <h2 id="list-of-dependencies">List of dependencies</h2>
+<pre><code>ffmpeg  
+libxml2  
+libsdl / SDL  
+freetype2  
+</code></pre><p>Optional:  </p>
+<pre><code>libdv (http://libdv.sf.net)  
+directfb (http://directfb.org)  
+jack (http://jackaudio.org)  
+unicap (http://www.unicap-imaging.org/)
+</code></pre>
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/reference/colorspaces/">Colorspaces</a></h2>
+        <p class="blog-post-meta">November 17, 2008</p>
+        <h2 id="colorspaces">Colorspaces</h2>
+<p>Veejay processes all video in YUV planar mostly for historical reasons - nowadays, VJ software is shifting to the domain of the GPU and OpenGL . However:  </p>
+<ul>
+<li>A lot of (older) capture hardware delivers in some YUV format  </li>
+<li>Your MJPEG and other videos usually decodes into some YUV format  </li>
+<li>YUV is a lot less bandwidth then RGB  </li>
+<li>Veejay is good at recording to disk from any source  </li>
+<li>Veejay runs on exotic systems and requires lower hardware requirements than most<br>(commercial) VJ software.  </li>
+</ul>
+<p>On the downside, veejay sub- and supersamples YUV to 4:4:4 planar when special<br>FX require a U and V pixel for every Y pixel. Some USB Webcams only support the RGB colorspace , for which veejay provides a (very fast) colorspace conversion.  </p>
+<p>By default, veejay works in YUV 4:2:2 format which is the highest quality possible,<br>as such, it will try to open any video source in its native format.  </p>
+<h4 id="yuv-4-2-2-planar-rec-601-y-cbcr-">YUV 4:2:2 planar Rec. 601 (Y&#39;CbCr)</h4>
+<p>8 bit Y plane followed by 8 bit 2x1 subsampled V and U planes.  </p>
+<p>The Y plane is filled with 8 bit luminance samples ; Here the value 16 is used for black and 235 for white.  </p>
+<p>The U and V planes are filled with 8 bit chrominance samples, with the values 16 to 240.  </p>
+<p>This allows for overshoot and undershoot .  </p>
+<h4 id="yuv-4-2-2-planar-jpeg-jfif-veejay-s-standard-playback-mode-">YUV 4:2:2 planar JPEG/JFIF (veejay&#39;s standard playback mode)</h4>
+<p>8 bit Y plane followed by 8 bit 2x1 subsampled V and U planes.  </p>
+<p>The sample values in the planes range from 0 - 255, Black is defined at 0, White at 255  </p>
+<p>Note that scaling this format to Rec. 601 is somewhat lossy.  </p>
+<p>Veejay has an enviroment variable you can set if you want to convert between the two formats  </p>
+<p>automatically.</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/reference/what-to-use-as-a-live-video-source/">What to use as a live video source?</a></h2>
+        <p class="blog-post-meta">August 08, 2007</p>
+        <p>The issue is raised every now and then:  </p>
+<p>&quot;How do I plug in my (USB WebCam/Digital Camera/Exotic Hardware) to veejay?&quot;  </p>
+<p>Currently, Veejay does not support decompressing digital video ( firewire) directly from the camera ( like on windows and mac). There is however, full functional support for avi&#39;s and quicktime movies in digital video.  </p>
+<p>The codec for DV video on linux, is unlike the commercial codecs for windows and macosx, rather slow. There&#39;s no way to expect near-realtime performance on average hardware.  </p>
+<p>( at least, not on my hardware wich is getting old).  </p>
+<p>Capturing live video is done trough UNICAP, so hopefully one day we can have digital video decompression on the fly.  </p>
+<p>As for the USB Webcams, please check out the compatibility list on <a href="http://www.exploits.org/v4l/">http://www.exploits.org/v4l/</a>  </p>
+<p>Basically, anything that goes with XawTV and others will propably work with Veejay too.  </p>
+<p>The veejay team has always relied on TV-input cards as a source of nice-quality realtime video source. The one&#39;s we used:  </p>
+<ul>
+<li>Anything that goes with BTTV  </li>
+<li>The AVER TV CARDBUS from AverMedia ( a PCMCIA card)<br>We are in no way affiliated with AverMedia, or making advertisements, but it just happened to be the ONLY existing PCMCIA TV card at the time I was looking for one. there might be other alternatives right now, again, see <a href="http://www.exploits.org/v4l/">http://www.exploits.org/v4l/</a>  </li>
+</ul>
+<p>Using uncompressed video is very CPU friendly, wich leaves more juice for realtime effects. Even on commercial platforms there&#39;s a speed penalty when using compressed sources.  </p>
+<p>Comments on this issue are VERY welcome!</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/reference/video-files-and-resolution/">Video files and resolution.</a></h2>
+        <p class="blog-post-meta">May 02, 2007</p>
+        <p><strong>1. Video formats and containers  
+</strong>  </p>
+<p>A video file consists out of TWO seperate elements:  </p>
+<ul>
+<li>container  </li>
+<li>codec  </li>
+</ul>
+<p>The container holds the digitally encoded data and the codec is capable of decoding/encoding this digitally encoded data.  </p>
+<p>Veejay supports the AVI and the Quicktime container , with the following codecs:  </p>
+<p>Quicktime:  </p>
+<ul>
+<li>mpjeg,mjpa,jpeg,dmb1  </li>
+<li>dvsd, dv, dvcp, dvhd  </li>
+</ul>
+<p>AVI  </p>
+<ul>
+<li>mjpeg, mjpa,jpeg,jfif,dmb1  </li>
+<li>dvsd, dv, dvcp, dvhd  </li>
+<li>i420, i422, yv16, hfyu  </li>
+</ul>
+<p>Raw DV  </p>
+<ul>
+<li>PAL / NTSC dvsd  </li>
+</ul>
+<p>Veejay can only deal with video files that consists entirely out of whole images (only I-frames). The codecs below will only work if all frames are I-frames. Otherwise, veejay will abort with an error message.  </p>
+<p>AVI / Quicktime:  </p>
+<ul>
+<li>xvid, mp4v,divx,dxsd,mp4s,m4s2  </li>
+<li>div3,mp43,mp42,mpg4  </li>
+<li>avc1,h264,x264,davc,svq1,svq3,avc1  </li>
+</ul>
+<p><strong>2. Wich codec to use</strong>  </p>
+<p>MotionJPEG ( mjpeg) is the veejay codec of choice for most applications, it gives you a good tradeof between compression, quality and compatibility. If you want speed, use AVI yv16 or i420 while recording to new samples.  </p>
+<p>Tools that support MJPEG:  </p>
+<ul>
+<li><a href="http://cvs.cinelerra.org/Cinelerra">http://cvs.cinelerra.org/Cinelerra</a>  </li>
+<li><a href="http://www.kinodv.org/Kino">http://www.kinodv.org/Kino</a>  </li>
+<li><a href="http://ronald.bitfreak.net/lvs/Linux">http://ronald.bitfreak.net/lvs/Linux</a> video studio  </li>
+<li><a href="http://mjpeg.sourceforge.net/mjpegtools">http://mjpeg.sourceforge.net/mjpegtools</a>  </li>
+<li><a href="http://www.mplayerhq.huMplayer">http://www.mplayerhq.huMplayer</a>, and mencoder  </li>
+<li><a href="http://lives.sf.net">http://lives.sf.net</a> Lives  </li>
+</ul>
+<p><strong>2. Wich resolutions to use</strong>  </p>
+<p>Veejay can do:  </p>
+<ul>
+<li>pal: 720x576  </li>
+<li>ntsc: 720x480  </li>
+<li>1/4 pal: 360x288  </li>
+<li>1/4 ntsc: 360x240  </li>
+</ul>
+<p><strong>and many more</strong>, but multiples of 16 ( jpeg squares) will look best!  </p>
+<p>If you load multiple video files on the commandline, make sure that all files have the same resolution and audio properties.  </p>
+<p><strong>3. How to convert ( transcode)</strong><br>Veejay can convert dv video to mjpeg for you, however, I prefer to use mplayer for this, wich has more flexibility.  </p>
+<p>From &quot;anything&quot; mplayer can play to mjpeg, use:  </p>
+<p>$ mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -o <outputfile> <inputfile>  </p>
+<p>To scale on the fly, use:  </p>
+<p>$ mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -vf scale=352:288 -o <outputfile> <inputfile>  </p>
+<p>consult mplayer documentation about other options, such as cropping and filtering out blocks in video.  </p>
+<p>a quick hint for bulk encoding a bunch of capture.dv files:  </p>
+<p>$ for i in `ls *dv`;do mencoder -ovc lavc -oac pcm -lavcopts vcodec=mjpeg -o `echo $i | sed s/.dv/.avi/` $i; done;  </p>
+<p><strong>4. What is this dummy mode</strong>  </p>
+<p>Dummy mode opens up a &#39;color stream&#39; to start veejay without a video file.  </p>
+<p>If you use a video file, veejay will take that file&#39;s properties as default settings for the whole session.</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            
+            <h4>Category index</h4>
+            <ul class="list-unstyled">
+              
+              <li><a href="/category/reference/livido-osc/">LiViDO/OSC</a></li>
+              
+              <li><a href="/category/reference/fx-stuff/">fx stuff</a></li>
+              
+              <li><a href="/category/reference/vims-list/">VIMS List</a></li>
+              
+              <li><a href="/category/reference/dependencies/">Dependencies</a></li>
+              
+              <li><a href="/category/reference/colorspaces/">Colorspaces</a></li>
+              
+              <li><a href="/category/reference/what-to-use-as-a-live-video-source/">What to use as a live video source?</a></li>
+              
+              <li><a href="/category/reference/video-files-and-resolution/">Video files and resolution.</a></li>
+              
+            </ul>
+            
+
+            <h4>Categories</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/category/sendvims/">sendvims</a></li>
+                
+                <li><a href="/category/reference/">reference</a></li>
+                
+                <li><a href="/category/news/">news</a></li>
+                
+                <li><a href="/category/howto/">howto</a></li>
+                
+                <li><a href="/category/documentation/">documentation</a></li>
+                
+            </ol>
+            <h4>Pages</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/contact/">Contact</a></li>
+                
+                <li><a href="/contributing/">Contributing</a></li>
+                
+                <li><a href="/documentation/">Documentation</a></li>
+                
+                <li><a href="/features/">Features</a></li>
+                
+                <li><a href="/installing/">Installation</a></li>
+                
+                <li><a href="/roadmap/">Roadmap</a></li>
+                
+                <li><a href="/screenshots/">Screenshots</a></li>
+                
+                <li><a href="/showcase/">showcase</a></li>
+                
+            </ol>
+        </div>
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+  </body>
+</html>

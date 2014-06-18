@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Veejay Basics</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      img {
+        max-width: 100%;
+      }
+
+      .blog-sidebar a {
+        text-transform: capitalize;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      h1, h2, h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">VeejayHQ</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a class="blog-nav-item" href="/">Home</a></li>
+          <li><a class="blog-nav-item" href="/features">Features</a></li>
+          <li><a class="blog-nav-item" href="/category/news">News</a></li>
+          <li><a class="blog-nav-item" href="/category/documentation">Documentation</a></li>
+          <li><a class="blog-nav-item" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="container">
+      <div class="span-12">
+        <img src="/img/header.png" />
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+            
+    <div class="blog-post">
+        <h2 class="blog-post-title"></h2>
+        <p class="blog-post-meta">June 19, 14</p>
+
+        <h2 id="rules-of-thumb">Rules of Thumb</h2>
+<ul>
+<li>Veejay is the server  </li>
+<li>Reloaded is the client  </li>
+<li>Sayvims is the console mini-client  </li>
+<li>You can interact with the server directly (SDL mouse and keyboard)  </li>
+<li>Veejay&#39;s console output logs your actions  </li>
+</ul>
+<h3 id="system-docs">system docs</h3>
+<p><code>$ reloaded -h  
+$ veejay -h  
+$ man veejay  
+$ veejay -u</code>  </p>
+<h3 id="various-ways-to-launch-the-server">Various ways to launch the server</h3>
+<p>In dummy mode (just a stream with black video, hit the color wheel in the Stream pad<br>to change its color)<br><code>$ veejay -d</code>  </p>
+<p>To open your Video4Linux device, you can do something like<br><code>$ echo &quot;240:0 1;&quot; | sayVIMS</code>  </p>
+<p>Or you can use reloaded, click GVeejay in the Menu, Stream -&gt; New, and doubleclick<br>your capture device.  </p>
+<p>To start veejay with a videofile (preferred), you can do something like<br><code>$ veejay -v mjpeg-video-file.avi</code>  </p>
+<h3 id="solo-ing-the-server">Solo&#39;ing the server</h3>
+<p>All the keybindings in veejay depend on SDL; if you move your mouse over to the<br>SDL windows to focus it you can interact directly with the output.  </p>
+<p>KP= Numeric KeyPad, check numlock.  </p>
+<p>Create new sample from your entire video file and play it by pressing:<br>KP1, Left Bracket, KP3, Right Bracket , F1  </p>
+<p>If you press &#39;KP divide&#39; , veejay will return to plain video mode so you can create more clips. If you press &#39;ESC&#39; , veejay will switch from playing streams to playing clips or vice versa  </p>
+<p>Press F1 to F12 to select a clip,<br>Press 1 to 9 to select a bank (1 = clips 1 to 12, 2 = clips 12 to 24, etc )  </p>
+<p>Once you are playing a clip/stream, simply press &#39;Cursor UP&#39; , &#39;ENTER&#39;<br>If you add a video effect, try pressing &#39;-&#39; and &#39;=&#39; to select another channel and &#39;/&#39; to<br>toggle between clip/stream sources  </p>
+<p>Veejay supports chaining of effects since day 0, a number of keys have some importance  </p>
+<p>&#39;-&#39; ,&#39;=&#39; and &#39;/&#39;<br>&#39;END&#39; for enabling/disabling the chain<br>&#39;KP -&#39; for selecting the previous entry<br>&#39;KP +&#39; for selecting the next entry<br>&#39;ENTER&#39; for adding an effect from the list to the chain<br>&#39;DEL&#39; for removing an effect from the chain  </p>
+<p>Also, you can press &#39;HOME&#39; to see clip or stream information. Try the keys &#39;A&#39; to &#39;L&#39; to increase/decrease playback speed, Press ALT + &#39;A&#39; to &#39;L&#39; to increase/decrease<br>slow motion speed.  </p>
+<h4 id="some-keyboard-bindings">Some keyboard bindings</h4>
+<table border="0" width="80%"><tr><td class="c1">Description</td><td class="c1">SDL key</td><td class="c1">In plain english</td></tr><tr><td>Set the starting position of a new sample</td><td>SDLK_LEFTBRACKET</td><td>Left bracket</td></tr><tr><td>Set ending position and create a new sample</td><td>SDLK_RIGHTBRACKET</td><td>Right bracket</td></tr><tr><td>Select and play sample <strong>1</strong></td><td>SDLK_F1</td><td>F1</td></tr><tr><td>Set playback speed to 3</td><td>SDLK_d</td><td>d</td></tr><tr><td></td></tr><tr><td>Change looptype</td><td>SDLK_KP_MULTIPLY</td><td>asterix on numeric keypad</td></tr><tr><td>Play backward</td><td>SDLK_KP_4</td><td>Cursor left on numeric keypad</td></tr><tr><td>Play forward</td><td>SDLK_KP_6</td><td>Cursor right on numeric keypad</td></tr><tr><td>Skip 1 second</td><td>SDLK_KP_8</td><td>Cursor up on numeric keypad</td></tr><tr><td>Switch playmode to Plain</td><td>SDLK_KP_DIVIDE</td><td>Divide on numeric keypad</td></tr><tr><td>Print information about sample</td><td>SDLK_HOME</td><td>Home</td></tr></table>  
+
+
+<p>All keys are listed in<br><code>$ man veejay</code></p>
+<h3 id="video-sampling">Video sampling</h3>
+<p>If you have started veejay with one or more video file(s) (thus <strong>not with</strong> <code>$ veejay -d</code> ), you can easily create new samples;</p>
+<p>First, Veejay must be running in <em>plain mode</em></p>
+<p><img src="/galleries/screenshots/reloaded_bar1.png" alt="top buttonbar"></p>
+<p>Then, you can press the In and Out button to set the starting and ending position of a sample ; Pressing the &#39;Out&#39;
+button immedialty commits the new sample. The keyboard shortcuts are Left bracket and Right bracket resp.</p>
+<p>When a sample is created it has a partial copy of the Edit Decision List; You can change the starting positions by at most -2.0 seconds and the ending positions +2.0 seconds.</p>
+<p>After each commit, the starting position of the sample is set equal to the ending position of the last created sample,
+you can repeatedly press the Out point button to quickly create a series of samples.</p>
+<p><img src="/galleries/screenshots/reloaded_nav1.png" alt="navigation buttons"></p>
+<p>If you have started Veejay in dummy mode, the only way to add videofiles is by GVeejay -&gt; Sample -&gt; New from file.</p>
+<p>To play a sample, you can either press one of the F-keys, or doubleclick a sample slot in the samplebank.
+You can activate up to 120 samples per keyboard; To play in range 12-24, press &#39;2&#39;, To play in range 1-12, press &#39;1&#39;.
+The &#39;a,s,d,f,g,h,j,k,l&#39; keys can be used for faster playback , ALT + &#39;a,s,d,f,g,h,j,k,l&#39; for slower playback.
+To see a full overview of the keyboard comments, use <code>$ man veejay</code> or click View -&gt; VIMS bundles in reloaded which displays a list of all valid events and their bindings).</p>
+
+    </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            
+
+            <h4>Categories</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/category/sendvims/">sendvims</a></li>
+                
+                <li><a href="/category/reference/">reference</a></li>
+                
+                <li><a href="/category/news/">news</a></li>
+                
+                <li><a href="/category/howto/">howto</a></li>
+                
+                <li><a href="/category/documentation/">documentation</a></li>
+                
+            </ol>
+            <h4>Pages</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/contact/">Contact</a></li>
+                
+                <li><a href="/contributing/">Contributing</a></li>
+                
+                <li><a href="/documentation/">Documentation</a></li>
+                
+                <li><a href="/features/">Features</a></li>
+                
+                <li><a href="/installing/">Installation</a></li>
+                
+                <li><a href="/roadmap/">Roadmap</a></li>
+                
+                <li><a href="/screenshots/">Screenshots</a></li>
+                
+                <li><a href="/showcase/">showcase</a></li>
+                
+            </ol>
+        </div>
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+  </body>
+</html>

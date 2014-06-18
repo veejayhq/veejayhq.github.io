@@ -13,64 +13,69 @@
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="/css/blog.css" rel="stylesheet">
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+      img {
+        max-width: 100%;
+      }
+
+      .blog-sidebar a {
+        text-transform: capitalize;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      h1, h2, h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    </style>
   </head>
 
   <body>
 
-    <div class="blog-masthead">
+    <div class="navbar navbar-inverse" role="navigation">
       <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item active" href="/">Home</a>
-          <a class="blog-nav-item" href="/category/news">News</a>
-          <a class="blog-nav-item" href="/category/documentation">Documentation</a>
-          <a class="blog-nav-item" href="/contact">Contact</a>
-        </nav>
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">VeejayHQ</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a class="blog-nav-item" href="/">Home</a></li>
+          <li><a class="blog-nav-item" href="/features">Features</a></li>
+          <li><a class="blog-nav-item" href="/category/news">News</a></li>
+          <li><a class="blog-nav-item" href="/category/documentation">Documentation</a></li>
+          <li><a class="blog-nav-item" href="/contact">Contact</a></li>
+        </ul>
       </div>
     </div>
 
-    <div class="container">
 
-      <div class="blog-header">
-        <h2 class="blog-title">showcase</h2>
-        <p class="lead blog-description">Veejay community site</p>
+
+    <div class="container">
+      <div class="span-12">
+        <img src="/img/header.png" />
       </div>
 
       <div class="row">
 
         <div class="col-sm-8 blog-main">
             
+    <h2>showcase</h2>
     <div class="blog-post">
         <p>If you have created something with veejay, feel free to send a link about it.  </p>
 <p><strong>video art installations</strong>  </p>
 <ul>
-<li></li>
-<li><p><a href="http://veejay.sourceforge.net/middle-event-5dec.html">Rebounds Lab</a></p>
-</li>
-<li></li>
-<li><p><a href="http://www.david-o.net/wordpress/2006/05/combat-de-gueules-groupe-ergot/">Combat de Gueules</a></p>
-</li>
-<li></li>
-<li><p><a href="http://www.david-o.net/wordpress/2004/12/de-leffort/">De l&#39;effort</a></p>
-</li>
-<li></li>
-<li><p><a href="http://www.larsmaaktkunst.nl/index.php?option=com_content&amp;task=view&amp;id=14&amp;Itemid=29">Sonsbeek Theater Avenue</a></p>
-</li>
-<li></li>
-</ul>
-<p><strong>live performances</strong>  </p>
-<ul>
-<li></li>
-<li><p>Landmark (2004) <a href="http://www.piksel.no/piksel04/piksel_vidblog/saturday_06/veejay_perf_01.avi">1</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/saturday_06/veejay_perf_02.avi">2</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/saturday_06/hansa_veejaying.avi">3</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/saturday_06/vj-ing.avi">4</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/tuesday_02/veejay_1.avi">5</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/tuesday_02/veejay_2.avi">6</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/tuesday_02/veejay_3.avi">7</a>
-*</p>
-</li>
+<li><a href="http://veejay.sourceforge.net/middle-event-5dec.html">Rebounds Lab</a></li>
+<li><a href="http://www.david-o.net/wordpress/2006/05/combat-de-gueules-groupe-ergot/">Combat de Gueules</a></li>
+<li><a href="http://www.david-o.net/wordpress/2004/12/de-leffort/">De l&#39;effort</a></li>
+<li><a href="http://www.larsmaaktkunst.nl/index.php?option=com_content&amp;task=view&amp;id=14&amp;Itemid=29">Sonsbeek Theater Avenue</a></li>
+<li>Landmark (2004) <a href="http://www.piksel.no/piksel04/piksel_vidblog/saturday_06/veejay_perf_01.avi">1</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/saturday_06/veejay_perf_02.avi">2</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/saturday_06/hansa_veejaying.avi">3</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/saturday_06/vj-ing.avi">4</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/tuesday_02/veejay_1.avi">5</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/tuesday_02/veejay_2.avi">6</a> <a href="http://www.piksel.no/piksel04/piksel_vidblog/tuesday_02/veejay_3.avi">7</a></li>
 </ul>
 
     </div><!-- /.blog-post -->
@@ -78,17 +83,18 @@
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          </div>
-          <div class="sidebar-module">
+            
+
             <h4>Categories</h4>
             <ol class="list-unstyled">
                 
-                <li><a href="/category/uncategorized/">uncategorized</a></li>
+                <li><a href="/category/sendvims/">sendvims</a></li>
+                
+                <li><a href="/category/reference/">reference</a></li>
                 
                 <li><a href="/category/news/">news</a></li>
+                
+                <li><a href="/category/howto/">howto</a></li>
                 
                 <li><a href="/category/documentation/">documentation</a></li>
                 
@@ -96,75 +102,28 @@
             <h4>Pages</h4>
             <ol class="list-unstyled">
                 
-                <li><a href="/colorspaces/">Colorspaces</a></li>
-                
-                <li><a href="/compiling-on-ubuntu/">Compiling on Ubuntu </a></li>
-                
                 <li><a href="/contact/">Contact</a></li>
                 
-                <li><a href="/contributions/">Contributions</a></li>
-                
-                <li><a href="/dependencies/">Dependencies</a></li>
+                <li><a href="/contributing/">Contributing</a></li>
                 
                 <li><a href="/documentation/">Documentation</a></li>
                 
-                <li><a href="/donate/">Donate</a></li>
-                
-                <li><a href="/download/">Download</a></li>
-                
-                <li><a href="/facebook/">Facebook</a></li>
-                
                 <li><a href="/features/">Features</a></li>
                 
-                <li><a href="/fx-stuff/">fx stuff</a></li>
-                
-                <li><a href="/getting-started/">Getting Started</a></li>
-                
-                <li><a href="/links/">links</a></li>
-                
-                <li><a href="/livido-osc/">LiViDO/OSC</a></li>
-                
-                <li><a href="/midi/">MIDI</a></li>
-                
-                <li><a href="/multitracker/">MultiTracker</a></li>
-                
-                <li><a href="/performance-tips/">Performance Tips</a></li>
-                
-                <li><a href="/projection-mapping/">Projection Mapping</a></li>
+                <li><a href="/installing/">Installation</a></li>
                 
                 <li><a href="/roadmap/">Roadmap</a></li>
-                
-                <li><a href="/sample-sequencer/">Sample Sequencer</a></li>
                 
                 <li><a href="/screenshots/">Screenshots</a></li>
                 
                 <li><a href="/showcase/">showcase</a></li>
                 
-                <li><a href="/veejay-1-5/">veejay 1.5</a></li>
-                
-                <li><a href="/veejay-advanced/">Veejay Advanced</a></li>
-                
-                <li><a href="/veejay-basics/">Veejay Basics</a></li>
-                
-                <li><a href="/veejay-environment-variables/">veejay environment variables</a></li>
-                
-                <li><a href="/vims-list/">VIMS List</a></li>
-                
             </ol>
-          </div>
-        </div><!-- /.blog-sidebar -->
+        </div>
 
       </div><!-- /.row -->
 
     </div><!-- /.container -->
-
-    <div class="blog-footer">
-      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
-    </div>
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

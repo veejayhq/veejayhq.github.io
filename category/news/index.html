@@ -13,34 +13,53 @@
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="/css/blog.css" rel="stylesheet">
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+      img {
+        max-width: 100%;
+      }
+
+      .blog-sidebar a {
+        text-transform: capitalize;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      h1, h2, h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    </style>
   </head>
 
   <body>
 
-    <div class="blog-masthead">
+    <div class="navbar navbar-inverse" role="navigation">
       <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item active" href="/">Home</a>
-          <a class="blog-nav-item" href="/category/news">News</a>
-          <a class="blog-nav-item" href="/category/documentation">Documentation</a>
-          <a class="blog-nav-item" href="/contact">Contact</a>
-        </nav>
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">VeejayHQ</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a class="blog-nav-item" href="/">Home</a></li>
+          <li><a class="blog-nav-item" href="/features">Features</a></li>
+          <li><a class="blog-nav-item" href="/category/news">News</a></li>
+          <li><a class="blog-nav-item" href="/category/documentation">Documentation</a></li>
+          <li><a class="blog-nav-item" href="/contact">Contact</a></li>
+        </ul>
       </div>
     </div>
 
-    <div class="container">
 
-      <div class="blog-header">
-        <h2 class="blog-title">news</h2>
-        <p class="lead blog-description">Veejay community site</p>
+
+    <div class="container">
+      <div class="span-12">
+        <img src="/img/header.png" />
       </div>
 
       <div class="row">
@@ -52,6 +71,76 @@
         <h2 class="blog-post-title"><a href="/category/news/document-freedom-day/">Document Freedom Day</a></h2>
         <p class="blog-post-meta">March 02, 2012</p>
         <p>On wednesday 28th march there&#39;s already the 4th Document Freedom Day in The Hague!, more info here: <a href="http://www.documentfreedomday.nl/">http://www.documentfreedomday.nl/</a></p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/news/veejay-1-5-5-released/">veejay 1.5.5 released</a></h2>
+        <p class="blog-post-meta">October 21, 2010</p>
+        <p><strong>veejay 1.5.5 is out now!</strong>  </p>
+<p><a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-src/veejay-1.5.5.tar.bz2/download">veejay-1.5.5</a>  </p>
+<p>ChangeLog:  </p>
+<p>fixed problem of setting playback speed while paused  </p>
+<p>MIDI channel/parameter numbers in reloaded can be used as sample IDs where 0 = current playing.</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/news/veejay-1-5-4-released/">veejay 1.5.4 released</a></h2>
+        <p class="blog-post-meta">August 04, 2010</p>
+        <p><strong>veejay 1.5.4 is out now!</strong>  </p>
+<p><a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-src/veejay-1.5.4.tar.bz2/download">veejay-1.5.4</a>  </p>
+<p>ChangeLog:  </p>
+<ul>
+<li>fixed data race condition in capture thread (affects all video capture devices)</li>
+</ul>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/news/veejay-1-5-3-released/">veejay 1.5.3 released</a></h2>
+        <p class="blog-post-meta">April 04, 2010</p>
+        <p><strong>veejay 1.5.3 is out now!</strong>  </p>
+<p><a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-src/veejay-1.5.3.tar.bz2/download">veejay-1.5.3 all-in-one package</a>  </p>
+<ul>
+<li><p>Added support for basic (CCD) image calibration.<br>(Dark Current subtraction &amp; Flat Field Correction)<br>There are two methods to combine frames: Average or Median Filter  </p>
+</li>
+<li><p>Added new Stream &#39;Calibration Image&#39; (bugged)<br>Use this to load your calibration config and apply it to existing video  </p>
+</li>
+<li><p>Added Constant-time median filtering from Simon Perreault<br>( <a href="http://nomis80.org/ctmf.html">http://nomis80.org/ctmf.html</a> )  </p>
+</li>
+<li><p>Fixed VIMS 330 &#39;Screenshot&#39;  </p>
+</li>
+<li><p>Fixed TrueType font name display  </p>
+</li>
+<li><p>Fixed synchronization problem in Reloaded  </p>
+</li>
+<li><p>Added VIMS message &#39;VIMS_CONTINUOUS_PLAY&#39; for continuous sample<br>playing<br>(positions are not reset when switching samples. Required for veejay-<br>radar)  </p>
+</li>
+<li><p>Added absolute cycle count to StatusMessage<br>(status token #19 and #- Fixed setting Norm on commandline (fixes David&#39;s problem)  </p>
+</li>
+<li><p>Fixed Dummy Mode  </p>
+</li>
+<li><p>Changed Dummy mode to playback in 720x5476 PAL or 720x480 NTSC resolution<br>( set VEEJAY_RUN_MODE=CLASSIC environment variable to get old behaviour)  </p>
+</li>
+<li><p>Refactorized OSC event handling. Use veejay -u to dump namespace. No pulling of data yet, only triggers.<br>The new OSC namespaces matches VIMS 1:1  </p>
+</li>
+<li><p>Added VIMS_SAMPLE_STACK message to pull FX mixing sources (veejay-<br>radar)  </p>
+</li>
+<li><p>Added VIMS_CHAIN_FOLLOW_FADE message to switch sources after fading<br>automatically<br>(Also added toggle button in Reloaded below the Chain Fade Slider)  </p>
+</li>
+<li><p>Added the Constant-time median filtering algorithm as a new Image FX  </p>
+</li>
+<li><p>Updated veejay&#39;s MAN page 20) Required for veejay-radar  </p>
+</li>
+<li><p>Fixed connection instability issues (libvjnet)  </p>
+</li>
+<li><p>Lots of bugfixes</p>
+</li>
+</ul>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -123,6 +212,14 @@
 <li>fixed samplebank loading  </li>
 <li>fixed VIMS Bundles window</li>
 </ul>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/news/veejay-1-4-8-released/">veejay 1.4.8 released</a></h2>
+        <p class="blog-post-meta">May 22, 2009</p>
+        <p>Veejay 1.4.8 is out now<br><a href="https://sourceforge.net/project/showfiles.php?group_id=47564&amp;package_id=298603&amp;release_id=684428">veejay 1.4.8 all-in-one</a></p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -235,7 +332,7 @@ or v4lutils capturing
 * bugfixes to Sample and Stream behaviour  
 * fixed compilation problems  
 * fixed build problems on some distributions  
-</code></pre><h1 id="download">Download</h1>
+</code></pre><h2 id="download">Download</h2>
 <p>All-in-one source package:  </p>
 <p><a href="http://downloads.sourceforge.net/veejay/veejay-1.4.3.tar.bz2?use_mirror=">http://downloads.sourceforge.net/veejay/veejay-1.4.3.tar.bz2?use_mirror=</a></p>
 
@@ -309,6 +406,15 @@ If you&#39;r lucky, there will be source packages soon - meanwhile,
 $ svn checkout svn://dyne.org/veejay/trunk/veejay-1.1  
 </code></pre><p>Especially users on newer distro&#39;s are encouraged to upgrade, since the preview-bug ( releated to a newer relase of gdk/gtk) has been solved, along other issues  </p>
 <p><a href="http://www.veejayhq.net/?page_id=127">go to the download page here for packages</a></p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/news/veejay-1-1-released/">Veejay 1.1 released</a></h2>
+        <p class="blog-post-meta">November 30, 2007</p>
+        <p>veejay 1.1 is available from the repository, its a bugfix release of<br>veejay-1.0  </p>
+<p>$ svn checkout svn://dyne.org/veejay/trunk/veejay-1.1</p>
 
     </div><!-- /.blog-post -->
     <hr/>
@@ -408,17 +514,67 @@ $ svn checkout svn://dyne.org/veejay/trunk/veejay-1.1
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          </div>
-          <div class="sidebar-module">
+            
+            <h4>Category index</h4>
+            <ul class="list-unstyled">
+              
+              <li><a href="/category/news/document-freedom-day/">Document Freedom Day</a></li>
+              
+              <li><a href="/category/news/veejay-1-5-5-released/">veejay 1.5.5 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-5-4-released/">veejay 1.5.4 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-5-3-released/">veejay 1.5.3 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-5-2-released/">veejay 1.5.2 released!</a></li>
+              
+              <li><a href="/category/news/veejay-1-5-1-released/">veejay 1.5.1 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-5-0-released/">veejay 1.5.0 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-4-8-released/">veejay 1.4.8 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-4-5-released/">veejay 1.4.5 released</a></li>
+              
+              <li><a href="/category/news/veejay-installation/">Veejay installation </a></li>
+              
+              <li><a href="/category/news/veejay-1-4-3-released/">veejay 1.4.3 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-4-1-released/">veejay 1.4.1 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-2pre1-released/">veejay 1.2pre1 released</a></li>
+              
+              <li><a href="/category/news/veejay-1-1-released/">Veejay 1.1 released</a></li>
+              
+              <li><a href="/category/news/new-article-about-veejay/">New article about veejay!</a></li>
+              
+              <li><a href="/category/news/screenshots-wanted/">Screenshots WANTED!</a></li>
+              
+              <li><a href="/category/news/mailinglist-veejay-users-canceled/">mailinglist veejay-users canceled</a></li>
+              
+              <li><a href="/category/news/documentation-updated/">Documentation updated</a></li>
+              
+              <li><a href="/category/news/veejay-in-combat-de-gueules/">veejay in ‘combat de gueules’</a></li>
+              
+              <li><a href="/category/news/veejay-in-de-l-effort/">veejay in ‘de l’effort’</a></li>
+              
+              <li><a href="/category/news/veejay-for-dyne-ii/">veejay for dyne:II</a></li>
+              
+              <li><a href="/category/news/announce-veejay-1-0/">ANNOUNCE VEEJAY 1.0</a></li>
+              
+            </ul>
+            
+
             <h4>Categories</h4>
             <ol class="list-unstyled">
                 
-                <li><a href="/category/uncategorized/">uncategorized</a></li>
+                <li><a href="/category/sendvims/">sendvims</a></li>
+                
+                <li><a href="/category/reference/">reference</a></li>
                 
                 <li><a href="/category/news/">news</a></li>
+                
+                <li><a href="/category/howto/">howto</a></li>
                 
                 <li><a href="/category/documentation/">documentation</a></li>
                 
@@ -426,75 +582,28 @@ $ svn checkout svn://dyne.org/veejay/trunk/veejay-1.1
             <h4>Pages</h4>
             <ol class="list-unstyled">
                 
-                <li><a href="/colorspaces/">Colorspaces</a></li>
-                
-                <li><a href="/compiling-on-ubuntu/">Compiling on Ubuntu </a></li>
-                
                 <li><a href="/contact/">Contact</a></li>
                 
-                <li><a href="/contributions/">Contributions</a></li>
-                
-                <li><a href="/dependencies/">Dependencies</a></li>
+                <li><a href="/contributing/">Contributing</a></li>
                 
                 <li><a href="/documentation/">Documentation</a></li>
                 
-                <li><a href="/donate/">Donate</a></li>
-                
-                <li><a href="/download/">Download</a></li>
-                
-                <li><a href="/facebook/">Facebook</a></li>
-                
                 <li><a href="/features/">Features</a></li>
                 
-                <li><a href="/fx-stuff/">fx stuff</a></li>
-                
-                <li><a href="/getting-started/">Getting Started</a></li>
-                
-                <li><a href="/links/">links</a></li>
-                
-                <li><a href="/livido-osc/">LiViDO/OSC</a></li>
-                
-                <li><a href="/midi/">MIDI</a></li>
-                
-                <li><a href="/multitracker/">MultiTracker</a></li>
-                
-                <li><a href="/performance-tips/">Performance Tips</a></li>
-                
-                <li><a href="/projection-mapping/">Projection Mapping</a></li>
+                <li><a href="/installing/">Installation</a></li>
                 
                 <li><a href="/roadmap/">Roadmap</a></li>
-                
-                <li><a href="/sample-sequencer/">Sample Sequencer</a></li>
                 
                 <li><a href="/screenshots/">Screenshots</a></li>
                 
                 <li><a href="/showcase/">showcase</a></li>
                 
-                <li><a href="/veejay-1-5/">veejay 1.5</a></li>
-                
-                <li><a href="/veejay-advanced/">Veejay Advanced</a></li>
-                
-                <li><a href="/veejay-basics/">Veejay Basics</a></li>
-                
-                <li><a href="/veejay-environment-variables/">veejay environment variables</a></li>
-                
-                <li><a href="/vims-list/">VIMS List</a></li>
-                
             </ol>
-          </div>
-        </div><!-- /.blog-sidebar -->
+        </div>
 
       </div><!-- /.row -->
 
     </div><!-- /.container -->
-
-    <div class="blog-footer">
-      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
-    </div>
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

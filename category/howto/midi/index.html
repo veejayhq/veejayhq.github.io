@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>MIDI</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      img {
+        max-width: 100%;
+      }
+
+      .blog-sidebar a {
+        text-transform: capitalize;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      h1, h2, h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">VeejayHQ</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a class="blog-nav-item" href="/">Home</a></li>
+          <li><a class="blog-nav-item" href="/features">Features</a></li>
+          <li><a class="blog-nav-item" href="/category/news">News</a></li>
+          <li><a class="blog-nav-item" href="/category/documentation">Documentation</a></li>
+          <li><a class="blog-nav-item" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="container">
+      <div class="span-12">
+        <img src="/img/header.png" />
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+            
+    <div class="blog-post">
+        <h2 class="blog-post-title"></h2>
+        <p class="blog-post-meta">June 19, 14</p>
+
+        <h2 id="configuring-the-midi-device">Configuring the MIDI device</h2>
+<p>Reloaded supports MIDI devices through ALSA, which means you have to connect<br>your MIDI device to reloaded.  </p>
+<p>To start, launch reloaded<br><code>control@veejay-1:~$ reloaded -v</code>  </p>
+<p>To list the input (readable) clients, type &#39;aconnect -i&#39;<br><code>c0ntrol@veejay-1:~$ aconnect -i  
+client 0: &#39;System&#39; [type=kernel]  
+0 &#39;Timer &#39;  
+1 &#39;Announce &#39;  
+client 14: &#39;Midi Through&#39; [type=kernel]  
+0 &#39;Midi Through Port-0&#39;  
+client 128: &#39;Virtual Keyboard&#39; [type=user]  
+0 &#39;Virtual Keyboard&#39;</code>  </p>
+<p>To list the output (writeable) clients, type &#39;aconnect -o&#39;<br><code>control@veejay-1:~$ aconnect -o  
+client 14: &#39;Midi Through&#39; [type=kernel]  
+0 &#39;Midi Through Port-0&#39;  
+client 129: &#39;Veejay&#39; [type=user]  
+0 &#39;Reloaded &#39;</code>  </p>
+<p>Now, we can connect the input to the output, Virtual Keyboard to Reloaded with<br><code>$ aconnect 128 129</code>  </p>
+<p>We&#39;r done on the commandline now and we can start learning midi events in<br>reloaded. Click GVeejay -&gt; Midi -&gt; Learn Midi<br>[caption id=&quot;attachment_173&quot; align=&quot;alignnone&quot; width=&quot;314&quot; caption=&quot;MIDI&quot;][<img src="/uploads/2008/11/midi.png" alt="MIDI">[/caption]  </p>
+<p>In the statusbar , you will see the message &#39;<em>Learning MIDI commands. Touch a midi key and then click a widget.</em>&#39; . Now, we can bind for example NoteOn to the Play Forward button by hitting the note on the keyboard and then by pressing the play forward button. Reloaded will learn MIDI events until you click &#39;Enable MIDI&#39; in the menu.  </p>
+<p>The MIDI events can be saved to file by clicking GVeejay -&gt; Save -&gt; Save MIDI layout</p>
+
+    </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            
+
+            <h4>Categories</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/category/sendvims/">sendvims</a></li>
+                
+                <li><a href="/category/reference/">reference</a></li>
+                
+                <li><a href="/category/news/">news</a></li>
+                
+                <li><a href="/category/howto/">howto</a></li>
+                
+                <li><a href="/category/documentation/">documentation</a></li>
+                
+            </ol>
+            <h4>Pages</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/contact/">Contact</a></li>
+                
+                <li><a href="/contributing/">Contributing</a></li>
+                
+                <li><a href="/documentation/">Documentation</a></li>
+                
+                <li><a href="/features/">Features</a></li>
+                
+                <li><a href="/installing/">Installation</a></li>
+                
+                <li><a href="/roadmap/">Roadmap</a></li>
+                
+                <li><a href="/screenshots/">Screenshots</a></li>
+                
+                <li><a href="/showcase/">showcase</a></li>
+                
+            </ol>
+        </div>
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>howto</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      img {
+        max-width: 100%;
+      }
+
+      .blog-sidebar a {
+        text-transform: capitalize;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      h1, h2, h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">VeejayHQ</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a class="blog-nav-item" href="/">Home</a></li>
+          <li><a class="blog-nav-item" href="/features">Features</a></li>
+          <li><a class="blog-nav-item" href="/category/news">News</a></li>
+          <li><a class="blog-nav-item" href="/category/documentation">Documentation</a></li>
+          <li><a class="blog-nav-item" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="container">
+      <div class="span-12">
+        <img src="/img/header.png" />
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+            
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/howto/veejay-vinyl-control/">Veejay Vinyl Control</a></h2>
+        <p class="blog-post-meta">September 24, 2013</p>
+        <p>This guide is aimed to use Serato or Traktor timecode with VeeJay&#39;s playback. You need to have VeeJay server, Reloaded, sendVIMS and Puredata already installed. Also we need Jackd daemon, in this example I&#39;ll use QJackCtl to set audio connection and configuration.<br>In order to make it work we&#39;ll need:  </p>
+<ul>
+<li>Flext (Development layer for puredata):<br><a href="http://puredata.info/Members/thomas/flext">http://puredata.info/Members/thomas/flext</a>  </li>
+<li>Niklas Klügel vinylcontrol~ external:<br><a href="http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html">http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html</a>  </li>
+<li><a href="/uploads/2013/09/VeeJayVinylControl.pd_.tar.gz">VeeJayVinylControl.pd.tar</a>:  </li>
+</ul>
+<p>[<img src="/uploads/2013/09/VeeJayVinylControl.png" alt="">  </p>
+<p>Build flext could be not so easy, so I give you a little guide. Let&#39;s build flext with the build bash script:  </p>
+<blockquote>
+<p>./build.sh pd gcc<br>Then a few configuration files will be created. Now we have to move to buildsys/config-lnx-pd-gcc.txt and edit some lines to point at PD directories, in my case:  </p>
+<p>PDPATH=/usr/include/pd<br>and  </p>
+<p>INSTPATH=/usr/lib/pd/extra<br>There&#39;s no need to build Flext with SndObj and STK support, so we can comment that lines.<br>Then we run as root:  </p>
+<p>./build.sh pd gcc install<br>We can also build Flext with autoconf:  </p>
+<p>./bootstrap.sh<br>Then we run:  </p>
+<p>./configure --with-sdkdir=/usr/include/pd/extra<br>make<br>make install<br>By now we should have Flext installed, move on to build vinylcontrol~:<br>We can download vinylcontrol src, or just the vinylcontrol~.pd_linux and make a copy to our external puredata directory from <a href="http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html">http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html</a><br>Installation of vinylcontrol src is almost the same that flext.<br>First:  </p>
+<p>./build.sh pd gcc<br>Again we have to edit the file buildsys/config-lnx-pd-gcc.txt and then install as root:  </p>
+<p>./build.sh pd gcc install<br>Now the system is ready to control the video playback with a vinyl control or scratch live control cd.<br>At first, load your video, then open QJackCtl and start the server. Open Puredata and connect the deck or CDJ to Puredata input.  </p>
+</blockquote>
+<p>Load VeeJayVinylControl.pd, and you&#39;ll be able to start scratching your video!! Let&#39;s explain how it work and how we can calibrate the patch in order to get it working better.  </p>
+<p>The external provide 3 outlets:<br>1) alive - bang is sent when the decoding starts/stops (ie. input is above a certain threshold and timecode is being tracked)<br>2) pitch - float that is 1 at 33 rpm in forward direction; negative values indicate backward-movement<br>3) relative position; the start is the first cue-point (first tracked timecode where the needle was dropped) and can be reset to the current timecode-position by sending a bang to the third inlet. The end position is the last sane timecode on the record. The position is calculated using (current_position-start_position)/(last_position-start_posit ion), thus giving a range between 0 and 1 between the end position and the relative start position and negative values for positions before the start position.  </p>
+<p>And 3 inlets:<br>1) left input<br>2) right input (take care of the cabling from your turntable)<br>3) reset for the relative start position  </p>
+<p>[<img src="/uploads/2013/09/vinylcontrol.png" alt="">  </p>
+<p>The external doesn&#39;t work perfectly, so you have to measure the audio input gain until the number on the 3rd patch outlet increases when the vinyl starts. This is multiplied by the frame&#39;s number of our video (I think that it could be took from VeeJay, but I&#39;m not too sure), and is connected to veejay current frame.  </p>
+<p>The 2nd outlet have a &quot;moses 0&quot; message box, that means that when it&#39;s under 0 it will play the video backward, and when is above 0 it will play forward.  </p>
+<p>The 1st outlet just bang the play/stop. It uses a threshold that I&#39;m almost sure it&#39;s defined by the timecode.c file.  </p>
+<p>That&#39;s all, the patch doesn&#39;t work perfectly, so if you make something better, let me know: juanicotolengo(at)gmail(dot)com<br>Thanks to DJ Trip&#39;s Cris, Niels Elburg and Matthijs van Henten for their support.  </p>
+<p>Juan Sebastian Faccio (a.k.a.: DaNoiseMan)</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/howto/projection-mapping/">Projection Mapping</a></h2>
+        <p class="blog-post-meta">November 24, 2012</p>
+        <h3 id="linux-vj-projection-mapping-using-veejay-lpmt">Linux VJ Projection Mapping using Veejay + LPMT</h3>
+<p>The output from Veejay may be used as a real-time projection-mapped surface using a program called Little Projection-Mapping Tool (LPMT). Using more than one projection-mapped Veejay instance should be possible, but is not covered by this document. Video is shared between the two applications using the v4l2loopback kernel module.  </p>
+<p>LPMT - Little Projection-Mapping Tool; is a simple and powerful cross-platform tool for Projection-Mapping. Based on OpenFrameworks C++ toolkit.  </p>
+<p>Both Veejay and LPMT are Free software with source code released under versions of the GNU GPL. Also, both can be controlled through OSC messages allowing them to play nicely with custom clients and other warez.  </p>
+<h4 id="websites-">WEBSITES:</h4>
+<ul>
+<li></li>
+<li><p>LPMT: <a href="http://hv-a.com/lpmt/">http://hv-a.com/lpmt/</a></p>
+</li>
+<li></li>
+<li><p>v4l2loopback: <a href="https://github.com/umlaeute/v4l2loopback">https://github.com/umlaeute/v4l2loopback</a></p>
+</li>
+<li></li>
+</ul>
+<h4 id="references-">REFERENCES:</h4>
+<ul>
+<li></li>
+<li><p>A work-in-progress &quot;Super-Sexy Secret Manual&quot; for LPMT version 1.4 <a href="http://hv-a.com/lpmt/?page_id=195">http://hv-a.com/lpmt/?page_id=195</a></p>
+</li>
+<li></li>
+<li><p>v4l2loopback usage examples <a href="https://github.com/umlaeute/v4l2loopback/wiki">https://github.com/umlaeute/v4l2loopback/wiki</a></p>
+</li>
+<li></li>
+</ul>
+<h4 id="installation-">INSTALLATION:</h4>
+<pre><code>* v4l2loopback  
+$ git clone &lt;https://github.com/umlaeute/v4l2loopback.git&gt; v4l2loopback  
+$ cd v4l2loopback  
+$ make &amp;&amp; sudo make install  
+
+Load the v4l2loopback kernel module:  
+$ sudo modprobe v4l2loopback  
+
+* yuv4mpeg_to_v4l2  
+A tiny example application included with the v4l2loopback source code  
+is used to stream YUV4MPEG output from Veejay into a v4l2 device.  
+$ cd v4l2loopback/examples  
+$ make yuv4mpeg_to_v4l2  
+
+You may want to manually install the resulting yuv4mpeg_to_v4l2 binary  
+somewhere in your $PATH for easier execution.  
+
+* LPMT:  
+Either, Download a pre-compiled binary:&lt;http://hv-a.com/lpmt/?page_id=63&gt;  
+Or, Luke, use the Source:&lt;http://hv-a.com/lpmt/?page_id=70&gt;  
+
+The following instructions are based on usage of the 64bit Linux binary.  
+There&#39;s no real installation of the binary, run LPMT from its directory:  
+
+$ tar -xjf lpmt_1.4_linux_x64.tar.bz2  
+$ cd lpmt_1.4_linux_x64  
+$ ./lpmt
+</code></pre><p>Play around, LPMT is cool! Press &quot;h&quot; for a command overview and refer to the manual for more help.  </p>
+<h4 id="configuration-">CONFIGURATION:</h4>
+<h4 id="when-the-v4l2loopback-kernel-module-is-successfully-loaded-it-will-create-a-device-at-dev-videox-where-x-is-a-number-that-depends-on-how-many-video-devices-you-already-have-loaded-my-computer-has-a-connected-webcam-so-this-is-what-i-have-">When the v4l2loopback kernel module is successfully loaded, it will create a device at /dev/videoX where &quot;X&quot; is a number that depends on how many video devices you already have loaded. My computer has a connected webcam so this is what I have:</h4>
+<pre><code>$ ls -l /dev/video*  
+crw-rw----+ 1 root video 81, 0 Nov 15 15:12 /dev/video0  
+crw-rw----+ 1 root video 81, 1 Nov 15 23:02 /dev/video1
+</code></pre><p>/dev/video0 is my webcam (because it was already loaded first) and /dev/video1 is the v4l2loopback video device -- it is the most recently created device with the highest number. The rest of this document uses /dev/video1 as the v4l2loopback device, substitute according to your setup. Make sure the system user that will be running Veejay and LPMT has permission to read and write to the device. In my case, my user needs to be in the &quot;video&quot; group.  </p>
+<p>Now, to configure LPMT. In the directory containing the lpmt binary, you should also find a &quot;data&quot; and &quot;libs&quot; directory.  </p>
+<pre><code>$ ls lpmt_1.4_linux_x64  
+data  
+libs  
+lpmt
+</code></pre><p>Edit data/config.xml and add a CAMERA section with the WIDTH and HEIGHT set to the dimensions of your Veejay output and ID set to &quot;X&quot; (the number of the /dev/video device created by the v4l2loopback module). My CAMERAS section looks like this:  </p>
+<pre><code>&lt;CAMERAS&gt;  
+&lt;CAMERA&gt;  
+&lt;WIDTH&gt;640&lt;/WIDTH&gt;  
+&lt;HEIGHT&gt;480&lt;/HEIGHT&gt;  
+&lt;ID&gt;0&lt;/ID&gt;  
+&lt;/CAMERA&gt;  
+&lt;CAMERA&gt;  
+&lt;WIDTH&gt;720&lt;/WIDTH&gt;  
+&lt;HEIGHT&gt;480&lt;/HEIGHT&gt;  
+&lt;ID&gt;1&lt;/ID&gt;  
+&lt;/CAMERA&gt;  
+&lt;/CAMERAS&gt;
+</code></pre><p>Configuration is complete!  </p>
+<h4 id="execution-">EXECUTION:</h4>
+<p>You may want to use several terminal windows for this. You may need to specify the full path of the executables depending on where you installed them and if they are in your $PATH.  </p>
+<pre><code>Create a named pipe:  
+$ mkfifo /tmp/pipe  
+
+Feed the video loopback device with yuv4mpeg (Y4M) data that enters the pipe:  
+$ yuv4mpeg_to_v4l2 /dev/video1 &lt; /tmp/pipe  
+
+Start veejay, directing a Y4M output stream to the pipe:  
+$ veejay --output 4 --output-file /tmp/pipe  
+
+Start LPMT  
+$ lpmt
+</code></pre><p>Refer to the LPMT manual for how to configure your projection mapping. Do this to see veejay output right away:  </p>
+<ul>
+<li></li>
+<li><p>press <F2> (or &quot;x&quot;)</p>
+</li>
+<li></li>
+<li><p>click &quot;cam on/off&quot; to enable it. You may need to select a different camera number from the &quot;select camera&quot; list.</p>
+</li>
+<li></li>
+</ul>
+<h4 id="conclusion-">CONCLUSION:</h4>
+<p>Epic!!! A Free VJ projection mapping solution for Linux! Thanks to all the people who have created these open source softwares and for their foresight and attention that has enabled interoperability.</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/howto/compiling-on-ubuntu/">Compiling on Ubuntu </a></h2>
+        <p class="blog-post-meta">July 06, 2011</p>
+        <h2 id="-warning-this-documentation-is-a-bit-out-of-date-"><em>warning this documentation is a bit out of date</em></h2>
+<p>Please <a href="/contact">contact</a> us if you need help.</p>
+<h4 id="1-introduction">1. Introduction</h4>
+<p>Compiling Veejay is not hard; however, there are a number of caveats to be ware of. The following document is intended to guide you trough a number of steps needed to start compiling, and hopefully, running veejay on Ubuntu/Debian based distro&#39;s. You will need to type in some commands in the terminal; The final steps in this document will assume that you can move around a bit on the commandline too  </p>
+<h4 id="2-versions">2. Versions</h4>
+<p>Software versions used in this document refer to Ubuntu 10.04 LTS/Lucid Lynx and veejay v1.5.9-4 retrieved from Git. Since both ubuntu and veejay are moving targets, we advice you to always try and use the latest versions available. When in trouble, just <a href="http://groups.google.com/group/veejay-discussion?hl=en">contact us.</a>  </p>
+<h4 id="3-prerequisite">3. Prerequisite</h4>
+<p><strong>Ubuntu 10.x:</strong> Veejay uses a set of packages called &quot;libavutils&quot;. The versions shipped by ubuntu may not be up-to-date. I&#39;ve found the &quot;MOTU Media&quot; packages of excellent quality and use those instead.(<a href="https://launchpad.net/~motumedia/+archive/ppa">https://launchpad.net/~motumedia/+archive/ppa</a>) . You may add the MOTU repositories using the following command: $ sudo apt-add-repository ppa:motumedia/ppa.  </p>
+<p>Also, note that you will need <strong>veejay 1.5.20</strong> from git. This version of veejay works with ffmpeg-0.8.12 &quot;Love&quot;.  </p>
+<p><strong>Ubuntu 12.x:</strong>  </p>
+<p>Current <strong>master branch</strong> in git works with more recent versions of ffmpeg. The version installed by your apt-get install commands will be fine.  </p>
+<p>To compile veejay ( and software in general ) you need a list of additional packages installed that do not ship with the default installation of Ubuntu.<br>The list below lists all dependencies:  </p>
+<pre><code># Packages installed on Xubuntu 12.04 to run veejay  
+*  and some dependencies compiled from source  
+*   
+*  `sudo apt-get install` these  
+
+build-essential  
+automake  
+libtool  
+cmake  
+
+*  revision control  
+git  
+
+*  ffmpeg  
+yasm  
+
+*  veejay-server  
+libgtk2.0-dev  
+libx11-dev  
+libxml2-dev  
+libxinerama-dev  
+libsdl1.2-dev  
+libjack-dev  
+libglib2.0-dev  
+libquicktime-dev  
+libmjpegtools-dev  
+libjpeg62-dev  
+libfreetype6-dev  
+libdv4-dev  
+libdirectfb-dev  
+liblo-dev  
+
+*  veejay-client  
+libglade2-dev  
+
+*  libunicap  
+intltool  
+libraw1394-dev  
+libv4l-dev  
+
+*  ucview  
+*  libunicapgtk  
+*  libucil  
+libtheora-dev  
+libvorbis-dev  
+libxv-dev  
+libgconf2-dev
+</code></pre><h4 id="4-downloading-veejay">4. Downloading veejay</h4>
+<p><span class="c1">The recommended way</span>Use GIT repository. This will contain the latest version and bugfixes of the current code. An alternative is to use a snapshot release. Git can be installed from synaptic. When looking for help, always supply the used versions of the software, as a bug may have been fixed in a later version.  </p>
+<p><a href="http://www.veejayhq.net/download-2/">Look here for a description of how to download veejay using git.</a>  </p>
+<h4 id="5-compiling">5. Compiling</h4>
+<p>After downloading and unpacking veejay you should have a directory tree that looks like this:  </p>
+<pre><code>veejay-git/  
+`-- veejay-current  
+|-- sendVIMS  
+|-- veejay-client  
+|-- veejay-server  
+|-- veejay-themes  
+`-- veejay-utils
+</code></pre><p>As you can see, veejay has been split up in a number of different &quot;packages&quot;. These packages have to be compiled separately, but in a specific order.  </p>
+<p>We&#39;ll start by compiling veejay-server:  </p>
+<pre><code>$cd veejay-server  
+$export PKG_CONFIG_PATH=/usr/lib/pkgconfig  
+$./autogen.sh  
+$./configure --prefix=/usr  
+$make -j2  
+$sudo make install
+</code></pre><p>Notes:  </p>
+<p>Make sure that PKG_CONFIG_PATH points to the directory containing the .pc files of the libraries veejay will be going to use! If you have build other libraries from source and installed them , for example to /opt, set /opt to be the first path on PKG_CONFIG_PATH and then include any other paths.  </p>
+<pre><code>$ export PKG_CONFIG_PATH=/opt/lib/pkgconfig:/usr/lib/pkgconfig
+</code></pre><p>If you run in trouble, you can launch ./build.sh and send us the output.  </p>
+<p>Next, veejay-client:  </p>
+<pre><code>$cd ../veejay-client  
+$export PKG_CONFIG_PATH=/usr/lib/pkgconfig  
+$./autogen.sh  
+$./configure --prefix=/usr  
+$make -j2  
+$sudo make install
+</code></pre><p>And some themes:  </p>
+<pre><code>$cd ../veejay-themes  
+$sudo ./INSTALL.sh
+</code></pre><p>That particular installation of veejay did not run without some fonts installed for the OSD. I&#39;m sure that&#39;ll be fixed in the near future, but here&#39;s how to fix that:  </p>
+<pre><code>$mkdir ~/.veejay &amp; mkdir ~/.veejay/fonts  
+$cp /usr/share/fonts/truetype/freefont/FreeSans.ttf .veejay/fonts/
+</code></pre><p>You may now start veejay:  </p>
+<pre><code>$veejay -d
+</code></pre><p>And reloaded:  </p>
+<pre><code>$reloaded
+</code></pre><p>That&#39;s it, cheers!</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/howto/midi/">MIDI</a></h2>
+        <p class="blog-post-meta">November 17, 2008</p>
+        <h2 id="configuring-the-midi-device">Configuring the MIDI device</h2>
+<p>Reloaded supports MIDI devices through ALSA, which means you have to connect<br>your MIDI device to reloaded.  </p>
+<p>To start, launch reloaded<br><code>control@veejay-1:~$ reloaded -v</code>  </p>
+<p>To list the input (readable) clients, type &#39;aconnect -i&#39;<br><code>c0ntrol@veejay-1:~$ aconnect -i  
+client 0: &#39;System&#39; [type=kernel]  
+0 &#39;Timer &#39;  
+1 &#39;Announce &#39;  
+client 14: &#39;Midi Through&#39; [type=kernel]  
+0 &#39;Midi Through Port-0&#39;  
+client 128: &#39;Virtual Keyboard&#39; [type=user]  
+0 &#39;Virtual Keyboard&#39;</code>  </p>
+<p>To list the output (writeable) clients, type &#39;aconnect -o&#39;<br><code>control@veejay-1:~$ aconnect -o  
+client 14: &#39;Midi Through&#39; [type=kernel]  
+0 &#39;Midi Through Port-0&#39;  
+client 129: &#39;Veejay&#39; [type=user]  
+0 &#39;Reloaded &#39;</code>  </p>
+<p>Now, we can connect the input to the output, Virtual Keyboard to Reloaded with<br><code>$ aconnect 128 129</code>  </p>
+<p>We&#39;r done on the commandline now and we can start learning midi events in<br>reloaded. Click GVeejay -&gt; Midi -&gt; Learn Midi<br>[caption id=&quot;attachment_173&quot; align=&quot;alignnone&quot; width=&quot;314&quot; caption=&quot;MIDI&quot;][<img src="/uploads/2008/11/midi.png" alt="MIDI">[/caption]  </p>
+<p>In the statusbar , you will see the message &#39;<em>Learning MIDI commands. Touch a midi key and then click a widget.</em>&#39; . Now, we can bind for example NoteOn to the Play Forward button by hitting the note on the keyboard and then by pressing the play forward button. Reloaded will learn MIDI events until you click &#39;Enable MIDI&#39; in the menu.  </p>
+<p>The MIDI events can be saved to file by clicking GVeejay -&gt; Save -&gt; Save MIDI layout</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/howto/projector-camera-calibration-augmented-reality/">Projector/Camera Calibration - Augmented reality</a></h2>
+        <p class="blog-post-meta">November 11, 2008</p>
+        <p>Use veejay 1.4 to calibrate your camera against a projector or a monitor screen in order to calculate the position of a physical object.  </p>
+<h3 id="calibration">Calibration</h3>
+<p>Press CTRL-s to bring up the setup screen:  </p>
+<p>As shown in the preview, the camera was mounted with an angle and doesnt capture the full projection area. We simply select the edges of the projection we see in the camera image, select forward transformation and press CTRL-s again to leave the setup.  </p>
+<p><table class="c3" border="0" width="688"><tbody><tr><td align="left"><a href="file:///home/control/Desktop/projector-camera-calibration_files/start.png"></a>  </p>
+<p>[caption id=&quot;attachment_123&quot; align=&quot;aligncenter&quot; width=&quot;150&quot; caption=&quot;Setup screen&quot;][<img src="/uploads/2008/11/result1.png" alt="Setup screen">  </p>
+<p>[<img src="/uploads/2008/11/result1.png" alt=""><br></td><td class="c1"></td></tr></tbody></table><br>After pressing CTRL-s, we return to our now calibrated camera image.<br>This image you can use to process it for motion detection. In order to have veejay pre process filters on your camera stream while playing a sample press CTRL-d</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="/category/howto/how-to-use-midi/">How to use MIDI</a></h2>
+        <p class="blog-post-meta">April 02, 2007</p>
+        <p><strong>Reloaded 1.0</strong> supports MIDI devices through ALSA  </p>
+<p>To use your MIDI device with Reloaded, you need to use <strong>aconnect</strong> or<br><strong>aconnectgui</strong> to connect the MIDI device to Reloaded.  </p>
+<p>To see all input devices (your MIDI devices)<br><code>$ aconnect -i</code>  </p>
+<p>And all output devices (Reloaded/ Veejay)<br>`<br>$ aconnect -o  </p>
+<p>And then connect them:<br>`<br>$ aconnect -i 127 -o 128  </p>
+<p>Launch Reloaded  </p>
+<p>$ reloaded  </p>
+<p>Instruction for MIDI learning:  </p>
+<p>In the menubar, click GVeejay -&gt; MIDI -&gt; MIDI learn<br>Press a key on your MIDI device (reloaded will display the raw MIDI event in the statusbar)<br>and click a button , press a key or pull a slider in the userinterface to associate<br>a particular event with a MIDI note, pitch or velocity key.<br>Once you have assigned the MIDI notes to VIMS, you can save the<br>MIDI preset and enable MIDI (GVeejay -&gt; Save -&gt; MIDI layout) and<br>(GVeejay -&gt; MIDI -&gt; MIDI enable)``</p>
+
+    </div><!-- /.blog-post -->
+    <hr/>
+    
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            
+            <h4>Category index</h4>
+            <ul class="list-unstyled">
+              
+              <li><a href="/category/howto/veejay-vinyl-control/">Veejay Vinyl Control</a></li>
+              
+              <li><a href="/category/howto/projection-mapping/">Projection Mapping</a></li>
+              
+              <li><a href="/category/howto/compiling-on-ubuntu/">Compiling on Ubuntu </a></li>
+              
+              <li><a href="/category/howto/midi/">MIDI</a></li>
+              
+              <li><a href="/category/howto/projector-camera-calibration-augmented-reality/">Projector/Camera Calibration - Augmented reality</a></li>
+              
+              <li><a href="/category/howto/how-to-use-midi/">How to use MIDI</a></li>
+              
+            </ul>
+            
+
+            <h4>Categories</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/category/sendvims/">sendvims</a></li>
+                
+                <li><a href="/category/reference/">reference</a></li>
+                
+                <li><a href="/category/news/">news</a></li>
+                
+                <li><a href="/category/howto/">howto</a></li>
+                
+                <li><a href="/category/documentation/">documentation</a></li>
+                
+            </ol>
+            <h4>Pages</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/contact/">Contact</a></li>
+                
+                <li><a href="/contributing/">Contributing</a></li>
+                
+                <li><a href="/documentation/">Documentation</a></li>
+                
+                <li><a href="/features/">Features</a></li>
+                
+                <li><a href="/installing/">Installation</a></li>
+                
+                <li><a href="/roadmap/">Roadmap</a></li>
+                
+                <li><a href="/screenshots/">Screenshots</a></li>
+                
+                <li><a href="/showcase/">showcase</a></li>
+                
+            </ol>
+        </div>
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+  </body>
+</html>

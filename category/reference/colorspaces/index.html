@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Colorspaces</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      img {
+        max-width: 100%;
+      }
+
+      .blog-sidebar a {
+        text-transform: capitalize;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      h1, h2, h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">VeejayHQ</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a class="blog-nav-item" href="/">Home</a></li>
+          <li><a class="blog-nav-item" href="/features">Features</a></li>
+          <li><a class="blog-nav-item" href="/category/news">News</a></li>
+          <li><a class="blog-nav-item" href="/category/documentation">Documentation</a></li>
+          <li><a class="blog-nav-item" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="container">
+      <div class="span-12">
+        <img src="/img/header.png" />
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+            
+    <div class="blog-post">
+        <h2 class="blog-post-title"></h2>
+        <p class="blog-post-meta">June 19, 14</p>
+
+        <h2 id="colorspaces">Colorspaces</h2>
+<p>Veejay processes all video in YUV planar mostly for historical reasons - nowadays, VJ software is shifting to the domain of the GPU and OpenGL . However:  </p>
+<ul>
+<li>A lot of (older) capture hardware delivers in some YUV format  </li>
+<li>Your MJPEG and other videos usually decodes into some YUV format  </li>
+<li>YUV is a lot less bandwidth then RGB  </li>
+<li>Veejay is good at recording to disk from any source  </li>
+<li>Veejay runs on exotic systems and requires lower hardware requirements than most<br>(commercial) VJ software.  </li>
+</ul>
+<p>On the downside, veejay sub- and supersamples YUV to 4:4:4 planar when special<br>FX require a U and V pixel for every Y pixel. Some USB Webcams only support the RGB colorspace , for which veejay provides a (very fast) colorspace conversion.  </p>
+<p>By default, veejay works in YUV 4:2:2 format which is the highest quality possible,<br>as such, it will try to open any video source in its native format.  </p>
+<h4 id="yuv-4-2-2-planar-rec-601-y-cbcr-">YUV 4:2:2 planar Rec. 601 (Y&#39;CbCr)</h4>
+<p>8 bit Y plane followed by 8 bit 2x1 subsampled V and U planes.  </p>
+<p>The Y plane is filled with 8 bit luminance samples ; Here the value 16 is used for black and 235 for white.  </p>
+<p>The U and V planes are filled with 8 bit chrominance samples, with the values 16 to 240.  </p>
+<p>This allows for overshoot and undershoot .  </p>
+<h4 id="yuv-4-2-2-planar-jpeg-jfif-veejay-s-standard-playback-mode-">YUV 4:2:2 planar JPEG/JFIF (veejay&#39;s standard playback mode)</h4>
+<p>8 bit Y plane followed by 8 bit 2x1 subsampled V and U planes.  </p>
+<p>The sample values in the planes range from 0 - 255, Black is defined at 0, White at 255  </p>
+<p>Note that scaling this format to Rec. 601 is somewhat lossy.  </p>
+<p>Veejay has an enviroment variable you can set if you want to convert between the two formats  </p>
+<p>automatically.</p>
+
+    </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            
+
+            <h4>Categories</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/category/sendvims/">sendvims</a></li>
+                
+                <li><a href="/category/reference/">reference</a></li>
+                
+                <li><a href="/category/news/">news</a></li>
+                
+                <li><a href="/category/howto/">howto</a></li>
+                
+                <li><a href="/category/documentation/">documentation</a></li>
+                
+            </ol>
+            <h4>Pages</h4>
+            <ol class="list-unstyled">
+                
+                <li><a href="/contact/">Contact</a></li>
+                
+                <li><a href="/contributing/">Contributing</a></li>
+                
+                <li><a href="/documentation/">Documentation</a></li>
+                
+                <li><a href="/features/">Features</a></li>
+                
+                <li><a href="/installing/">Installation</a></li>
+                
+                <li><a href="/roadmap/">Roadmap</a></li>
+                
+                <li><a href="/screenshots/">Screenshots</a></li>
+                
+                <li><a href="/showcase/">showcase</a></li>
+                
+            </ol>
+        </div>
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+  </body>
+</html>

@@ -35,6 +35,28 @@
         font-size: 18px;
         text-transform: capitalize;
       }
+
+      .list-box-gradient {
+        position: absolute;
+        bottom:0;
+        height: 50%;
+        width: 100%;
+
+        background: rgb(255,255,255); /* Old browsers */
+        background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
+      }
+
+      .list-box {
+        max-height: 300px;
+        overflow: hidden;
+        position: relative;
+      }
+
     </style>
   </head>
 
@@ -67,10 +89,11 @@
         <div class="col-sm-8 blog-main">
             
     
-    <div class="blog-post">
-        <h2 class="blog-post-title"><a href="/category/howto/veejay-vinyl-control/">Veejay Vinyl Control</a></h2>
-        <p class="blog-post-meta">September 24, 2013</p>
-        <p>This guide is aimed to use Serato or Traktor timecode with VeeJay&#39;s playback. You need to have VeeJay server, Reloaded, sendVIMS and Puredata already installed. Also we need Jackd daemon, in this example I&#39;ll use QJackCtl to set audio connection and configuration.<br>In order to make it work we&#39;ll need:  </p>
+    <div class="list-box">
+        <div class="post">
+            <h2 class="blog-post-title"><a href="/category/howto/veejay-vinyl-control/">Veejay Vinyl Control</a></h2>
+            <p class="blog-post-meta">September 24, 2013</p>
+            <p>This guide is aimed to use Serato or Traktor timecode with VeeJay&#39;s playback. You need to have VeeJay server, Reloaded, sendVIMS and Puredata already installed. Also we need Jackd daemon, in this example I&#39;ll use QJackCtl to set audio connection and configuration.<br>In order to make it work we&#39;ll need:  </p>
 <ul>
 <li>Flext (Development layer for puredata):<br><a href="http://puredata.info/Members/thomas/flext">http://puredata.info/Members/thomas/flext</a>  </li>
 <li>Niklas Klügel vinylcontrol~ external:<br><a href="http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html">http://karhumusic.sesser.at/vinylcontrol/vinylcontrol.html</a>  </li>
@@ -98,13 +121,18 @@
 <p>That&#39;s all, the patch doesn&#39;t work perfectly, so if you make something better, let me know: juanicotolengo(at)gmail(dot)com<br>Thanks to DJ Trip&#39;s Cris, Niels Elburg and Matthijs van Henten for their support.  </p>
 <p>Juan Sebastian Faccio (a.k.a.: DaNoiseMan)</p>
 
-    </div><!-- /.blog-post -->
+        </div>
+        <div class="list-box-gradient">
+        </div>
+    </div>
+    <h4><a href="/category/howto/veejay-vinyl-control/">read more &raquo;</a></h4>
     <hr/>
     
-    <div class="blog-post">
-        <h2 class="blog-post-title"><a href="/category/howto/projection-mapping/">Projection Mapping</a></h2>
-        <p class="blog-post-meta">November 24, 2012</p>
-        <h3 id="linux-vj-projection-mapping-using-veejay-lpmt">Linux VJ Projection Mapping using Veejay + LPMT</h3>
+    <div class="list-box">
+        <div class="post">
+            <h2 class="blog-post-title"><a href="/category/howto/projection-mapping/">Projection Mapping</a></h2>
+            <p class="blog-post-meta">November 24, 2012</p>
+            <h3 id="linux-vj-projection-mapping-using-veejay-lpmt">Linux VJ Projection Mapping using Veejay + LPMT</h3>
 <p>The output from Veejay may be used as a real-time projection-mapped surface using a program called Little Projection-Mapping Tool (LPMT). Using more than one projection-mapped Veejay instance should be possible, but is not covered by this document. Video is shared between the two applications using the v4l2loopback kernel module.  </p>
 <p>LPMT - Little Projection-Mapping Tool; is a simple and powerful cross-platform tool for Projection-Mapping. Based on OpenFrameworks C++ toolkit.  </p>
 <p>Both Veejay and LPMT are Free software with source code released under versions of the GNU GPL. Also, both can be controlled through OSC messages allowing them to play nicely with custom clients and other warez.  </p>
@@ -208,13 +236,18 @@ $ lpmt
 <h4 id="conclusion-">CONCLUSION:</h4>
 <p>Epic!!! A Free VJ projection mapping solution for Linux! Thanks to all the people who have created these open source softwares and for their foresight and attention that has enabled interoperability.</p>
 
-    </div><!-- /.blog-post -->
+        </div>
+        <div class="list-box-gradient">
+        </div>
+    </div>
+    <h4><a href="/category/howto/projection-mapping/">read more &raquo;</a></h4>
     <hr/>
     
-    <div class="blog-post">
-        <h2 class="blog-post-title"><a href="/category/howto/compiling-on-ubuntu/">Compiling on Ubuntu </a></h2>
-        <p class="blog-post-meta">July 06, 2011</p>
-        <h2 id="-warning-this-documentation-is-a-bit-out-of-date-"><em>warning this documentation is a bit out of date</em></h2>
+    <div class="list-box">
+        <div class="post">
+            <h2 class="blog-post-title"><a href="/category/howto/compiling-on-ubuntu/">Compiling on Ubuntu </a></h2>
+            <p class="blog-post-meta">July 06, 2011</p>
+            <h2 id="-warning-this-documentation-is-a-bit-out-of-date-"><em>warning this documentation is a bit out of date</em></h2>
 <p>Please <a href="/contact">contact</a> us if you need help.</p>
 <h4 id="1-introduction">1. Introduction</h4>
 <p>Compiling Veejay is not hard; however, there are a number of caveats to be ware of. The following document is intended to guide you trough a number of steps needed to start compiling, and hopefully, running veejay on Ubuntu/Debian based distro&#39;s. You will need to type in some commands in the terminal; The final steps in this document will assume that you can move around a bit on the commandline too  </p>
@@ -316,13 +349,18 @@ $cp /usr/share/fonts/truetype/freefont/FreeSans.ttf .veejay/fonts/
 <pre><code>$reloaded
 </code></pre><p>That&#39;s it, cheers!</p>
 
-    </div><!-- /.blog-post -->
+        </div>
+        <div class="list-box-gradient">
+        </div>
+    </div>
+    <h4><a href="/category/howto/compiling-on-ubuntu/">read more &raquo;</a></h4>
     <hr/>
     
-    <div class="blog-post">
-        <h2 class="blog-post-title"><a href="/category/howto/midi/">MIDI</a></h2>
-        <p class="blog-post-meta">November 17, 2008</p>
-        <h2 id="configuring-the-midi-device">Configuring the MIDI device</h2>
+    <div class="list-box">
+        <div class="post">
+            <h2 class="blog-post-title"><a href="/category/howto/midi/">MIDI</a></h2>
+            <p class="blog-post-meta">November 17, 2008</p>
+            <h2 id="configuring-the-midi-device">Configuring the MIDI device</h2>
 <p>Reloaded supports MIDI devices through ALSA, which means you have to connect<br>your MIDI device to reloaded.  </p>
 <p>To start, launch reloaded<br><code>control@veejay-1:~$ reloaded -v</code>  </p>
 <p>To list the input (readable) clients, type &#39;aconnect -i&#39;<br><code>c0ntrol@veejay-1:~$ aconnect -i  
@@ -343,13 +381,18 @@ client 129: &#39;Veejay&#39; [type=user]
 <p>In the statusbar , you will see the message &#39;<em>Learning MIDI commands. Touch a midi key and then click a widget.</em>&#39; . Now, we can bind for example NoteOn to the Play Forward button by hitting the note on the keyboard and then by pressing the play forward button. Reloaded will learn MIDI events until you click &#39;Enable MIDI&#39; in the menu.  </p>
 <p>The MIDI events can be saved to file by clicking GVeejay -&gt; Save -&gt; Save MIDI layout</p>
 
-    </div><!-- /.blog-post -->
+        </div>
+        <div class="list-box-gradient">
+        </div>
+    </div>
+    <h4><a href="/category/howto/midi/">read more &raquo;</a></h4>
     <hr/>
     
-    <div class="blog-post">
-        <h2 class="blog-post-title"><a href="/category/howto/projector-camera-calibration-augmented-reality/">Projector/Camera Calibration - Augmented reality</a></h2>
-        <p class="blog-post-meta">November 11, 2008</p>
-        <p>Use veejay 1.4 to calibrate your camera against a projector or a monitor screen in order to calculate the position of a physical object.  </p>
+    <div class="list-box">
+        <div class="post">
+            <h2 class="blog-post-title"><a href="/category/howto/projector-camera-calibration-augmented-reality/">Projector/Camera Calibration - Augmented reality</a></h2>
+            <p class="blog-post-meta">November 11, 2008</p>
+            <p>Use veejay 1.4 to calibrate your camera against a projector or a monitor screen in order to calculate the position of a physical object.  </p>
 <h3 id="calibration">Calibration</h3>
 <p>Press CTRL-s to bring up the setup screen:  </p>
 <p>As shown in the preview, the camera was mounted with an angle and doesnt capture the full projection area. We simply select the edges of the projection we see in the camera image, select forward transformation and press CTRL-s again to leave the setup.  </p>
@@ -357,13 +400,18 @@ client 129: &#39;Veejay&#39; [type=user]
 <p>[caption id=&quot;attachment_123&quot; align=&quot;aligncenter&quot; width=&quot;150&quot; caption=&quot;Setup screen&quot;][<img src="/uploads/2008/11/result1.png" alt="Setup screen">  </p>
 <p>[<img src="/uploads/2008/11/result1.png" alt=""><br></td><td class="c1"></td></tr></tbody></table><br>After pressing CTRL-s, we return to our now calibrated camera image.<br>This image you can use to process it for motion detection. In order to have veejay pre process filters on your camera stream while playing a sample press CTRL-d</p>
 
-    </div><!-- /.blog-post -->
+        </div>
+        <div class="list-box-gradient">
+        </div>
+    </div>
+    <h4><a href="/category/howto/projector-camera-calibration-augmented-reality/">read more &raquo;</a></h4>
     <hr/>
     
-    <div class="blog-post">
-        <h2 class="blog-post-title"><a href="/category/howto/how-to-use-midi/">How to use MIDI</a></h2>
-        <p class="blog-post-meta">April 02, 2007</p>
-        <p><strong>Reloaded 1.0</strong> supports MIDI devices through ALSA  </p>
+    <div class="list-box">
+        <div class="post">
+            <h2 class="blog-post-title"><a href="/category/howto/how-to-use-midi/">How to use MIDI</a></h2>
+            <p class="blog-post-meta">April 02, 2007</p>
+            <p><strong>Reloaded 1.0</strong> supports MIDI devices through ALSA  </p>
 <p>To use your MIDI device with Reloaded, you need to use <strong>aconnect</strong> or<br><strong>aconnectgui</strong> to connect the MIDI device to Reloaded.  </p>
 <p>To see all input devices (your MIDI devices)<br><code>$ aconnect -i</code>  </p>
 <p>And all output devices (Reloaded/ Veejay)<br>`<br>$ aconnect -o  </p>
@@ -373,7 +421,11 @@ client 129: &#39;Veejay&#39; [type=user]
 <p>Instruction for MIDI learning:  </p>
 <p>In the menubar, click GVeejay -&gt; MIDI -&gt; MIDI learn<br>Press a key on your MIDI device (reloaded will display the raw MIDI event in the statusbar)<br>and click a button , press a key or pull a slider in the userinterface to associate<br>a particular event with a MIDI note, pitch or velocity key.<br>Once you have assigned the MIDI notes to VIMS, you can save the<br>MIDI preset and enable MIDI (GVeejay -&gt; Save -&gt; MIDI layout) and<br>(GVeejay -&gt; MIDI -&gt; MIDI enable)``</p>
 
-    </div><!-- /.blog-post -->
+        </div>
+        <div class="list-box-gradient">
+        </div>
+    </div>
+    <h4><a href="/category/howto/how-to-use-midi/">read more &raquo;</a></h4>
     <hr/>
     
 

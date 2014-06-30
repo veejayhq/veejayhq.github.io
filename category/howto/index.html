@@ -138,23 +138,17 @@
 <p>Both Veejay and LPMT are Free software with source code released under versions of the GNU GPL. Also, both can be controlled through OSC messages allowing them to play nicely with custom clients and other warez.  </p>
 <h4 id="websites-">WEBSITES:</h4>
 <ul>
-<li></li>
 <li><p>LPMT: <a href="http://hv-a.com/lpmt/">http://hv-a.com/lpmt/</a></p>
 </li>
-<li></li>
 <li><p>v4l2loopback: <a href="https://github.com/umlaeute/v4l2loopback">https://github.com/umlaeute/v4l2loopback</a></p>
 </li>
-<li></li>
 </ul>
 <h4 id="references-">REFERENCES:</h4>
 <ul>
-<li></li>
 <li><p>A work-in-progress &quot;Super-Sexy Secret Manual&quot; for LPMT version 1.4 <a href="http://hv-a.com/lpmt/?page_id=195">http://hv-a.com/lpmt/?page_id=195</a></p>
 </li>
-<li></li>
 <li><p>v4l2loopback usage examples <a href="https://github.com/umlaeute/v4l2loopback/wiki">https://github.com/umlaeute/v4l2loopback/wiki</a></p>
 </li>
-<li></li>
 </ul>
 <h4 id="installation-">INSTALLATION:</h4>
 <pre><code>* v4l2loopback  
@@ -184,19 +178,19 @@ There&#39;s no real installation of the binary, run LPMT from its directory:
 $ tar -xjf lpmt_1.4_linux_x64.tar.bz2  
 $ cd lpmt_1.4_linux_x64  
 $ ./lpmt
-</code></pre><p>Play around, LPMT is cool! Press &quot;h&quot; for a command overview and refer to the manual for more help.  </p>
+</code></pre><p>Play around, LPMT is cool! Press <strong>h</strong> for a command overview and refer to the manual for more help.  </p>
 <h4 id="configuration-">CONFIGURATION:</h4>
-<h4 id="when-the-v4l2loopback-kernel-module-is-successfully-loaded-it-will-create-a-device-at-dev-videox-where-x-is-a-number-that-depends-on-how-many-video-devices-you-already-have-loaded-my-computer-has-a-connected-webcam-so-this-is-what-i-have-">When the v4l2loopback kernel module is successfully loaded, it will create a device at /dev/videoX where &quot;X&quot; is a number that depends on how many video devices you already have loaded. My computer has a connected webcam so this is what I have:</h4>
+<h4 id="when-the-v4l2loopback-kernel-module-is-successfully-loaded-it-will-create-a-device-at-_-dev-videox_-where-x-is-a-number-that-depends-on-how-many-video-devices-you-already-have-loaded-my-computer-has-a-connected-webcam-so-this-is-what-i-have-">When the v4l2loopback kernel module is successfully loaded, it will create a device at <em>/dev/videoX</em> where &quot;X&quot; is a number that depends on how many video devices you already have loaded. My computer has a connected webcam so this is what I have:</h4>
 <pre><code>$ ls -l /dev/video*  
 crw-rw----+ 1 root video 81, 0 Nov 15 15:12 /dev/video0  
 crw-rw----+ 1 root video 81, 1 Nov 15 23:02 /dev/video1
-</code></pre><p>/dev/video0 is my webcam (because it was already loaded first) and /dev/video1 is the v4l2loopback video device -- it is the most recently created device with the highest number. The rest of this document uses /dev/video1 as the v4l2loopback device, substitute according to your setup. Make sure the system user that will be running Veejay and LPMT has permission to read and write to the device. In my case, my user needs to be in the &quot;video&quot; group.  </p>
+</code></pre><p><em>/dev/video0</em> is my webcam (because it was already loaded first) and <em>/dev/video1</em> is the v4l2loopback video device -- it is the most recently created device with the highest number. The rest of this document uses <em>/dev/video1</em> as the v4l2loopback device, substitute according to your setup. Make sure the system user that will be running Veejay and LPMT has permission to read and write to the device. In my case, my user needs to be in the &quot;video&quot; group.  </p>
 <p>Now, to configure LPMT. In the directory containing the lpmt binary, you should also find a &quot;data&quot; and &quot;libs&quot; directory.  </p>
 <pre><code>$ ls lpmt_1.4_linux_x64  
 data  
 libs  
 lpmt
-</code></pre><p>Edit data/config.xml and add a CAMERA section with the WIDTH and HEIGHT set to the dimensions of your Veejay output and ID set to &quot;X&quot; (the number of the /dev/video device created by the v4l2loopback module). My CAMERAS section looks like this:  </p>
+</code></pre><p>Edit <em>data/config.xml</em> and add a CAMERA section with the WIDTH and HEIGHT set to the dimensions of your Veejay output and ID set to &quot;X&quot; (the number of the <em>/dev/video</em> device created by the v4l2loopback module). My CAMERAS section looks like this:  </p>
 <pre><code>&lt;CAMERAS&gt;  
 &lt;CAMERA&gt;  
 &lt;WIDTH&gt;640&lt;/WIDTH&gt;  
@@ -225,13 +219,10 @@ Start LPMT
 $ lpmt
 </code></pre><p>Refer to the LPMT manual for how to configure your projection mapping. Do this to see veejay output right away:  </p>
 <ul>
-<li></li>
-<li><p>press <F2> (or &quot;x&quot;)</p>
+<li><p>press <strong>F2</strong> (or <strong>x</strong>)</p>
 </li>
-<li></li>
-<li><p>click &quot;cam on/off&quot; to enable it. You may need to select a different camera number from the &quot;select camera&quot; list.</p>
+<li><p>click <strong>cam on/off</strong> to enable it. You may need to select a different camera number from the <strong>select camera</strong> list.</p>
 </li>
-<li></li>
 </ul>
 <h4 id="conclusion-">CONCLUSION:</h4>
 <p>Epic!!! A Free VJ projection mapping solution for Linux! Thanks to all the people who have created these open source softwares and for their foresight and attention that has enabled interoperability.</p>
@@ -394,11 +385,11 @@ client 129: &#39;Veejay&#39; [type=user]
             <p class="blog-post-meta">November 11, 2008</p>
             <p>Use veejay 1.4 to calibrate your camera against a projector or a monitor screen in order to calculate the position of a physical object.  </p>
 <h3 id="calibration">Calibration</h3>
-<p>Press CTRL-s to bring up the setup screen:  </p>
-<p>As shown in the preview, the camera was mounted with an angle and doesnt capture the full projection area. We simply select the edges of the projection we see in the camera image, select forward transformation and press CTRL-s again to leave the setup.  </p>
-<p><table class="c3" border="0" width="688"><tbody><tr><td align="left"><a href="file:///home/control/Desktop/projector-camera-calibration_files/start.png"></a>  </p>
-<p>[caption id=&quot;attachment_123&quot; align=&quot;aligncenter&quot; width=&quot;150&quot; caption=&quot;Setup screen&quot;][<img src="/uploads/2008/11/result1.png" alt="Setup screen">  </p>
-<p>[<img src="/uploads/2008/11/result1.png" alt=""><br></td><td class="c1"></td></tr></tbody></table><br>After pressing CTRL-s, we return to our now calibrated camera image.<br>This image you can use to process it for motion detection. In order to have veejay pre process filters on your camera stream while playing a sample press CTRL-d</p>
+<p>Press <strong>CTRL-s</strong> to bring up the setup screen:  </p>
+<p>As shown in the preview, the camera was mounted with an angle and doesnt capture the full projection area. We simply select the edges of the projection we see in the camera image, select forward transformation and press <strong>CTRL-s</strong> again to leave the setup.  </p>
+<p><table class="c3" border="0" width="688"><tbody><tr><td align="left"><img src="/uploads/2008/11/start.png Setup screen" alt="Setup screen">  </p>
+<p><img src="/uploads/2008/11/result1.png" alt="">  </p>
+<p></td><td class="c1"></td></tr></tbody></table><br>After pressing <strong>CTRL-s</strong>, we return to our now calibrated camera image.<br>This image you can use to process it for motion detection. In order to have veejay pre process filters on your camera stream while playing a sample press <strong>CTRL-d</strong></p>
 
         </div>
         <div class="list-box-gradient">
@@ -485,6 +476,8 @@ client 129: &#39;Veejay&#39; [type=user]
                 <li><a href="/showcase/">showcase</a></li>
                 
             </ol>
+
+            <script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/nl_NL"></script><script type="text/javascript">FB.init("2316634eb821b47343363e55f8568ac3");</script><fb:fan profile_id="338190661100" stream="0" connections="9" logobar="1" height="440" width="200"></fb:fan>
         </div>
 
       </div><!-- /.row -->

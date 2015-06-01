@@ -90,7 +90,10 @@
             
     <h2>Installation</h2>
     <div class="blog-post">
-        <h2 id="compile-from-source">Compile from source</h2>
+        <h2 id="pre-compiled-packages">Pre-compiled packages</h2>
+<p>Currently there is a all-in-one binary release for Ubuntu 12.04 LTS (64 bit).
+You can grab it here: <a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-bin/veejay-1.5.28-amd64.deb/download">veejay-1.5.28-amd64</a></p>
+<h2 id="compile-from-source">Compile from source</h2>
 <p>To get a copy of veejay&#39;s source anonymously:</p>
 <pre><code>git clone git://code.dyne.org/veejay.git veejay-git
 </code></pre><p>To check the latest releases:</p>
@@ -134,7 +137,7 @@ veejay-client $ sudo make install
 </ol>
 <pre><code>veejay-client $ cd ..
 veejay-current $ cd veejay-utils
-veejay-utils $ veejay-client $ sh autogen.sh
+veejay-utils $ sh autogen.sh
 veejay-utils $ ./configure &amp;&amp; make
 veejay-utlis $ sudo make install
 </code></pre><ol>
@@ -145,12 +148,72 @@ veejay-utlis $ sudo make install
 </code></pre><p>If all goes well, you will see a black video window. Press CTRL-C to exit</p>
 <p>Then, run the server with a video-file:</p>
 <pre><code>$ veejay -v /path/to/mjpeg.avi
-</code></pre><h2 id="pre-compiled-packages">Pre-compiled packages</h2>
-<p>Currently there is a all-in-one binary release for Ubuntu 12.04 LTS (64 bit).
-You can grab it here: <a href="https://sourceforge.net/projects/veejay/files/veejay-1.5-bin/veejay-1.5.28-amd64.deb/download">veejay-1.5.28-amd64</a></p>
-<h2 id="source-archives">Source archives</h2>
+</code></pre><h3 id="compiling-on-ubuntu-with-ffmpeg-from-sources">Compiling on Ubuntu with ffmpeg from sources</h3>
+<p>These steps are for Ubuntu 14.10 Utopic Unicorn (tested over xubuntu)</p>
+<ol>
+<li>Build your own ffmpeg:</li>
+</ol>
+<p>(tested with ffmpeg version 2.6.git)</p>
+<p>Mainly you will follow the official ffmpeg compilation <a href="https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu">guide for Ubuntu</a>.
+The little difference who make it work is the &#39;--enable-shared&#39; you add to give at the &#39;./configure&#39; step to fix linking errors like &quot;relocation R_X86_64_32 against `ff_a64_muxer&#39;&quot;.
+The build is a bit udge, it&#39;s time to make coffee.</p>
+<ol>
+<li>Get all the dependencies to build veejay:</li>
+</ol>
+<p>(first, make sure you are up-to-date)</p>
+<p>Install the dependencies with:</p>
+<pre><code>$ sudo apt-get install git autoconf automake libtool m4 gcc libjpeg8-dev libswscale-dev libavutil-dev libavcodec-dev libavformat-dev libavresample-dev libx11-dev libgtk2.0-dev libxml2-dev libsdl1.2-dev libjack0 libjack-dev jackd1 libglade2-dev
+</code></pre><p>Nota : install also libsdl1.2-dev dependencies (libavahi-client-dev, libavahi-common-dev, libcaca-dev, libpulse-dev, libslang2-dev) and maybe also other dependencies from other packages.</p>
+<ol>
+<li>Build the server</li>
+</ol>
+<p>You need to inform where veejay will get the ffmpeg you just successfuly build, this is done by setting of few environnement variables based on where you have installed ffmpeg (/opt/ffmpeg , $HOME/bin/ffmpeg, ....)</p>
+<pre><code>export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$HOME/ffmpeg_build/lib/pkgconfig
+export LD_LIBRARY_PATH=$HOME/ffmpeg_build/lib
+export C_INCLUDE_PATH=$HOME/ffmpeg_build/include
+</code></pre><p>Then build the server.</p>
+<pre><code>$ cd veejay-current
+veejay-current $ cd veejay-server
+veejay-server $ sh autogen.sh
+veejay-server $ ./configure --enable-shared
+veejay-server $ make
+veejay-server $ sudo make install
+</code></pre><p>If you want to build for a generic or specific architecture, replace the above configure command with for example:</p>
+<pre><code># generic
+$ ./configure --enable-shared --with-arch-target=generic
+
+# specific cpu
+$ ./configure --enable-shared --wit-arch-target=core2
+</code></pre><p>The client and command line utility also accept the --with-arch-target configure parameter.</p>
+<ol>
+<li>Build the client</li>
+</ol>
+<pre><code>veejay-server $ cd ..
+veejay-current $ cd veejay-client
+veejay-client $ sh autogen.sh
+veejay-client $ ./configure &amp;&amp; make
+veejay-client $ sudo make install
+</code></pre><ol>
+<li>Build the command line tool sayVIMS (optional)</li>
+</ol>
+<pre><code>veejay-client $ cd ..
+veejay-current $ cd veejay-utils
+veejay-utils $ sh autogen.sh
+veejay-utils $ ./configure &amp;&amp; make
+veejay-utlis $ sudo make install
+</code></pre><ol>
+<li>Test-run</li>
+</ol>
+<p>Has you have configured a non-standard installation of ffmpeg, you must inform veejay where to found it by setting an environnment variable.</p>
+<pre><code>export LD_LIBRARY_PATH=$HOME/ffmpeg_build/lib
+</code></pre><p>Now you can test the server stand-alone in dummy mode:</p>
+<pre><code>$ veejay -v -d
+</code></pre><p>If all goes well, you will see a black video window. Press CTRL-C to exit</p>
+<p>Then, run the server with a video-file:</p>
+<pre><code>$ veejay -v /path/to/mjpeg.avi
+</code></pre><h2 id="source-archives">Source archives</h2>
 <ul>
-<li><a href="http://veejay.dyne.org">Veejay development (websvn, trac)</a></li>
+<li><a href="http://code.dyne.org/veejay">Veejay development (websvn, trac)</a></li>
 <li><a href="http://www.sourceforge.net/projects/veejay">Veejay File Release archive</a></li>
 </ul>
 

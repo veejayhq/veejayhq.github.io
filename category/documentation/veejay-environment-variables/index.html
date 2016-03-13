@@ -95,12 +95,15 @@
 <table><tr><td>VEEJAY_FULLSCREEN</td><td>0 or 1</td><td>Always starts veejay in fullscreen mode (usefull for installation mode)</td></tr><tr><td>VEEJAY_SCREEN_SIZE</td><td>WidthXHeight</td><td>Size of the video window in Twinview/One BigDesktop mode</td></tr><tr><td>VEEJAY_SCREEN_GEOMETRY</td><td>WidthXHeight+XOffsetxYOffset</td><td>Geometry of your desktop and X/Y offset for video window</td></tr><tr><td>VEEJAY_CAPTURE_DRIVER</td><td>unicap or v4lutils</td><td>Specifies capture driver to use</td></tr><tr><td>VEEJAY_PERFORMANCE</td><td>quality or fastest</td><td>Choose between quality or speed</td></tr><tr><td></td></tr></table>  
 
 
-<h3 id="examples">Examples</h3>
+<p>###Examples  </p>
+<p>Currently undergoing review at [<a href="https://github.com/c0ntrol/veejay/issues/27">https://github.com/c0ntrol/veejay/issues/27</a>]</p>
 <p>TwinView setup, Screen 0:1600x1024 Screen1: 1024x768<br>[<img src="/uploads/2009/01/ms.jpg" alt="">  </p>
-<p><code>$ export VEEJAY_SCREEN_GEOMETRY=2624x1024+1600x0  
-$ export VEEJAY_SCREEN_SIZE=1024x768  
+<pre><code>$ export VEEJAY_DESKTOP_GEOMETRY=2624x1024+0x0  
+$ export VEEJAY_VIDEO_SIZE=1024x768  
+$ export VEEJAY_VIDEO_POSITION+1600x0
 $ export VEEJAY_PERFORMANCE=quality  
-$ veejay -v -w1024 -h768 myvideo.avi</code></p>
+$ veejay -v -w1024 -h768 myvideo.avi  
+</code></pre><p>`</p>
 
     </div>
 

@@ -90,14 +90,7 @@
             
     <h2>Features</h2>
     <div class="blog-post">
-        <div class="c1"># Veejay version 1.5.47<br>Feburary  14, 2015<br><strong>Veejay, a visual instrument for GNU  
-</strong></div><br><div class="c1"><br><a href="http://veejayhq.net">http://veejayhq.net</a><br><a href="http://code.dyne.org/veejay/">http://code.dyne.org/veejay/</a><br></div><br><div class="c1"><strong><br>Veejay is a visual instrument and real-time video sampler.<br>It allows you to &quot;play&quot; the video like you would play a piano.<br>While playing, you can record the resulting video directly to disk (video sampling).</strong></div>  
-
-
-<div class="c1"><br><a href="/category/howto/projector-camera-calibration-augmented-reality">Camera calibration with veejay</a><br><a href="/screenshots">Reloaded</a><br></div>  
-
-
-<h2 id="feature-overview">FEATURE OVERVIEW</h2>
+        <h2 id="feature-overview">FEATURE OVERVIEW</h2>
 <h3 id="general">General</h3>
 <ul>
 <li>Free Software (GNU GPL) (1)  </li>
@@ -107,25 +100,25 @@
 <li>Loop based editing (5)  </li>
 <li>Native YUV processing  </li>
 <li>Crash recovery  </li>
-<li>Support for multi core cpu  </li>
+<li>Support for multi core cpu (parallel computations)</li>
 </ul>
 <h3 id="media">Media</h3>
 <ul>
-<li>Codecs: MJPEG,MPNG, DV, LossLess JPEG, MJPEG-b,YUV (raw)  </li>
+<li>Codecs: MJPEG,MPNG, DV, LossLess JPEG, MJPEG-b,YUV, HUFFYUV, rawvideo  </li>
 <li>Containers: AVI , Quicktime, rawDV  </li>
 <li>Devices: USB webcams, DV1394, TV capture cards, etc (v4l2)  </li>
 <li>Support for unlimited capture devices  </li>
 <li>Support for Image files (PNG ,JPEG,TIFF,etc)  </li>
-<li>Support for JPEG streaming webcams  </li>
+<li>Support for JPEG streaming webcams</li>
+<li>Support for shared resources (shared memory)</li>
 </ul>
 <h3 id="editing">Editing</h3>
 <ul>
-<li>137 built-in FX , many unique and original FX filters  </li>
-<li>FX chain (20 slots, first 3 are rendered in mixing mode)  </li>
+<li>161 built-in FX , many unique and original FX filters  </li>
+<li>FX chain with up to 20 FX slots</li>
 <li>All FX parameters can be animated.  </li>
-<li>Mix up to two layers per FX slot  </li>
+<li>Mix up to two sources per FX slot  </li>
 <li>Non destructive edit decision lists (cut/copy/paste/crop video)  </li>
-<li>Simple text editor  </li>
 <li>Sample editor  </li>
 <li>Sequence editor  </li>
 <li>Live disk recorder (sampling)  </li>
@@ -152,15 +145,15 @@
 <li>Audio trough Jack (low latency audio server) (8)  </li>
 <li>SDL  </li>
 <li>Headless  </li>
-<li>Network streaming (unicast and multicast)  </li>
-<li>Preview rendering  </li>
-<li>V42L loopback  </li>
-<li>YUV4mpeg  </li>
-<li><a href="/category/documentation/veejay-environment-variables">TwinView / One BigDesktop</a>  </li>
+<li>Network streaming (unicast)  </li>
+<li>Life view</li>
+<li>V4L2 Loopback  </li>
+<li>YUV4MPEG  </li>
+<li><a href="/category/documentation/veejay-environment-variables">TwinView / One BigDesktop</a> </li>
+<li><a href="https://github.com/c0ntrol/veejay/blob/master/veejay-current/veejay-server/doc/video-wall.md">Video Splitter</a></li>
 </ul>
 <h3 id="interaction">Interaction</h3>
 <ul>
-<li>Programmable keyboard interface  </li>
 <li>VIMS (tcp/ip)  </li>
 <li>OSC (udp)  </li>
 <li>PureData trough sendVIMS external </li>
@@ -168,7 +161,7 @@
 <h3 id="viewing">Viewing</h3>
 <ul>
 <li>Full screen or windowed mode  </li>
-<li>Camera/Projector calibration (9)  </li>
+<li><a href="http://veejayhq.net/category/howto/projector-camera-calibration-augmented-reality">Camera/Projector calibration</a> (9)  </li>
 </ul>
 <h3 id="additional">Additional</h3>
 <ul>
